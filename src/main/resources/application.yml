@@ -1,0 +1,23 @@
+# application.yml
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.95.16.85:3306/river_chart_luo_writ?characterEncoding=UTF8&autoReconnect=true&allowMultiQueries=true&rewriteBatchedStatements=true&serverTimezone=GMT%2B7&useSSL=false
+    username: dev_rw
+    password: z8E3SuIy.1MlCril8
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+
+
+logging:
+  level:
+    com.example: DEBUG
+
+myapp:
+  feature:
+    enabled: true
+    max-items: 100
