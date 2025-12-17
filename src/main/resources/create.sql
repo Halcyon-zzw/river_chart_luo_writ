@@ -6,7 +6,7 @@ USE `river_chart_luo_writ`;
 -- ====================================
 -- 1. 用户表 (user)
 -- ====================================
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
                         `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '用户ID，主键',
                         `username` VARCHAR(64) NOT NULL UNIQUE COMMENT '用户名，唯一',
                         `email` VARCHAR(128) UNIQUE COMMENT '邮箱，唯一',
@@ -52,8 +52,8 @@ CREATE TABLE `user` (
 -- ====================================
 -- 2. 标签表 (tags)
 -- ====================================
-CREATE TABLE tags (
-                      id INT AUTO_INCREMENT PRIMARY KEY COMMENT '标签ID',
+CREATE TABLE IF NOT EXISTS tags (
+                      id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '标签ID',
                       name VARCHAR(50) NOT NULL UNIQUE COMMENT '标签名称',
                       color VARCHAR(7) DEFAULT '#007AFF' COMMENT '标签颜色(十六进制)',
                       is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
@@ -64,8 +64,8 @@ CREATE TABLE tags (
 -- ====================================
 -- 3. 主分类表 (main_categories)
 -- ====================================
-CREATE TABLE main_categories (
-                                 id INT AUTO_INCREMENT PRIMARY KEY COMMENT '主分类ID',
+CREATE TABLE IF NOT EXISTS main_categories (
+                                 id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '主分类ID',
                                  name VARCHAR(100) NOT NULL COMMENT '分类名称',
                                  description TEXT COMMENT '分类描述',
                                  thumbnail_url VARCHAR(500) COMMENT '缩略图URL',
@@ -80,8 +80,8 @@ CREATE TABLE main_categories (
 -- ====================================
 -- 4. 小分类表 (sub_categories)
 -- ====================================
-CREATE TABLE sub_categories (
-                                id INT AUTO_INCREMENT PRIMARY KEY COMMENT '小分类ID',
+CREATE TABLE IF NOT EXISTS sub_categories (
+                                id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '小分类ID',
                                 main_category_id INT NOT NULL COMMENT '所属主分类ID',
                                 name VARCHAR(100) NOT NULL COMMENT '小分类名称',
                                 description TEXT COMMENT '小分类描述',
@@ -99,8 +99,8 @@ CREATE TABLE sub_categories (
 -- ====================================
 -- 5. 数据内容表 (contents)
 -- ====================================
-CREATE TABLE contents (
-                          id INT AUTO_INCREMENT PRIMARY KEY COMMENT '内容ID',
+CREATE TABLE IF NOT EXISTS contents (
+                          id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '内容ID',
                           sub_category_id INT NOT NULL COMMENT '所属小分类ID',
                           title VARCHAR(200) NOT NULL COMMENT '内容标题',
                           content_type ENUM('image', 'note') NOT NULL COMMENT '内容类型(image:图片, note:笔记)',
@@ -127,15 +127,14 @@ CREATE TABLE contents (
                           INDEX idx_sub_category_id (sub_category_id),
                           INDEX idx_sort_order (sort_order),
                           INDEX idx_created_time (created_time),
-                          INDEX idx_type_deleted_time (content_type, is_deleted, created_time DESC);
-FULLTEXT KEY ft_title_description (title, description)
+                          INDEX idx_type_deleted_time (content_type, is_deleted, created_time DESC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='数据内容表';
 
 -- ====================================
 -- 6. 主分类标签关联表 (main_category_tags)
 -- ====================================
-CREATE TABLE main_category_tags (
-                                    id INT AUTO_INCREMENT PRIMARY KEY COMMENT '关联ID',
+CREATE TABLE IF NOT EXISTS main_category_tags (
+                                    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '关联ID',
                                     main_category_id INT NOT NULL COMMENT '主分类ID',
                                     tag_id INT NOT NULL COMMENT '标签ID',
                                     is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
@@ -144,14 +143,14 @@ CREATE TABLE main_category_tags (
 
                                     UNIQUE KEY uk_main_category_tag (main_category_id, tag_id),
                                     INDEX idx_main_category_id (main_category_id),
-                                    INDEX idx_tag_id (tag_id),
+                                    INDEX idx_tag_id (tag_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='主分类标签关联表';
 
 -- ====================================
 -- 7. 小分类标签关联表 (sub_category_tags)
 -- ====================================
-CREATE TABLE sub_category_tags (
-                                   id INT AUTO_INCREMENT PRIMARY KEY COMMENT '关联ID',
+CREATE TABLE IF NOT EXISTS sub_category_tags (
+                                   id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '关联ID',
                                    sub_category_id INT NOT NULL COMMENT '小分类ID',
                                    tag_id INT NOT NULL COMMENT '标签ID',
                                    is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
@@ -160,14 +159,14 @@ CREATE TABLE sub_category_tags (
 
                                    UNIQUE KEY uk_sub_category_tag (sub_category_id, tag_id),
                                    INDEX idx_sub_category_id (sub_category_id),
-                                   INDEX idx_tag_id (tag_id),
+                                   INDEX idx_tag_id (tag_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='小分类标签关联表';
 
 -- ====================================
 -- 8. 内容标签关联表 (content_tags)
 -- ====================================
-CREATE TABLE content_tags (
-                              id INT AUTO_INCREMENT PRIMARY KEY COMMENT '关联ID',
+CREATE TABLE IF NOT EXISTS content_tags (
+                              id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '关联ID',
                               content_id INT NOT NULL COMMENT '内容ID',
                               tag_id INT NOT NULL COMMENT '标签ID',
                               is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
@@ -176,13 +175,13 @@ CREATE TABLE content_tags (
 
                               UNIQUE KEY uk_content_tag (content_id, tag_id),
                               INDEX idx_content_id (content_id),
-                              INDEX idx_tag_id (tag_id),
+                              INDEX idx_tag_id (tag_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='内容标签关联表';
 
 -- ====================================
 -- 9. 用户收藏表 (user_favorites)
 -- ====================================
-CREATE TABLE user_favorites (
+CREATE TABLE IF NOT EXISTS user_favorites (
                                 id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '收藏ID',
                                 user_id BIGINT NOT NULL COMMENT '用户ID（逻辑关联user.id）',
                                 content_id INT NOT NULL COMMENT '收藏的内容ID（逻辑关联contents.id）',
@@ -204,7 +203,7 @@ CREATE TABLE user_favorites (
 -- ====================================
 -- 10. 操作日志表 (operation_logs)
 -- ====================================
-CREATE TABLE operation_logs (
+CREATE TABLE IF NOT EXISTS operation_logs (
                                 id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '日志ID',
                                 user_id BIGINT NOT NULL COMMENT '操作用户ID（逻辑关联user.id）',
                                 operation_type VARCHAR(50) NOT NULL COMMENT '操作类型：CREATE, UPDATE, DELETE, VIEW, LOGIN, etc.',
