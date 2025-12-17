@@ -51,7 +51,7 @@ public class ${table.controllerName} {
     /**
      * 创建${table.comment!}
      */
-    @PostMapping
+    @PostMapping("/create")
     @Operation(summary = "创建${table.comment!}", description = "创建新的${table.comment!}")
     public Result<${entity}DTO> create${entity}(@RequestBody @Validated ${entity}DTO ${entity?uncap_first}DTO) {
         ${entity}DTO result = ${table.serviceName?uncap_first}.save(${entity?uncap_first}DTO);

@@ -1,5 +1,6 @@
 package com.dzy.river.chart.luo.writ.common;
 
+import com.dzy.river.chart.luo.writ.util.TraceIdUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,10 @@ public class Result<T> implements Serializable {
      */
     @Schema(description = "响应消息", example = "操作成功")
     private String message;
+
+
+    @Schema(description = "traceId")
+    private String traceId = TraceIdUtil.getTraceId();
 
     /**
      * 响应数据
