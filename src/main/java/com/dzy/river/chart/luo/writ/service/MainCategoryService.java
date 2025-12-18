@@ -1,6 +1,8 @@
 package com.dzy.river.chart.luo.writ.service;
 
+import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.MainCategoryDTO;
+import com.dzy.river.chart.luo.writ.domain.req.MainCategoryPageReq;
 
 /**
  * <p>
@@ -44,5 +46,13 @@ public interface MainCategoryService {
      * @return 主分类表DTO对象
      */
     MainCategoryDTO updateById(Long id, MainCategoryDTO mainCategoryDTO);
+
+    /**
+     * 分页查询主分类列表
+     *
+     * @param mainCategoryPageReq 分页请求参数
+     * @return 分页结果
+     */
+    PageResult<MainCategoryDTO> page(MainCategoryPageReq mainCategoryPageReq);
 
 }

@@ -1,7 +1,9 @@
 package com.dzy.river.chart.luo.writ.controller;
 
+import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.MainCategoryDTO;
 import com.dzy.river.chart.luo.writ.common.Result;
+import com.dzy.river.chart.luo.writ.domain.req.MainCategoryPageReq;
 import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.MainCategoryService;
 import org.springframework.web.bind.annotation.*;
@@ -77,6 +79,16 @@ public class MainCategoryController {
         } else {
             throw new DataNotFoundException("主分类表", id);
         }
+    }
+
+    /**
+     * 分页查询主分类列表
+     */
+    @PostMapping("/page")
+    @Operation(summary = "分页查询主分类", description = "分页查询主分类列表，包含关联的标签信息")
+    public Result<PageResult<MainCategoryDTO>> page(@RequestBody @Validated MainCategoryPageReq mainCategoryPageReq) {
+        PageResult<MainCategoryDTO> pageResult = mainCategoryService.page(mainCategoryPageReq);
+        return Result.success(pageResult);
     }
 
 }

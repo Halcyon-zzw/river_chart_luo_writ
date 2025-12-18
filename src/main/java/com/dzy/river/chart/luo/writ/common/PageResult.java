@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,7 +74,7 @@ public class PageResult<T> implements Serializable {
         this.setRainbow(PageUtil.rainbow(Convert.toInt(page.getCurrent()), Convert.toInt(this.getTotalPage()), RAINBOW_NUM));
     }
 
-    public PageResult(Page<T> page, List<T> t) {
+    public PageResult(Page<?> page, List<T> t) {
         this.setRows(t);
         this.setTotalRows(Convert.toInt(page.getTotal()));
         this.setPageNo(Convert.toInt(page.getCurrent()));

@@ -1,6 +1,8 @@
 package com.dzy.river.chart.luo.writ.service;
 
+import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.ContentDTO;
+import com.dzy.river.chart.luo.writ.domain.req.ContentPageReq;
 
 /**
  * <p>
@@ -44,5 +46,13 @@ public interface ContentService {
      * @return 数据内容表DTO对象
      */
     ContentDTO updateById(Long id, ContentDTO contentDTO);
+
+    /**
+     * 分页查询内容列表
+     *
+     * @param contentPageReq 分页请求参数
+     * @return 分页结果
+     */
+    PageResult<ContentDTO> page(ContentPageReq contentPageReq);
 
 }

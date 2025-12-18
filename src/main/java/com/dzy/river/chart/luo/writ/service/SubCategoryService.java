@@ -1,6 +1,8 @@
 package com.dzy.river.chart.luo.writ.service;
 
+import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.SubCategoryDTO;
+import com.dzy.river.chart.luo.writ.domain.req.SubCategoryPageReq;
 
 /**
  * <p>
@@ -44,5 +46,13 @@ public interface SubCategoryService {
      * @return 小分类表DTO对象
      */
     SubCategoryDTO updateById(Long id, SubCategoryDTO subCategoryDTO);
+
+    /**
+     * 分页查询小分类列表
+     *
+     * @param subCategoryPageReq 分页请求参数
+     * @return 分页结果
+     */
+    PageResult<SubCategoryDTO> page(SubCategoryPageReq subCategoryPageReq);
 
 }

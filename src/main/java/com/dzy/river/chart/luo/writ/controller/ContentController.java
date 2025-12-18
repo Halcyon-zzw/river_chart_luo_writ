@@ -1,7 +1,9 @@
 package com.dzy.river.chart.luo.writ.controller;
 
+import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.ContentDTO;
 import com.dzy.river.chart.luo.writ.common.Result;
+import com.dzy.river.chart.luo.writ.domain.req.ContentPageReq;
 import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.ContentService;
 import org.springframework.web.bind.annotation.*;
@@ -77,6 +79,16 @@ public class ContentController {
         } else {
             throw new DataNotFoundException("数据内容表", id);
         }
+    }
+
+    /**
+     * 分页查询内容列表
+     */
+    @PostMapping("/page")
+    @Operation(summary = "分页查询内容", description = "分页查询内容列表，包含关联的标签信息")
+    public Result<PageResult<ContentDTO>> page(@RequestBody @Validated ContentPageReq contentPageReq) {
+        PageResult<ContentDTO> pageResult = contentService.page(contentPageReq);
+        return Result.success(pageResult);
     }
 
 }

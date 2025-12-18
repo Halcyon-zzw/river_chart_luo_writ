@@ -1,7 +1,9 @@
 package com.dzy.river.chart.luo.writ.controller;
 
+import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.SubCategoryDTO;
 import com.dzy.river.chart.luo.writ.common.Result;
+import com.dzy.river.chart.luo.writ.domain.req.SubCategoryPageReq;
 import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.SubCategoryService;
 import org.springframework.web.bind.annotation.*;
@@ -77,6 +79,16 @@ public class SubCategoryController {
         } else {
             throw new DataNotFoundException("小分类表", id);
         }
+    }
+
+    /**
+     * 分页查询小分类列表
+     */
+    @PostMapping("/page")
+    @Operation(summary = "分页查询小分类", description = "分页查询小分类列表，包含关联的标签信息")
+    public Result<PageResult<SubCategoryDTO>> page(@RequestBody @Validated SubCategoryPageReq subCategoryPageReq) {
+        PageResult<SubCategoryDTO> pageResult = subCategoryService.page(subCategoryPageReq);
+        return Result.success(pageResult);
     }
 
 }
