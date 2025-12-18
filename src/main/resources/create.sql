@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS main_categories (
 -- ====================================
 CREATE TABLE IF NOT EXISTS sub_categories (
                                 id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '小分类ID',
-                                main_category_id INT NOT NULL COMMENT '所属主分类ID',
+                                main_category_id BIGINT NOT NULL COMMENT '所属主分类ID',
                                 name VARCHAR(100) NOT NULL COMMENT '小分类名称',
                                 description TEXT COMMENT '小分类描述',
                                 thumbnail_url VARCHAR(500) COMMENT '缩略图URL',
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS sub_categories (
 -- ====================================
 CREATE TABLE IF NOT EXISTS content (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '内容ID',
-                          sub_category_id INT NOT NULL COMMENT '所属小分类ID',
+                          sub_category_id BIGINT NOT NULL COMMENT '所属小分类ID',
                           title VARCHAR(200) NOT NULL COMMENT '内容标题',
                           content_type ENUM('image', 'note') NOT NULL COMMENT '内容类型(image:图片, note:笔记)',
 
@@ -119,7 +119,6 @@ CREATE TABLE IF NOT EXISTS content (
     -- 通用字段
                           description TEXT COMMENT '内容描述',
                           sort_order INT DEFAULT 0 COMMENT '排序权重',
-                          view_count INT DEFAULT 0 COMMENT '查看次数',
                           is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
                           created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
                           updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -135,8 +134,8 @@ CREATE TABLE IF NOT EXISTS content (
 -- ====================================
 CREATE TABLE IF NOT EXISTS main_category_tag (
                                     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '关联ID',
-                                    main_category_id INT NOT NULL COMMENT '主分类ID',
-                                    tag_id INT NOT NULL COMMENT '标签ID',
+                                    main_category_id BIGINT NOT NULL COMMENT '主分类ID',
+                                    tag_id BIGINT NOT NULL COMMENT '标签ID',
                                     is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
                                     created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
                                     updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -151,8 +150,8 @@ CREATE TABLE IF NOT EXISTS main_category_tag (
 -- ====================================
 CREATE TABLE IF NOT EXISTS sub_category_tag (
                                    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '关联ID',
-                                   sub_category_id INT NOT NULL COMMENT '小分类ID',
-                                   tag_id INT NOT NULL COMMENT '标签ID',
+                                   sub_category_id BIGINT NOT NULL COMMENT '小分类ID',
+                                   tag_id BIGINT NOT NULL COMMENT '标签ID',
                                    is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
                                    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
                                    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -167,8 +166,8 @@ CREATE TABLE IF NOT EXISTS sub_category_tag (
 -- ====================================
 CREATE TABLE IF NOT EXISTS content_tag (
                               id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '关联ID',
-                              content_id INT NOT NULL COMMENT '内容ID',
-                              tag_id INT NOT NULL COMMENT '标签ID',
+                              content_id BIGINT NOT NULL COMMENT '内容ID',
+                              tag_id BIGINT NOT NULL COMMENT '标签ID',
                               is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
                               created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
                               updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -184,7 +183,7 @@ CREATE TABLE IF NOT EXISTS content_tag (
 CREATE TABLE IF NOT EXISTS user_collection (
                                 id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '收藏ID',
                                 user_id BIGINT NOT NULL COMMENT '用户ID（逻辑关联user.id）',
-                                content_id INT NOT NULL COMMENT '收藏的内容ID（逻辑关联contents.id）',
+                                content_id BIGINT NOT NULL COMMENT '收藏的内容ID（逻辑关联contents.id）',
                                 folder_name VARCHAR(100) DEFAULT '默认收藏夹' COMMENT '收藏夹名称',
                                 tags JSON COMMENT '收藏标签，JSON数组格式',
                                 notes TEXT COMMENT '收藏备注',

@@ -2,6 +2,8 @@ package com.dzy.river.chart.luo.writ.domain.dto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -57,6 +59,9 @@ public class ContentDTO implements Serializable {
 
     @Schema(description = "内容描述")
     private String description;
+
+    @Schema(description = "标签列表")
+    private List<TagDTO> tagDTOList;
 
     @Schema(description = "排序权重")
     private Integer sortOrder;
