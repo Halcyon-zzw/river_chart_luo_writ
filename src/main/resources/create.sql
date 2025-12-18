@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- ====================================
 -- 2. 标签表 (tags)
 -- ====================================
-CREATE TABLE IF NOT EXISTS tags (
+CREATE TABLE IF NOT EXISTS tag (
                       id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '标签ID',
                       name VARCHAR(50) NOT NULL UNIQUE COMMENT '标签名称',
                       color VARCHAR(7) DEFAULT '#007AFF' COMMENT '标签颜色(十六进制)',
@@ -97,9 +97,9 @@ CREATE TABLE IF NOT EXISTS sub_categories (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='小分类表';
 
 -- ====================================
--- 5. 数据内容表 (contents)
+-- 5. 数据内容表 (content)
 -- ====================================
-CREATE TABLE IF NOT EXISTS contents (
+CREATE TABLE IF NOT EXISTS content (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '内容ID',
                           sub_category_id INT NOT NULL COMMENT '所属小分类ID',
                           title VARCHAR(200) NOT NULL COMMENT '内容标题',
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS contents (
 -- ====================================
 -- 6. 主分类标签关联表 (main_category_tags)
 -- ====================================
-CREATE TABLE IF NOT EXISTS main_category_tags (
+CREATE TABLE IF NOT EXISTS main_category_tag (
                                     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '关联ID',
                                     main_category_id INT NOT NULL COMMENT '主分类ID',
                                     tag_id INT NOT NULL COMMENT '标签ID',
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS main_category_tags (
 -- ====================================
 -- 7. 小分类标签关联表 (sub_category_tags)
 -- ====================================
-CREATE TABLE IF NOT EXISTS sub_category_tags (
+CREATE TABLE IF NOT EXISTS sub_category_tag (
                                    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '关联ID',
                                    sub_category_id INT NOT NULL COMMENT '小分类ID',
                                    tag_id INT NOT NULL COMMENT '标签ID',
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS sub_category_tags (
 -- ====================================
 -- 8. 内容标签关联表 (content_tags)
 -- ====================================
-CREATE TABLE IF NOT EXISTS content_tags (
+CREATE TABLE IF NOT EXISTS content_tag (
                               id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '关联ID',
                               content_id INT NOT NULL COMMENT '内容ID',
                               tag_id INT NOT NULL COMMENT '标签ID',
@@ -179,9 +179,9 @@ CREATE TABLE IF NOT EXISTS content_tags (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='内容标签关联表';
 
 -- ====================================
--- 9. 用户收藏表 (user_favorites)
+-- 9. 用户收藏表 (user_collection)
 -- ====================================
-CREATE TABLE IF NOT EXISTS user_favorites (
+CREATE TABLE IF NOT EXISTS user_collection (
                                 id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '收藏ID',
                                 user_id BIGINT NOT NULL COMMENT '用户ID（逻辑关联user.id）',
                                 content_id INT NOT NULL COMMENT '收藏的内容ID（逻辑关联contents.id）',
@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS user_favorites (
 -- ====================================
 -- 10. 操作日志表 (operation_logs)
 -- ====================================
-CREATE TABLE IF NOT EXISTS operation_logs (
+CREATE TABLE IF NOT EXISTS operation_log (
                                 id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '日志ID',
                                 user_id BIGINT NOT NULL COMMENT '操作用户ID（逻辑关联user.id）',
                                 operation_type VARCHAR(50) NOT NULL COMMENT '操作类型：CREATE, UPDATE, DELETE, VIEW, LOGIN, etc.',
@@ -230,7 +230,7 @@ CREATE TABLE IF NOT EXISTS operation_logs (
 -- ====================================
 
 -- 插入优化后的基础标签
-INSERT INTO tags (name, color) VALUES
+INSERT INTO tag (name, color) VALUES
                                    ('重要', '#FF3B30'),
                                    ('急用', '#FF6B35'),
                                    ('常用', '#FF9500'),
