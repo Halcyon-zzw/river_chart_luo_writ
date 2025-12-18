@@ -12,6 +12,8 @@ import org.springframework.validation.annotation.Validated;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.util.List;
+
 /**
  * <p>
  * 数据内容表 前端控制器
@@ -89,6 +91,16 @@ public class ContentController {
     public Result<PageResult<ContentDTO>> page(@RequestBody @Validated ContentPageReq contentPageReq) {
         PageResult<ContentDTO> pageResult = contentService.page(contentPageReq);
         return Result.success(pageResult);
+    }
+
+    /**
+     * 关联标签
+     */
+    @PostMapping("/{id}/tags")
+    @Operation(summary = "关联标签", description = "为内容关联标签")
+    public Result<Boolean> associateTags(@PathVariable Long id, @RequestBody List<Long> tagIds) {
+        boolean success = contentService.associateTags(id, tagIds);
+        return Result.success("关联成功", success);
     }
 
 }

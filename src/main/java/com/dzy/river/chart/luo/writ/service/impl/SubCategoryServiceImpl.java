@@ -17,6 +17,7 @@ import com.dzy.river.chart.luo.writ.domain.req.SubCategoryPageReq;
 import com.dzy.river.chart.luo.writ.service.SubCategoryService;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
@@ -143,6 +144,32 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 
         // 12. 返回分页结果
         return new PageResult(page, subCategoryDTOList);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean associateTags(Long subCategoryId, List<Long> tagIds) {
+        // 1. 删除现有的标签关联
+        LambdaQueryWrapper<SubCategoryTag> deleteWrapper = new LambdaQueryWrapper<>();
+        deleteWrapper.eq(SubCategoryTag::getSubCategoryId, subCategoryId);
+        subCategoryTagDao.remove(deleteWrapper);
+
+        // 2. 如果标签列表为空，直接返回
+        if (CollectionUtils.isEmpty(tagIds)) {
+            return true;
+        }
+
+        // 3. 创建新的标签关联
+        List<SubCategoryTag> subCategoryTags = tagIds.stream()
+                .map(tagId -> {
+                    SubCategoryTag subCategoryTag = new SubCategoryTag();
+                    subCategoryTag.setSubCategoryId(subCategoryId);
+                    subCategoryTag.setTagId(tagId);
+                    return subCategoryTag;
+                })
+                .collect(Collectors.toList());
+
+        return subCategoryTagDao.saveBatch(subCategoryTags);
     }
 
 }

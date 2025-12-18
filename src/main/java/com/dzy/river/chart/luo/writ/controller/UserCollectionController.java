@@ -1,7 +1,9 @@
 package com.dzy.river.chart.luo.writ.controller;
 
+import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.UserCollectionDTO;
 import com.dzy.river.chart.luo.writ.common.Result;
+import com.dzy.river.chart.luo.writ.domain.req.CollectionPageReq;
 import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.UserCollectionService;
 import org.springframework.web.bind.annotation.*;
@@ -77,6 +79,16 @@ public class UserCollectionController {
         } else {
             throw new DataNotFoundException("用户收藏表", id);
         }
+    }
+
+    /**
+     * 分页查询用户收藏列表
+     */
+    @PostMapping("/page")
+    @Operation(summary = "分页查询用户收藏", description = "根据用户ID和内容类型分页查询收藏列表")
+    public Result<PageResult<UserCollectionDTO>> page(@RequestBody @Validated CollectionPageReq collectionPageReq) {
+        PageResult<UserCollectionDTO> pageResult = userCollectionService.page(collectionPageReq);
+        return Result.success(pageResult);
     }
 
 }

@@ -84,13 +84,13 @@ public class PageResult<T> implements Serializable {
         this.setRainbow(PageUtil.rainbow(Convert.toInt(page.getCurrent()), Convert.toInt(this.getTotalPage()), RAINBOW_NUM));
     }
 
-    public PageResult(IPage<T> page, List<T> t) {
-        this.setRows(t);
-        this.setTotalRows(Convert.toInt(page.getTotal()));
-        this.setPageNo(Convert.toInt(page.getCurrent()));
-        this.setPageNum(Convert.toInt(page.getCurrent()));
-        this.setPageSize(Convert.toInt(page.getSize()));
-        this.setTotalPage(PageUtil.totalPage(Convert.toInt(page.getTotal()), Convert.toInt(page.getSize())));
-        this.setRainbow(PageUtil.rainbow(Convert.toInt(page.getCurrent()), Convert.toInt(this.getTotalPage()), RAINBOW_NUM));
-    }
+//    public PageResult(IPage<T> page, List<T> t) {
+//        this.setRows(t);
+//        this.setTotalRows(Convert.toInt(page.getTotal()));
+//        this.setPageNo(Convert.toInt(page.getCurrent()));
+//        this.setPageNum(Convert.toInt(page.getCurrent()));
+//        this.setPageSize(Convert.toInt(page.getSize()));
+//        this.setTotalPage(PageUtil.totalPage(Convert.toInt(page.getTotal()), Convert.toInt(page.getSize())));
+//        this.setRainbow(PageUtil.rainbow(Convert.toInt(page.getCurrent()), Convert.toInt(this.getTotalPage()), RAINBOW_NUM));
+//    }
 }

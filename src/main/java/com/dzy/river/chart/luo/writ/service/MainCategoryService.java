@@ -4,6 +4,8 @@ import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.MainCategoryDTO;
 import com.dzy.river.chart.luo.writ.domain.req.MainCategoryPageReq;
 
+import java.util.List;
+
 /**
  * <p>
  * 主分类表 服务类
@@ -54,5 +56,14 @@ public interface MainCategoryService {
      * @return 分页结果
      */
     PageResult<MainCategoryDTO> page(MainCategoryPageReq mainCategoryPageReq);
+
+    /**
+     * 关联标签
+     *
+     * @param mainCategoryId 主分类ID
+     * @param tagIds 标签ID列表
+     * @return 是否关联成功
+     */
+    boolean associateTags(Long mainCategoryId, List<Long> tagIds);
 
 }

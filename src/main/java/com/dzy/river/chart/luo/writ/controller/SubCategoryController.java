@@ -12,6 +12,8 @@ import org.springframework.validation.annotation.Validated;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.util.List;
+
 /**
  * <p>
  * 小分类表 前端控制器
@@ -89,6 +91,16 @@ public class SubCategoryController {
     public Result<PageResult<SubCategoryDTO>> page(@RequestBody @Validated SubCategoryPageReq subCategoryPageReq) {
         PageResult<SubCategoryDTO> pageResult = subCategoryService.page(subCategoryPageReq);
         return Result.success(pageResult);
+    }
+
+    /**
+     * 关联标签
+     */
+    @PostMapping("/{id}/tags")
+    @Operation(summary = "关联标签", description = "为小分类关联标签")
+    public Result<Boolean> associateTags(@PathVariable Long id, @RequestBody List<Long> tagIds) {
+        boolean success = subCategoryService.associateTags(id, tagIds);
+        return Result.success("关联成功", success);
     }
 
 }

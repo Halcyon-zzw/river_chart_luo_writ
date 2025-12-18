@@ -1,6 +1,8 @@
 package com.dzy.river.chart.luo.writ.service;
 
+import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.UserCollectionDTO;
+import com.dzy.river.chart.luo.writ.domain.req.CollectionPageReq;
 
 /**
  * <p>
@@ -44,5 +46,13 @@ public interface UserCollectionService {
      * @return 用户收藏表DTO对象
      */
     UserCollectionDTO updateById(Long id, UserCollectionDTO userCollectionDTO);
+
+    /**
+     * 分页查询用户收藏列表
+     *
+     * @param collectionPageReq 分页请求参数
+     * @return 分页结果
+     */
+    PageResult<UserCollectionDTO> page(CollectionPageReq collectionPageReq);
 
 }

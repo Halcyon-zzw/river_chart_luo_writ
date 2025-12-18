@@ -2,6 +2,8 @@ package com.dzy.river.chart.luo.writ.service;
 
 import com.dzy.river.chart.luo.writ.domain.dto.TagDTO;
 
+import java.util.List;
+
 /**
  * <p>
  * 标签表 服务类
@@ -44,5 +46,13 @@ public interface TagService {
      * @return 标签表DTO对象
      */
     TagDTO updateById(Long id, TagDTO tagDTO);
+
+    /**
+     * 根据名称查询标签列表
+     *
+     * @param name 标签名称（模糊匹配，允许为空）
+     * @return 标签DTO列表
+     */
+    List<TagDTO> queryByName(String name);
 
 }

@@ -17,6 +17,7 @@ import com.dzy.river.chart.luo.writ.domain.req.MainCategoryPageReq;
 import com.dzy.river.chart.luo.writ.service.MainCategoryService;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -144,6 +145,32 @@ public class MainCategoryServiceImpl implements MainCategoryService {
 
         // 12. 返回分页结果
         return new PageResult<>(page, mainCategoryDTOList);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean associateTags(Long mainCategoryId, List<Long> tagIds) {
+        // 1. 删除现有的标签关联
+        LambdaQueryWrapper<MainCategoryTag> deleteWrapper = new LambdaQueryWrapper<>();
+        deleteWrapper.eq(MainCategoryTag::getMainCategoryId, mainCategoryId);
+        mainCategoryTagDao.remove(deleteWrapper);
+
+        // 2. 如果标签列表为空，直接返回
+        if (CollectionUtils.isEmpty(tagIds)) {
+            return true;
+        }
+
+        // 3. 创建新的标签关联
+        List<MainCategoryTag> mainCategoryTags = tagIds.stream()
+                .map(tagId -> {
+                    MainCategoryTag mainCategoryTag = new MainCategoryTag();
+                    mainCategoryTag.setMainCategoryId(mainCategoryId);
+                    mainCategoryTag.setTagId(tagId);
+                    return mainCategoryTag;
+                })
+                .collect(Collectors.toList());
+
+        return mainCategoryTagDao.saveBatch(mainCategoryTags);
     }
 
 }

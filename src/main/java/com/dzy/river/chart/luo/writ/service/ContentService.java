@@ -4,6 +4,8 @@ import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.ContentDTO;
 import com.dzy.river.chart.luo.writ.domain.req.ContentPageReq;
 
+import java.util.List;
+
 /**
  * <p>
  * 数据内容表 服务类
@@ -54,5 +56,14 @@ public interface ContentService {
      * @return 分页结果
      */
     PageResult<ContentDTO> page(ContentPageReq contentPageReq);
+
+    /**
+     * 关联标签
+     *
+     * @param contentId 内容ID
+     * @param tagIds 标签ID列表
+     * @return 是否关联成功
+     */
+    boolean associateTags(Long contentId, List<Long> tagIds);
 
 }

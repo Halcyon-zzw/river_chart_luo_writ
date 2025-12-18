@@ -17,6 +17,7 @@ import com.dzy.river.chart.luo.writ.domain.req.ContentPageReq;
 import com.dzy.river.chart.luo.writ.service.ContentService;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -145,6 +146,32 @@ public class ContentServiceImpl implements ContentService {
 
         // 12. 返回分页结果
         return new PageResult<>(page, contentDTOList);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean associateTags(Long contentId, List<Long> tagIds) {
+        // 1. 删除现有的标签关联
+        LambdaQueryWrapper<ContentTag> deleteWrapper = new LambdaQueryWrapper<>();
+        deleteWrapper.eq(ContentTag::getContentId, contentId);
+        contentTagDao.remove(deleteWrapper);
+
+        // 2. 如果标签列表为空，直接返回
+        if (CollectionUtils.isEmpty(tagIds)) {
+            return true;
+        }
+
+        // 3. 创建新的标签关联
+        List<ContentTag> contentTags = tagIds.stream()
+                .map(tagId -> {
+                    ContentTag contentTag = new ContentTag();
+                    contentTag.setContentId(contentId);
+                    contentTag.setTagId(tagId);
+                    return contentTag;
+                })
+                .collect(Collectors.toList());
+
+        return contentTagDao.saveBatch(contentTags);
     }
 
 }

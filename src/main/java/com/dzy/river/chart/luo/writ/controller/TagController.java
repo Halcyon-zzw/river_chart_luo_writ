@@ -10,6 +10,8 @@ import org.springframework.validation.annotation.Validated;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.util.List;
+
 /**
  * <p>
  * 标签表 前端控制器
@@ -77,6 +79,16 @@ public class TagController {
         } else {
             throw new DataNotFoundException("标签表", id);
         }
+    }
+
+    /**
+     * 查询标签列表
+     */
+    @GetMapping("/query")
+    @Operation(summary = "查询标签", description = "根据名称模糊查询标签列表")
+    public Result<List<TagDTO>> query(@RequestParam(required = false) String name) {
+        List<TagDTO> tags = tagService.queryByName(name);
+        return Result.success(tags);
     }
 
 }
