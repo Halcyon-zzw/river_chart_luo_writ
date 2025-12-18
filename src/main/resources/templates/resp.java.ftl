@@ -1,7 +1,7 @@
 <#if customMap?? && customMap.domainPackage??>
-package ${customMap.domainPackage}.dto;
+package ${customMap.domainPackage}.resp;
 <#else>
-package ${package.Parent}.domain.dto;
+package ${package.Parent}.domain.resp;
 </#if>
 
 <#list table.importPackages as pkg>
@@ -19,7 +19,7 @@ import jakarta.validation.constraints.*;
 
 /**
  * <p>
- * ${table.comment!} DTO
+ * ${table.comment!} Resp
  * </p>
  *
  * @author ${author}
@@ -30,8 +30,8 @@ import jakarta.validation.constraints.*;
 <#if chainModel>
 @Accessors(chain = true)
 </#if>
-@Schema(name = "${entity}DTO", description = "${table.comment!} DTO")
-public class ${entity}DTO implements Serializable {
+@Schema(name = "${entity}Resp", description = "${table.comment!} Resp")
+public class ${entity}Resp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->

@@ -1,6 +1,10 @@
 package ${package.Service};
 
-import ${package.Parent}.dto.${entity}DTO;
+<#if customMap?? && customMap.domainPackage??>
+import ${customMap.domainPackage}.dto.${entity}DTO;
+<#else>
+import ${package.Parent}.domain.dto.${entity}DTO;
+</#if>
 
 /**
  * <p>
@@ -9,6 +13,15 @@ import ${package.Parent}.dto.${entity}DTO;
  *
  * @author ${author}
  * @since ${date}
+<#if customMap?? && customMap.projectName??>
+ * @project ${customMap.projectName}
+</#if>
+<#if customMap?? && customMap.companyName??>
+ * @company ${customMap.companyName}
+</#if>
+<#if customMap?? && customMap.copyright??>
+ * ${customMap.copyright}
+</#if>
  */
 <#if kotlin>
 interface ${table.serviceName}

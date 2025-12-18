@@ -1,12 +1,20 @@
 package ${package.ServiceImpl};
 
 import ${package.Entity}.${entity};
-import ${package.Parent}.dto.${entity}DTO;
-import ${package.Parent}.convert.${entity}Convert;
+<#if customMap?? && customMap.domainPackage??>
+import ${customMap.domainPackage}.dto.${entity}DTO;
+import ${customMap.domainPackage}.convert.${entity}Convert;
+<#else>
+import ${package.Parent}.domain.dto.${entity}DTO;
+import ${package.Parent}.domain.convert.${entity}Convert;
+</#if>
 import ${package.Parent}.dao.${entity}Dao;
 import ${package.Service}.${table.serviceName};
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+<#if customMap?? && customMap.enableLog?? && customMap.enableLog>
+import lombok.extern.slf4j.Slf4j;
+</#if>
 
 /**
  * <p>
@@ -16,6 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author ${author}
  * @since ${date}
  */
+<#if customMap?? && customMap.enableLog?? && customMap.enableLog>
+@Slf4j
+</#if>
 @Service
 <#if kotlin>
 open class ${table.serviceImplName} : ${table.serviceName} {
@@ -32,6 +43,9 @@ public class ${table.serviceImplName} implements ${table.serviceName} {
 
     @Override
     public ${entity}DTO getById(Long id) {
+<#if customMap?? && customMap.enableLog?? && customMap.enableLog>
+        log.info("根据ID获取${table.comment!}: {}", id);
+</#if>
         ${entity} ${entity?uncap_first} = ${entity?uncap_first}Dao.getById(id);
         return ${entity?uncap_first} != null ? ${entity?uncap_first}Convert.to${entity}DTO(${entity?uncap_first}) : null;
     }

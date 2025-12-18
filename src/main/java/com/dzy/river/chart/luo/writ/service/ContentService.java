@@ -1,0 +1,48 @@
+package com.dzy.river.chart.luo.writ.service;
+
+import com.dzy.river.chart.luo.writ.domain.dto.ContentDTO;
+
+/**
+ * <p>
+ * 数据内容表 服务类
+ * </p>
+ *
+ * @author zhuzhiwei
+ * @since 2025-12-18
+ */
+public interface ContentService {
+
+    /**
+     * 根据ID获取数据内容表
+     *
+     * @param id 主键ID
+     * @return 数据内容表DTO对象
+     */
+    ContentDTO getById(Long id);
+
+    /**
+     * 保存数据内容表
+     *
+     * @param contentDTO 数据内容表DTO对象
+     * @return 数据内容表DTO对象
+     */
+    ContentDTO save(ContentDTO contentDTO);
+
+    /**
+     * 根据ID删除数据内容表
+     *
+     * @param id 主键ID
+     * @return 是否删除成功
+     */
+    boolean removeById(Long id);
+
+    /**
+     * 根据ID更新数据内容表
+     *
+     * @param id 主键ID
+     * @param contentDTO 数据内容表DTO对象
+     * @return 数据内容表DTO对象
+     */
+    ContentDTO updateById(Long id, ContentDTO contentDTO);
+
+}

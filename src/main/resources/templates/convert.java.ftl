@@ -1,7 +1,15 @@
-package ${package.Parent}.convert;
+<#if customMap?? && customMap.domainPackage??>
+package ${customMap.domainPackage}.convert;
+<#else>
+package ${package.Parent}.domain.convert;
+</#if>
 
 import ${package.Entity}.${entity};
-import ${package.Parent}.dto.${entity}DTO;
+<#if customMap?? && customMap.domainPackage??>
+import ${customMap.domainPackage}.dto.${entity}DTO;
+<#else>
+import ${package.Parent}.domain.dto.${entity}DTO;
+</#if>
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import java.util.List;

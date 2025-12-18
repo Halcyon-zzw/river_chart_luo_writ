@@ -1,6 +1,10 @@
 package ${package.Controller};
 
-import ${package.Parent}.dto.${entity}DTO;
+<#if customMap?? && customMap.domainPackage??>
+import ${customMap.domainPackage}.dto.${entity}DTO;
+<#else>
+import ${package.Parent}.domain.dto.${entity}DTO;
+</#if>
 import ${package.Parent}.common.Result;
 import ${package.Parent}.exception.DataNotFoundException;
 import ${package.Service}.${table.serviceName};
@@ -51,7 +55,7 @@ public class ${table.controllerName} {
     /**
      * 创建${table.comment!}
      */
-    @PostMapping("/create")
+    @PostMapping
     @Operation(summary = "创建${table.comment!}", description = "创建新的${table.comment!}")
     public Result<${entity}DTO> create${entity}(@RequestBody @Validated ${entity}DTO ${entity?uncap_first}DTO) {
         ${entity}DTO result = ${table.serviceName?uncap_first}.save(${entity?uncap_first}DTO);
