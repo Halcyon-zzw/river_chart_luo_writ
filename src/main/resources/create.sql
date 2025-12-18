@@ -62,9 +62,9 @@ CREATE TABLE IF NOT EXISTS tag (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='标签表';
 
 -- ====================================
--- 3. 主分类表 (main_categories)
+-- 3. 主分类表 (main_category)
 -- ====================================
-CREATE TABLE IF NOT EXISTS main_categories (
+CREATE TABLE IF NOT EXISTS main_category (
                                  id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '主分类ID',
                                  name VARCHAR(100) NOT NULL COMMENT '分类名称',
                                  description TEXT COMMENT '分类描述',
@@ -78,9 +78,9 @@ CREATE TABLE IF NOT EXISTS main_categories (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='主分类表';
 
 -- ====================================
--- 4. 小分类表 (sub_categories)
+-- 4. 小分类表 (sub_category)
 -- ====================================
-CREATE TABLE IF NOT EXISTS sub_categories (
+CREATE TABLE IF NOT EXISTS sub_category (
                                 id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '小分类ID',
                                 main_category_id BIGINT NOT NULL COMMENT '所属主分类ID',
                                 name VARCHAR(100) NOT NULL COMMENT '小分类名称',
