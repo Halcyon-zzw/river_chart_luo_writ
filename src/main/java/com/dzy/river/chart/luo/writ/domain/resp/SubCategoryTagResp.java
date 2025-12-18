@@ -26,10 +26,10 @@ public class SubCategoryTagResp implements Serializable {
     private Long id;
 
     @Schema(description = "小分类ID")
-    private Integer subCategoryId;
+    private Long subCategoryId;
 
     @Schema(description = "标签ID")
-    private Integer tagId;
+    private Long tagId;
 
     @Schema(description = "删除标志：0-未删除，1-已删除")
     private Byte isDeleted;

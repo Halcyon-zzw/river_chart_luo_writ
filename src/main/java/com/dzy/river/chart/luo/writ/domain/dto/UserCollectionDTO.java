@@ -29,7 +29,7 @@ public class UserCollectionDTO implements Serializable {
     private Long userId;
 
     @Schema(description = "收藏的内容ID（逻辑关联contents.id）")
-    private Integer contentId;
+    private Long contentId;
 
     @Schema(description = "收藏夹名称")
     private String folderName;

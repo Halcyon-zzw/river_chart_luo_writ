@@ -44,7 +44,7 @@ public class UserCollectionController {
     /**
      * 创建用户收藏表
      */
-    @PostMapping
+    @PostMapping("/create")
     @Operation(summary = "创建用户收藏表", description = "创建新的用户收藏表")
     public Result<UserCollectionDTO> createUserCollection(@RequestBody @Validated UserCollectionDTO userCollectionDTO) {
         UserCollectionDTO result = userCollectionService.save(userCollectionDTO);

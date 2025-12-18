@@ -26,7 +26,7 @@ public class SubCategoryResp implements Serializable {
     private Long id;
 
     @Schema(description = "所属主分类ID")
-    private Integer mainCategoryId;
+    private Long mainCategoryId;
 
     @Schema(description = "小分类名称")
     @NotBlank(message = "姓名不能为空")

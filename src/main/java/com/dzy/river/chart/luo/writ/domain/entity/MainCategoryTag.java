@@ -37,13 +37,13 @@ public class MainCategoryTag implements Serializable {
      * 主分类ID
      */
     @TableField("main_category_id")
-    private Integer mainCategoryId;
+    private Long mainCategoryId;
 
     /**
      * 标签ID
      */
     @TableField("tag_id")
-    private Integer tagId;
+    private Long tagId;
 
     /**
      * 删除标志：0-未删除，1-已删除

@@ -44,7 +44,7 @@ public class OperationLogController {
     /**
      * 创建操作日志表
      */
-    @PostMapping
+    @PostMapping("/create")
     @Operation(summary = "创建操作日志表", description = "创建新的操作日志表")
     public Result<OperationLogDTO> createOperationLog(@RequestBody @Validated OperationLogDTO operationLogDTO) {
         OperationLogDTO result = operationLogService.save(operationLogDTO);

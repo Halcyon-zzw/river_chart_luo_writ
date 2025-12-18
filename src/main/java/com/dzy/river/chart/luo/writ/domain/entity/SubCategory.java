@@ -37,7 +37,7 @@ public class SubCategory implements Serializable {
      * 所属主分类ID
      */
     @TableField("main_category_id")
-    private Integer mainCategoryId;
+    private Long mainCategoryId;
 
     /**
      * 小分类名称

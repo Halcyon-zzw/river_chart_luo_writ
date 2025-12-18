@@ -28,7 +28,7 @@ public class ContentDTO implements Serializable {
     private Long id;
 
     @Schema(description = "所属小分类ID")
-    private Integer subCategoryId;
+    private Long subCategoryId;
 
     @Schema(description = "内容标题")
     private String title;
@@ -65,9 +65,6 @@ public class ContentDTO implements Serializable {
 
     @Schema(description = "排序权重")
     private Integer sortOrder;
-
-    @Schema(description = "查看次数")
-    private Integer viewCount;
 
     @Schema(description = "删除标志：0-未删除，1-已删除")
     private Byte isDeleted;

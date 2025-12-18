@@ -44,7 +44,7 @@ public class UserController {
     /**
      * 创建用户表
      */
-    @PostMapping
+    @PostMapping("/create")
     @Operation(summary = "创建用户表", description = "创建新的用户表")
     public Result<UserDTO> createUser(@RequestBody @Validated UserDTO userDTO) {
         UserDTO result = userService.save(userDTO);

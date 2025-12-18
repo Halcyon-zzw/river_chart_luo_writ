@@ -44,7 +44,7 @@ public class SubCategoryController {
     /**
      * 创建小分类表
      */
-    @PostMapping
+    @PostMapping("/create")
     @Operation(summary = "创建小分类表", description = "创建新的小分类表")
     public Result<SubCategoryDTO> createSubCategory(@RequestBody @Validated SubCategoryDTO subCategoryDTO) {
         SubCategoryDTO result = subCategoryService.save(subCategoryDTO);

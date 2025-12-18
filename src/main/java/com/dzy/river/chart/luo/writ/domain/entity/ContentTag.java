@@ -37,13 +37,13 @@ public class ContentTag implements Serializable {
      * 内容ID
      */
     @TableField("content_id")
-    private Integer contentId;
+    private Long contentId;
 
     /**
      * 标签ID
      */
     @TableField("tag_id")
-    private Integer tagId;
+    private Long tagId;
 
     /**
      * 删除标志：0-未删除，1-已删除

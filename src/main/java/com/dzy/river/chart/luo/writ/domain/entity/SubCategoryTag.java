@@ -37,13 +37,13 @@ public class SubCategoryTag implements Serializable {
      * 小分类ID
      */
     @TableField("sub_category_id")
-    private Integer subCategoryId;
+    private Long subCategoryId;
 
     /**
      * 标签ID
      */
     @TableField("tag_id")
-    private Integer tagId;
+    private Long tagId;
 
     /**
      * 删除标志：0-未删除，1-已删除

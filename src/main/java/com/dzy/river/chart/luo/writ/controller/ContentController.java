@@ -44,7 +44,7 @@ public class ContentController {
     /**
      * 创建数据内容表
      */
-    @PostMapping
+    @PostMapping("/create")
     @Operation(summary = "创建数据内容表", description = "创建新的数据内容表")
     public Result<ContentDTO> createContent(@RequestBody @Validated ContentDTO contentDTO) {
         ContentDTO result = contentService.save(contentDTO);

@@ -44,7 +44,7 @@ public class ContentTagController {
     /**
      * 创建内容标签关联表
      */
-    @PostMapping
+    @PostMapping("/create")
     @Operation(summary = "创建内容标签关联表", description = "创建新的内容标签关联表")
     public Result<ContentTagDTO> createContentTag(@RequestBody @Validated ContentTagDTO contentTagDTO) {
         ContentTagDTO result = contentTagService.save(contentTagDTO);

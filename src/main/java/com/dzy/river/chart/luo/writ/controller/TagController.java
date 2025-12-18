@@ -44,7 +44,7 @@ public class TagController {
     /**
      * 创建标签表
      */
-    @PostMapping
+    @PostMapping("/create")
     @Operation(summary = "创建标签表", description = "创建新的标签表")
     public Result<TagDTO> createTag(@RequestBody @Validated TagDTO tagDTO) {
         TagDTO result = tagService.save(tagDTO);

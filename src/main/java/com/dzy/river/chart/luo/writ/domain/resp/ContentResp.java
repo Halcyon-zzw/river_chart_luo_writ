@@ -2,9 +2,6 @@ package com.dzy.river.chart.luo.writ.domain.resp;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
-
-import com.dzy.river.chart.luo.writ.domain.dto.TagDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,7 +26,7 @@ public class ContentResp implements Serializable {
     private Long id;
 
     @Schema(description = "所属小分类ID")
-    private Integer subCategoryId;
+    private Long subCategoryId;
 
     @Schema(description = "内容标题")
     private String title;
@@ -63,12 +60,6 @@ public class ContentResp implements Serializable {
 
     @Schema(description = "排序权重")
     private Integer sortOrder;
-
-    @Schema(description = "查看次数")
-    private Integer viewCount;
-
-    @Schema(description = "标签列表")
-    private List<TagDTO> tagDTOList;
 
     @Schema(description = "删除标志：0-未删除，1-已删除")
     private Byte isDeleted;

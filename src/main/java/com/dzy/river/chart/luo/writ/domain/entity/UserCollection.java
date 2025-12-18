@@ -43,7 +43,7 @@ public class UserCollection implements Serializable {
      * 收藏的内容ID（逻辑关联contents.id）
      */
     @TableField("content_id")
-    private Integer contentId;
+    private Long contentId;
 
     /**
      * 收藏夹名称

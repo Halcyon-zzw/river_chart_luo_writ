@@ -44,7 +44,7 @@ public class MainCategoryController {
     /**
      * 创建主分类表
      */
-    @PostMapping
+    @PostMapping("/create")
     @Operation(summary = "创建主分类表", description = "创建新的主分类表")
     public Result<MainCategoryDTO> createMainCategory(@RequestBody @Validated MainCategoryDTO mainCategoryDTO) {
         MainCategoryDTO result = mainCategoryService.save(mainCategoryDTO);

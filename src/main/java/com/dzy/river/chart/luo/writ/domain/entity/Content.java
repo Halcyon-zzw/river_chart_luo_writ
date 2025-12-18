@@ -37,7 +37,7 @@ public class Content implements Serializable {
      * 所属小分类ID
      */
     @TableField("sub_category_id")
-    private Integer subCategoryId;
+    private Long subCategoryId;
 
     /**
      * 内容标题
@@ -104,12 +104,6 @@ public class Content implements Serializable {
      */
     @TableField("sort_order")
     private Integer sortOrder;
-
-    /**
-     * 查看次数
-     */
-    @TableField("view_count")
-    private Integer viewCount;
 
     /**
      * 删除标志：0-未删除，1-已删除

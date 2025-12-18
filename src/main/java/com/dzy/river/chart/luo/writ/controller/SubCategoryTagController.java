@@ -44,7 +44,7 @@ public class SubCategoryTagController {
     /**
      * 创建小分类标签关联表
      */
-    @PostMapping
+    @PostMapping("/create")
     @Operation(summary = "创建小分类标签关联表", description = "创建新的小分类标签关联表")
     public Result<SubCategoryTagDTO> createSubCategoryTag(@RequestBody @Validated SubCategoryTagDTO subCategoryTagDTO) {
         SubCategoryTagDTO result = subCategoryTagService.save(subCategoryTagDTO);

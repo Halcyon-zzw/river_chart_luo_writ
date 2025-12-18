@@ -44,7 +44,7 @@ public class MainCategoryTagController {
     /**
      * 创建主分类标签关联表
      */
-    @PostMapping
+    @PostMapping("/create")
     @Operation(summary = "创建主分类标签关联表", description = "创建新的主分类标签关联表")
     public Result<MainCategoryTagDTO> createMainCategoryTag(@RequestBody @Validated MainCategoryTagDTO mainCategoryTagDTO) {
         MainCategoryTagDTO result = mainCategoryTagService.save(mainCategoryTagDTO);
