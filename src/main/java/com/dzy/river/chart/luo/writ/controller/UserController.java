@@ -79,4 +79,13 @@ public class UserController {
         }
     }
 
+    /**
+     * 根据ID更新用户表
+     */
+    @PostMapping("/login")
+    @Operation(summary = "更新用户表", description = "根据ID更新用户表信息")
+    public Result<Long> login(@RequestBody @Validated Object obj) {
+        return Result.success(1L);
+    }
+
 }

@@ -6,9 +6,11 @@ import com.dzy.river.chart.luo.writ.common.Result;
 import com.dzy.river.chart.luo.writ.domain.req.ContentPageReq;
 import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.ContentService;
+import com.dzy.river.chart.luo.writ.service.FileUploadService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.multipart.MultipartFile;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -30,6 +32,9 @@ public class ContentController {
 
     @Autowired
     private ContentService contentService;
+
+    @Autowired
+    private FileUploadService fileUploadService;
 
     /**
      * 根据ID获取数据内容表
@@ -101,6 +106,16 @@ public class ContentController {
     public Result<Boolean> associateTags(@PathVariable Long id, @RequestBody List<Long> tagIds) {
         boolean success = contentService.associateTags(id, tagIds);
         return Result.success("关联成功", success);
+    }
+
+    /**
+     * 批量上传图片
+     */
+    @PostMapping("/upload-images")
+    @Operation(summary = "批量上传图片", description = "批量上传图片文件，单次最多20个，返回图片访问URL列表")
+    public Result<List<String>> uploadImages(@RequestParam("files") MultipartFile[] files) {
+        List<String> imageUrls = fileUploadService.uploadImages(files, 20);
+        return Result.success("上传成功", imageUrls);
     }
 
 }

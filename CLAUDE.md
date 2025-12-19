@@ -230,3 +230,6 @@ public class ContentsServiceImpl implements ContentsService {
 测试类遵循命名规范 `*Test.java` 或 `*Tests.java`，位于 `src/test/java/`。
 
 基础测试类：`RiverChartLuoWritApplicationTests` 用于验证应用上下文加载。
+
+## 说明
+生成代码时注意中文乱码问题
