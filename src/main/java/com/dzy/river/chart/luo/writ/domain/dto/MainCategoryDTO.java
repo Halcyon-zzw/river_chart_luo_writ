@@ -41,6 +41,9 @@ public class MainCategoryDTO implements Serializable {
     @Schema(description = "标签列表")
     private List<TagDTO> tagDTOList;
 
+    @Schema(description = "子分类数量")
+    private Integer subCategorySize;
+
     @Schema(description = "排序权重")
     private Integer sortOrder;
 

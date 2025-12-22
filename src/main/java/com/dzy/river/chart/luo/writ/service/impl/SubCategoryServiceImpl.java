@@ -3,6 +3,7 @@ package com.dzy.river.chart.luo.writ.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dzy.river.chart.luo.writ.common.PageResult;
+import com.dzy.river.chart.luo.writ.dao.ContentDao;
 import com.dzy.river.chart.luo.writ.dao.SubCategoryTagDao;
 import com.dzy.river.chart.luo.writ.dao.TagDao;
 import com.dzy.river.chart.luo.writ.domain.convert.TagConvert;
@@ -48,6 +49,9 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 
     @Autowired
     private TagConvert tagConvert;
+
+    @Autowired
+    private ContentDao contentDao;
 
     @Override
     public SubCategoryDTO getById(Long id) {
@@ -142,7 +146,16 @@ public class SubCategoryServiceImpl implements SubCategoryService {
             subCategoryDTO.setTagDTOList(categoryTags != null ? categoryTags : new ArrayList<>());
         }
 
-        // 12. 返回分页结果
+        // 12. 批量统计内容数量
+        Map<Long, Long> contentCountMap = contentDao.countBySubCategoryIds(subCategoryIds);
+
+        // 13. 设置每个小分类的内容数量
+        for (SubCategoryDTO subCategoryDTO : subCategoryDTOList) {
+            Long count = contentCountMap.getOrDefault(subCategoryDTO.getId(), 0L);
+            subCategoryDTO.setContentSize(count.intValue());
+        }
+
+        // 14. 返回分页结果
         return new PageResult(page, subCategoryDTOList);
     }
 

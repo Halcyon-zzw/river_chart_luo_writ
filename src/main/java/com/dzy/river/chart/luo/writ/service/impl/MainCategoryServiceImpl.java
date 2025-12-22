@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.dao.MainCategoryTagDao;
+import com.dzy.river.chart.luo.writ.dao.SubCategoryDao;
 import com.dzy.river.chart.luo.writ.dao.TagDao;
 import com.dzy.river.chart.luo.writ.domain.convert.TagConvert;
 import com.dzy.river.chart.luo.writ.domain.dto.TagDTO;
@@ -49,6 +50,9 @@ public class MainCategoryServiceImpl implements MainCategoryService {
 
     @Autowired
     private TagConvert tagConvert;
+
+    @Autowired
+    private SubCategoryDao subCategoryDao;
 
     @Override
     public MainCategoryDTO getById(Long id) {
@@ -143,7 +147,16 @@ public class MainCategoryServiceImpl implements MainCategoryService {
             mainCategoryDTO.setTagDTOList(categoryTags != null ? categoryTags : new ArrayList<>());
         }
 
-        // 12. 返回分页结果
+        // 12. 批量统计子分类数量
+        Map<Long, Long> subCategoryCountMap = subCategoryDao.countByMainCategoryIds(mainCategoryIds);
+
+        // 13. 设置每个主分类的子分类数量
+        for (MainCategoryDTO mainCategoryDTO : mainCategoryDTOList) {
+            Long count = subCategoryCountMap.getOrDefault(mainCategoryDTO.getId(), 0L);
+            mainCategoryDTO.setSubCategorySize(count.intValue());
+        }
+
+        // 14. 返回分页结果
         return new PageResult<>(page, mainCategoryDTOList);
     }
 
