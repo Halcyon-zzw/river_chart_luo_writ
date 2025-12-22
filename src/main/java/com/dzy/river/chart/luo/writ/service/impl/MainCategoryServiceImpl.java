@@ -114,10 +114,24 @@ public class MainCategoryServiceImpl implements MainCategoryService {
         List<MainCategoryTag> mainCategoryTags = mainCategoryTagDao.list(tagRelationWrapper);
 
         // 7. 如果没有标签关联，直接返回
-        if (CollectionUtils.isEmpty(mainCategoryTags)) {
-            return new PageResult<>(page, mainCategoryDTOList);
+        if (!CollectionUtils.isEmpty(mainCategoryTags)) {
+            fillTag(mainCategoryDTOList, mainCategoryTags);
         }
 
+        // 12. 批量统计子分类数量
+        Map<Long, Long> subCategoryCountMap = subCategoryDao.countByMainCategoryIds(mainCategoryIds);
+
+        // 13. 设置每个主分类的子分类数量
+        for (MainCategoryDTO mainCategoryDTO : mainCategoryDTOList) {
+            Long count = subCategoryCountMap.getOrDefault(mainCategoryDTO.getId(), 0L);
+            mainCategoryDTO.setSubCategorySize(count.intValue());
+        }
+
+        // 14. 返回分页结果
+        return new PageResult<>(page, mainCategoryDTOList);
+    }
+
+    private void fillTag(List<MainCategoryDTO> mainCategoryDTOList, List<MainCategoryTag> mainCategoryTags) {
         // 8. 提取标签ID并批量查询标签
         List<Long> tagIds = mainCategoryTags.stream()
                 .map(MainCategoryTag::getTagId)
@@ -146,18 +160,6 @@ public class MainCategoryServiceImpl implements MainCategoryService {
             List<TagDTO> categoryTags = mainCategoryTagMap.get(mainCategoryDTO.getId());
             mainCategoryDTO.setTagDTOList(categoryTags != null ? categoryTags : new ArrayList<>());
         }
-
-        // 12. 批量统计子分类数量
-        Map<Long, Long> subCategoryCountMap = subCategoryDao.countByMainCategoryIds(mainCategoryIds);
-
-        // 13. 设置每个主分类的子分类数量
-        for (MainCategoryDTO mainCategoryDTO : mainCategoryDTOList) {
-            Long count = subCategoryCountMap.getOrDefault(mainCategoryDTO.getId(), 0L);
-            mainCategoryDTO.setSubCategorySize(count.intValue());
-        }
-
-        // 14. 返回分页结果
-        return new PageResult<>(page, mainCategoryDTOList);
     }
 
     @Override

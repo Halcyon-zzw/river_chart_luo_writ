@@ -113,10 +113,24 @@ public class SubCategoryServiceImpl implements SubCategoryService {
         List<SubCategoryTag> subCategoryTags = subCategoryTagDao.list(tagRelationWrapper);
 
         // 7. 如果没有标签关联，直接返回
-        if (CollectionUtils.isEmpty(subCategoryTags)) {
-            return new PageResult(page, subCategoryDTOList);
+        if (!CollectionUtils.isEmpty(subCategoryTags)) {
+            fillTag(subCategoryDTOList, subCategoryTags);
         }
 
+        // 12. 批量统计内容数量
+        Map<Long, Long> contentCountMap = contentDao.countBySubCategoryIds(subCategoryIds);
+
+        // 13. 设置每个小分类的内容数量
+        for (SubCategoryDTO subCategoryDTO : subCategoryDTOList) {
+            Long count = contentCountMap.getOrDefault(subCategoryDTO.getId(), 0L);
+            subCategoryDTO.setContentSize(count.intValue());
+        }
+
+        // 14. 返回分页结果
+        return new PageResult(page, subCategoryDTOList);
+    }
+
+    private void fillTag(List<SubCategoryDTO> subCategoryDTOList, List<SubCategoryTag> subCategoryTags) {
         // 8. 提取标签ID并批量查询标签
         List<Long> tagIds = subCategoryTags.stream()
                 .map(SubCategoryTag::getTagId)
@@ -145,18 +159,6 @@ public class SubCategoryServiceImpl implements SubCategoryService {
             List<TagDTO> categoryTags = subCategoryTagMap.get(subCategoryDTO.getId());
             subCategoryDTO.setTagDTOList(categoryTags != null ? categoryTags : new ArrayList<>());
         }
-
-        // 12. 批量统计内容数量
-        Map<Long, Long> contentCountMap = contentDao.countBySubCategoryIds(subCategoryIds);
-
-        // 13. 设置每个小分类的内容数量
-        for (SubCategoryDTO subCategoryDTO : subCategoryDTOList) {
-            Long count = contentCountMap.getOrDefault(subCategoryDTO.getId(), 0L);
-            subCategoryDTO.setContentSize(count.intValue());
-        }
-
-        // 14. 返回分页结果
-        return new PageResult(page, subCategoryDTOList);
     }
 
     @Override
