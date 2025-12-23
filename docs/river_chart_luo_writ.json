@@ -1,0 +1,5145 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "River Chart Luo Writ API",
+    "description" : "河图洛书内容管理系统 API 文档",
+    "contact" : {
+      "name" : "开发团队",
+      "url" : "https://example.com",
+      "email" : "dev@example.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "v1.0.0"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:8080",
+    "description" : "Generated server url"
+  } ],
+  "tags" : [ {
+    "name" : "操作日志表管理",
+    "description" : "操作日志表相关接口"
+  }, {
+    "name" : "小分类标签关联表管理",
+    "description" : "小分类标签关联表相关接口"
+  }, {
+    "name" : "主分类标签关联表管理",
+    "description" : "主分类标签关联表相关接口"
+  }, {
+    "name" : "主分类表管理",
+    "description" : "主分类表相关接口"
+  }, {
+    "name" : "小分类表管理",
+    "description" : "小分类表相关接口"
+  }, {
+    "name" : "数据内容表管理",
+    "description" : "数据内容表相关接口"
+  }, {
+    "name" : "内容标签关联表管理",
+    "description" : "内容标签关联表相关接口"
+  }, {
+    "name" : "标签表管理",
+    "description" : "标签表相关接口"
+  }, {
+    "name" : "用户收藏表管理",
+    "description" : "用户收藏表相关接口"
+  }, {
+    "name" : "用户表管理",
+    "description" : "用户表相关接口"
+  } ],
+  "paths" : {
+    "/user/{id}" : {
+      "get" : {
+        "tags" : [ "用户表管理" ],
+        "summary" : "获取用户表",
+        "description" : "根据ID获取用户表详情",
+        "operationId" : "getUser",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultUserDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "用户表管理" ],
+        "summary" : "更新用户表",
+        "description" : "根据ID更新用户表信息",
+        "operationId" : "updateById",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultUserDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "用户表管理" ],
+        "summary" : "删除用户表",
+        "description" : "根据ID删除用户表",
+        "operationId" : "deleteById",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-collection/{id}" : {
+      "get" : {
+        "tags" : [ "用户收藏表管理" ],
+        "summary" : "获取用户收藏表",
+        "description" : "根据ID获取用户收藏表详情",
+        "operationId" : "getUserCollection",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "用户收藏表管理" ],
+        "summary" : "更新用户收藏表",
+        "description" : "根据ID更新用户收藏表信息",
+        "operationId" : "updateById_1",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserCollectionDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "用户收藏表管理" ],
+        "summary" : "删除用户收藏表",
+        "description" : "根据ID删除用户收藏表",
+        "operationId" : "deleteById_1",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tag/{id}" : {
+      "get" : {
+        "tags" : [ "标签表管理" ],
+        "summary" : "获取标签表",
+        "description" : "根据ID获取标签表详情",
+        "operationId" : "getTag",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultTagDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "标签表管理" ],
+        "summary" : "更新标签表",
+        "description" : "根据ID更新标签表信息",
+        "operationId" : "updateById_2",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TagDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultTagDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "标签表管理" ],
+        "summary" : "删除标签表",
+        "description" : "根据ID删除标签表",
+        "operationId" : "deleteById_2",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sub-category/{id}" : {
+      "get" : {
+        "tags" : [ "小分类表管理" ],
+        "summary" : "获取小分类表",
+        "description" : "根据ID获取小分类表详情",
+        "operationId" : "getSubCategory",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "小分类表管理" ],
+        "summary" : "更新小分类表",
+        "description" : "根据ID更新小分类表信息",
+        "operationId" : "updateById_3",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SubCategoryDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "小分类表管理" ],
+        "summary" : "删除小分类表",
+        "description" : "根据ID删除小分类表",
+        "operationId" : "deleteById_3",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sub-category-tag/{id}" : {
+      "get" : {
+        "tags" : [ "小分类标签关联表管理" ],
+        "summary" : "获取小分类标签关联表",
+        "description" : "根据ID获取小分类标签关联表详情",
+        "operationId" : "getSubCategoryTag",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "小分类标签关联表管理" ],
+        "summary" : "更新小分类标签关联表",
+        "description" : "根据ID更新小分类标签关联表信息",
+        "operationId" : "updateById_4",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SubCategoryTagDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "小分类标签关联表管理" ],
+        "summary" : "删除小分类标签关联表",
+        "description" : "根据ID删除小分类标签关联表",
+        "operationId" : "deleteById_4",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operation-log/{id}" : {
+      "get" : {
+        "tags" : [ "操作日志表管理" ],
+        "summary" : "获取操作日志表",
+        "description" : "根据ID获取操作日志表详情",
+        "operationId" : "getOperationLog",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "操作日志表管理" ],
+        "summary" : "更新操作日志表",
+        "description" : "根据ID更新操作日志表信息",
+        "operationId" : "updateById_5",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OperationLogDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "操作日志表管理" ],
+        "summary" : "删除操作日志表",
+        "description" : "根据ID删除操作日志表",
+        "operationId" : "deleteById_5",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/main-category/{id}" : {
+      "get" : {
+        "tags" : [ "主分类表管理" ],
+        "summary" : "获取主分类表",
+        "description" : "根据ID获取主分类表详情",
+        "operationId" : "getMainCategory",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "主分类表管理" ],
+        "summary" : "更新主分类表",
+        "description" : "根据ID更新主分类表信息",
+        "operationId" : "updateById_6",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MainCategoryDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "主分类表管理" ],
+        "summary" : "删除主分类表",
+        "description" : "根据ID删除主分类表",
+        "operationId" : "deleteById_6",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/main-category-tag/{id}" : {
+      "get" : {
+        "tags" : [ "主分类标签关联表管理" ],
+        "summary" : "获取主分类标签关联表",
+        "description" : "根据ID获取主分类标签关联表详情",
+        "operationId" : "getMainCategoryTag",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "主分类标签关联表管理" ],
+        "summary" : "更新主分类标签关联表",
+        "description" : "根据ID更新主分类标签关联表信息",
+        "operationId" : "updateById_7",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MainCategoryTagDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "主分类标签关联表管理" ],
+        "summary" : "删除主分类标签关联表",
+        "description" : "根据ID删除主分类标签关联表",
+        "operationId" : "deleteById_7",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/{id}" : {
+      "get" : {
+        "tags" : [ "数据内容表管理" ],
+        "summary" : "获取数据内容表",
+        "description" : "根据ID获取数据内容表详情",
+        "operationId" : "getContent",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultContentDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "数据内容表管理" ],
+        "summary" : "更新数据内容表",
+        "description" : "根据ID更新数据内容表信息",
+        "operationId" : "updateById_8",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ContentDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultContentDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "数据内容表管理" ],
+        "summary" : "删除数据内容表",
+        "description" : "根据ID删除数据内容表",
+        "operationId" : "deleteById_8",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content-tag/{id}" : {
+      "get" : {
+        "tags" : [ "内容标签关联表管理" ],
+        "summary" : "获取内容标签关联表",
+        "description" : "根据ID获取内容标签关联表详情",
+        "operationId" : "getContentTag",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultContentTagDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "内容标签关联表管理" ],
+        "summary" : "更新内容标签关联表",
+        "description" : "根据ID更新内容标签关联表信息",
+        "operationId" : "updateById_9",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ContentTagDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultContentTagDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "内容标签关联表管理" ],
+        "summary" : "删除内容标签关联表",
+        "description" : "根据ID删除内容标签关联表",
+        "operationId" : "deleteById_9",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/login" : {
+      "post" : {
+        "tags" : [ "用户表管理" ],
+        "summary" : "更新用户表",
+        "description" : "根据ID更新用户表信息",
+        "operationId" : "login",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultLong"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/create" : {
+      "post" : {
+        "tags" : [ "用户表管理" ],
+        "summary" : "创建用户表",
+        "description" : "创建新的用户表",
+        "operationId" : "createUser",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultUserDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-collection/page" : {
+      "post" : {
+        "tags" : [ "用户收藏表管理" ],
+        "summary" : "分页查询用户收藏",
+        "description" : "根据用户ID和内容类型分页查询收藏列表",
+        "operationId" : "page",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CollectionPageReq"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultPageResultUserCollectionDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-collection/create" : {
+      "post" : {
+        "tags" : [ "用户收藏表管理" ],
+        "summary" : "创建用户收藏表",
+        "description" : "创建新的用户收藏表",
+        "operationId" : "createUserCollection",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserCollectionDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tag/create" : {
+      "post" : {
+        "tags" : [ "标签表管理" ],
+        "summary" : "创建标签表",
+        "description" : "创建新的标签表",
+        "operationId" : "createTag",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TagDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultTagDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sub-category/{id}/tags" : {
+      "post" : {
+        "tags" : [ "小分类表管理" ],
+        "summary" : "关联标签",
+        "description" : "为小分类关联标签",
+        "operationId" : "associateTags",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "integer",
+                  "format" : "int64"
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sub-category/page" : {
+      "post" : {
+        "tags" : [ "小分类表管理" ],
+        "summary" : "分页查询小分类",
+        "description" : "分页查询小分类列表，包含关联的标签信息",
+        "operationId" : "page_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SubCategoryPageReq"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultPageResultSubCategoryDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sub-category/create" : {
+      "post" : {
+        "tags" : [ "小分类表管理" ],
+        "summary" : "创建小分类表",
+        "description" : "创建新的小分类表",
+        "operationId" : "createSubCategory",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SubCategoryDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sub-category-tag/create" : {
+      "post" : {
+        "tags" : [ "小分类标签关联表管理" ],
+        "summary" : "创建小分类标签关联表",
+        "description" : "创建新的小分类标签关联表",
+        "operationId" : "createSubCategoryTag",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SubCategoryTagDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operation-log/create" : {
+      "post" : {
+        "tags" : [ "操作日志表管理" ],
+        "summary" : "创建操作日志表",
+        "description" : "创建新的操作日志表",
+        "operationId" : "createOperationLog",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OperationLogDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/main-category/{id}/tags" : {
+      "post" : {
+        "tags" : [ "主分类表管理" ],
+        "summary" : "关联标签",
+        "description" : "为主分类关联标签",
+        "operationId" : "associateTags_1",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "integer",
+                  "format" : "int64"
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/main-category/page" : {
+      "post" : {
+        "tags" : [ "主分类表管理" ],
+        "summary" : "分页查询主分类",
+        "description" : "分页查询主分类列表，包含关联的标签信息",
+        "operationId" : "page_2",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MainCategoryPageReq"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultPageResultMainCategoryDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/main-category/create" : {
+      "post" : {
+        "tags" : [ "主分类表管理" ],
+        "summary" : "创建主分类表",
+        "description" : "创建新的主分类表",
+        "operationId" : "createMainCategory",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MainCategoryDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/main-category-tag/create" : {
+      "post" : {
+        "tags" : [ "主分类标签关联表管理" ],
+        "summary" : "创建主分类标签关联表",
+        "description" : "创建新的主分类标签关联表",
+        "operationId" : "createMainCategoryTag",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MainCategoryTagDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/{id}/tags" : {
+      "post" : {
+        "tags" : [ "数据内容表管理" ],
+        "summary" : "关联标签",
+        "description" : "为内容关联标签",
+        "operationId" : "associateTags_2",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "integer",
+                  "format" : "int64"
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/upload-images" : {
+      "post" : {
+        "tags" : [ "数据内容表管理" ],
+        "summary" : "批量上传图片",
+        "description" : "批量上传图片文件，单次最多20个，返回图片访问URL列表",
+        "operationId" : "uploadImages",
+        "parameters" : [ {
+          "name" : "files",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "format" : "binary"
+            }
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultListString"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/page" : {
+      "post" : {
+        "tags" : [ "数据内容表管理" ],
+        "summary" : "分页查询内容",
+        "description" : "分页查询内容列表，包含关联的标签信息",
+        "operationId" : "page_3",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ContentPageReq"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultPageResultContentDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/create" : {
+      "post" : {
+        "tags" : [ "数据内容表管理" ],
+        "summary" : "创建数据内容表",
+        "description" : "创建新的数据内容表",
+        "operationId" : "createContent",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ContentDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultContentDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content-tag/create" : {
+      "post" : {
+        "tags" : [ "内容标签关联表管理" ],
+        "summary" : "创建内容标签关联表",
+        "description" : "创建新的内容标签关联表",
+        "operationId" : "createContentTag",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ContentTagDTO"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultContentTagDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tag/query" : {
+      "get" : {
+        "tags" : [ "标签表管理" ],
+        "summary" : "查询标签",
+        "description" : "根据名称模糊查询标签列表",
+        "operationId" : "query",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultListTagDTO"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "ResultVoid" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "type" : "object",
+            "description" : "响应数据"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "UserDTO" : {
+        "required" : [ "username" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "用户ID，主键",
+            "format" : "int64",
+            "example" : 1
+          },
+          "username" : {
+            "maxLength" : 64,
+            "minLength" : 3,
+            "type" : "string",
+            "description" : "用户名，唯一"
+          },
+          "email" : {
+            "type" : "string",
+            "description" : "邮箱，唯一"
+          },
+          "phone" : {
+            "pattern" : "^1[3-9]\\d{9}$",
+            "type" : "string",
+            "description" : "手机号"
+          },
+          "passwordHash" : {
+            "type" : "string",
+            "description" : "加密后的密码"
+          },
+          "nickname" : {
+            "type" : "string",
+            "description" : "昵称"
+          },
+          "avatar" : {
+            "type" : "string",
+            "description" : "头像URL"
+          },
+          "openid" : {
+            "type" : "string",
+            "description" : "微信openid，唯一"
+          },
+          "unionid" : {
+            "type" : "string",
+            "description" : "微信unionid，唯一"
+          },
+          "wechatInfo" : {
+            "type" : "string",
+            "description" : "微信用户信息，JSON格式"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "状态：0-禁用，1-启用，2-锁定",
+            "format" : "byte"
+          },
+          "isDeleted" : {
+            "type" : "string",
+            "description" : "删除标志：0-未删除，1-已删除",
+            "format" : "byte"
+          },
+          "role" : {
+            "type" : "string",
+            "description" : "角色：SUPER_ADMIN-超级管理员, ADMIN-管理员, USER-普通用户"
+          },
+          "permissions" : {
+            "type" : "string",
+            "description" : "额外权限配置，JSON格式"
+          },
+          "lastLoginTime" : {
+            "type" : "string",
+            "description" : "最后登录时间",
+            "format" : "date-time"
+          },
+          "lastLoginIp" : {
+            "type" : "string",
+            "description" : "最后登录IP"
+          },
+          "passwordUpdateTime" : {
+            "type" : "string",
+            "description" : "密码最后修改时间",
+            "format" : "date-time"
+          },
+          "accountExpireTime" : {
+            "type" : "string",
+            "description" : "账号过期时间",
+            "format" : "date-time"
+          },
+          "createBy" : {
+            "type" : "integer",
+            "description" : "创建人ID",
+            "format" : "int64"
+          },
+          "updateBy" : {
+            "type" : "integer",
+            "description" : "更新人ID",
+            "format" : "int64"
+          },
+          "createTime" : {
+            "type" : "string",
+            "description" : "创建时间",
+            "format" : "date-time"
+          },
+          "updateTime" : {
+            "type" : "string",
+            "description" : "更新时间",
+            "format" : "date-time"
+          }
+        },
+        "description" : "用户表 DTO"
+      },
+      "ResultUserDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/UserDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "UserCollectionDTO" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "收藏ID",
+            "format" : "int64",
+            "example" : 1
+          },
+          "userId" : {
+            "type" : "integer",
+            "description" : "用户ID（逻辑关联user.id）",
+            "format" : "int64"
+          },
+          "contentId" : {
+            "type" : "integer",
+            "description" : "收藏的内容ID（逻辑关联contents.id）",
+            "format" : "int64"
+          },
+          "folderName" : {
+            "type" : "string",
+            "description" : "收藏夹名称"
+          },
+          "tags" : {
+            "type" : "string",
+            "description" : "收藏标签，JSON数组格式"
+          },
+          "notes" : {
+            "type" : "string",
+            "description" : "收藏备注"
+          },
+          "isDeleted" : {
+            "type" : "string",
+            "description" : "删除标志：0-未删除，1-已删除",
+            "format" : "byte"
+          },
+          "createTime" : {
+            "type" : "string",
+            "description" : "创建时间",
+            "format" : "date-time"
+          },
+          "updateTime" : {
+            "type" : "string",
+            "description" : "更新时间",
+            "format" : "date-time"
+          }
+        },
+        "description" : "用户收藏表 DTO"
+      },
+      "ResultUserCollectionDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/UserCollectionDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "TagDTO" : {
+        "required" : [ "name" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "标签ID",
+            "format" : "int64",
+            "example" : 1
+          },
+          "name" : {
+            "maxLength" : 50,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "标签名称"
+          },
+          "color" : {
+            "type" : "string",
+            "description" : "标签颜色(十六进制)"
+          },
+          "isDeleted" : {
+            "type" : "string",
+            "description" : "删除标志：0-未删除，1-已删除",
+            "format" : "byte"
+          },
+          "createTime" : {
+            "type" : "string",
+            "description" : "创建时间",
+            "format" : "date-time"
+          },
+          "updateTime" : {
+            "type" : "string",
+            "description" : "更新时间",
+            "format" : "date-time"
+          }
+        },
+        "description" : "标签表 DTO"
+      },
+      "ResultTagDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/TagDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "SubCategoryDTO" : {
+        "required" : [ "name" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "小分类ID",
+            "format" : "int64",
+            "example" : 1
+          },
+          "mainCategoryId" : {
+            "type" : "integer",
+            "description" : "所属主分类ID",
+            "format" : "int64"
+          },
+          "name" : {
+            "maxLength" : 50,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "小分类名称"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "小分类描述"
+          },
+          "thumbnailUrl" : {
+            "type" : "string",
+            "description" : "缩略图URL"
+          },
+          "tagDTOList" : {
+            "type" : "array",
+            "description" : "标签列表",
+            "items" : {
+              "$ref" : "#/components/schemas/TagDTO"
+            }
+          },
+          "contentSize" : {
+            "type" : "integer",
+            "description" : "内容数量",
+            "format" : "int32"
+          },
+          "sortOrder" : {
+            "type" : "integer",
+            "description" : "排序权重",
+            "format" : "int32"
+          },
+          "isDeleted" : {
+            "type" : "string",
+            "description" : "删除标志：0-未删除，1-已删除",
+            "format" : "byte"
+          },
+          "createTime" : {
+            "type" : "string",
+            "description" : "创建时间",
+            "format" : "date-time"
+          },
+          "updateTime" : {
+            "type" : "string",
+            "description" : "更新时间",
+            "format" : "date-time"
+          }
+        },
+        "description" : "小分类表 DTO"
+      },
+      "ResultSubCategoryDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/SubCategoryDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "SubCategoryTagDTO" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "关联ID",
+            "format" : "int64",
+            "example" : 1
+          },
+          "subCategoryId" : {
+            "type" : "integer",
+            "description" : "小分类ID",
+            "format" : "int64"
+          },
+          "tagId" : {
+            "type" : "integer",
+            "description" : "标签ID",
+            "format" : "int64"
+          },
+          "isDeleted" : {
+            "type" : "string",
+            "description" : "删除标志：0-未删除，1-已删除",
+            "format" : "byte"
+          },
+          "createTime" : {
+            "type" : "string",
+            "description" : "创建时间",
+            "format" : "date-time"
+          },
+          "updateTime" : {
+            "type" : "string",
+            "description" : "更新时间",
+            "format" : "date-time"
+          }
+        },
+        "description" : "小分类标签关联表 DTO"
+      },
+      "ResultSubCategoryTagDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/SubCategoryTagDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "OperationLogDTO" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "日志ID",
+            "format" : "int64",
+            "example" : 1
+          },
+          "userId" : {
+            "type" : "integer",
+            "description" : "操作用户ID（逻辑关联user.id）",
+            "format" : "int64"
+          },
+          "operationType" : {
+            "type" : "string",
+            "description" : "操作类型：CREATE, UPDATE, DELETE, VIEW, LOGIN, etc."
+          },
+          "targetTable" : {
+            "type" : "string",
+            "description" : "操作目标表"
+          },
+          "targetId" : {
+            "type" : "string",
+            "description" : "操作目标ID"
+          },
+          "operationDescription" : {
+            "type" : "string",
+            "description" : "操作描述"
+          },
+          "oldValues" : {
+            "type" : "string",
+            "description" : "旧值（JSON格式）"
+          },
+          "newValues" : {
+            "type" : "string",
+            "description" : "新值（JSON格式）"
+          },
+          "ipAddress" : {
+            "type" : "string",
+            "description" : "操作IP地址"
+          },
+          "userAgent" : {
+            "type" : "string",
+            "description" : "用户代理"
+          },
+          "isDeleted" : {
+            "type" : "string",
+            "description" : "删除标志：0-未删除，1-已删除",
+            "format" : "byte"
+          },
+          "createTime" : {
+            "type" : "string",
+            "description" : "创建时间",
+            "format" : "date-time"
+          }
+        },
+        "description" : "操作日志表 DTO"
+      },
+      "ResultOperationLogDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/OperationLogDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "MainCategoryDTO" : {
+        "required" : [ "name" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "主分类ID",
+            "format" : "int64",
+            "example" : 1
+          },
+          "name" : {
+            "maxLength" : 50,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "分类名称"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "分类描述"
+          },
+          "thumbnailUrl" : {
+            "type" : "string",
+            "description" : "缩略图URL"
+          },
+          "tagDTOList" : {
+            "type" : "array",
+            "description" : "标签列表",
+            "items" : {
+              "$ref" : "#/components/schemas/TagDTO"
+            }
+          },
+          "subCategorySize" : {
+            "type" : "integer",
+            "description" : "子分类数量",
+            "format" : "int32"
+          },
+          "sortOrder" : {
+            "type" : "integer",
+            "description" : "排序权重",
+            "format" : "int32"
+          },
+          "isDeleted" : {
+            "type" : "string",
+            "description" : "删除标志：0-未删除，1-已删除",
+            "format" : "byte"
+          },
+          "createTime" : {
+            "type" : "string",
+            "description" : "创建时间",
+            "format" : "date-time"
+          },
+          "updateTime" : {
+            "type" : "string",
+            "description" : "更新时间",
+            "format" : "date-time"
+          }
+        },
+        "description" : "主分类表 DTO"
+      },
+      "ResultMainCategoryDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/MainCategoryDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "MainCategoryTagDTO" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "关联ID",
+            "format" : "int64",
+            "example" : 1
+          },
+          "mainCategoryId" : {
+            "type" : "integer",
+            "description" : "主分类ID",
+            "format" : "int64"
+          },
+          "tagId" : {
+            "type" : "integer",
+            "description" : "标签ID",
+            "format" : "int64"
+          },
+          "isDeleted" : {
+            "type" : "string",
+            "description" : "删除标志：0-未删除，1-已删除",
+            "format" : "byte"
+          },
+          "createTime" : {
+            "type" : "string",
+            "description" : "创建时间",
+            "format" : "date-time"
+          },
+          "updateTime" : {
+            "type" : "string",
+            "description" : "更新时间",
+            "format" : "date-time"
+          }
+        },
+        "description" : "主分类标签关联表 DTO"
+      },
+      "ResultMainCategoryTagDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/MainCategoryTagDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "ContentDTO" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "内容ID",
+            "format" : "int64",
+            "example" : 1
+          },
+          "subCategoryId" : {
+            "type" : "integer",
+            "description" : "所属小分类ID",
+            "format" : "int64"
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "内容标题"
+          },
+          "contentType" : {
+            "type" : "string",
+            "description" : "内容类型(image:图片, note:笔记)"
+          },
+          "imageUrl" : {
+            "type" : "string",
+            "description" : "图片URL(当content_type为image时使用)"
+          },
+          "imageThumbnailUrl" : {
+            "type" : "string",
+            "description" : "图片缩略图URL"
+          },
+          "imageSize" : {
+            "type" : "integer",
+            "description" : "图片文件大小(字节)",
+            "format" : "int64"
+          },
+          "imageWidth" : {
+            "type" : "integer",
+            "description" : "图片宽度",
+            "format" : "int32"
+          },
+          "imageHeight" : {
+            "type" : "integer",
+            "description" : "图片高度",
+            "format" : "int32"
+          },
+          "noteContent" : {
+            "type" : "string",
+            "description" : "笔记内容(当content_type为note时使用)"
+          },
+          "noteFormat" : {
+            "type" : "string",
+            "description" : "笔记格式类型"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "内容描述"
+          },
+          "tagDTOList" : {
+            "type" : "array",
+            "description" : "标签列表",
+            "items" : {
+              "$ref" : "#/components/schemas/TagDTO"
+            }
+          },
+          "sortOrder" : {
+            "type" : "integer",
+            "description" : "排序权重",
+            "format" : "int32"
+          },
+          "isDeleted" : {
+            "type" : "string",
+            "description" : "删除标志：0-未删除，1-已删除",
+            "format" : "byte"
+          },
+          "createTime" : {
+            "type" : "string",
+            "description" : "创建时间",
+            "format" : "date-time"
+          },
+          "updateTime" : {
+            "type" : "string",
+            "description" : "更新时间",
+            "format" : "date-time"
+          }
+        },
+        "description" : "数据内容表 DTO"
+      },
+      "ResultContentDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/ContentDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "ContentTagDTO" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "关联ID",
+            "format" : "int64",
+            "example" : 1
+          },
+          "contentId" : {
+            "type" : "integer",
+            "description" : "内容ID",
+            "format" : "int64"
+          },
+          "tagId" : {
+            "type" : "integer",
+            "description" : "标签ID",
+            "format" : "int64"
+          },
+          "isDeleted" : {
+            "type" : "string",
+            "description" : "删除标志：0-未删除，1-已删除",
+            "format" : "byte"
+          },
+          "createTime" : {
+            "type" : "string",
+            "description" : "创建时间",
+            "format" : "date-time"
+          },
+          "updateTime" : {
+            "type" : "string",
+            "description" : "更新时间",
+            "format" : "date-time"
+          }
+        },
+        "description" : "内容标签关联表 DTO"
+      },
+      "ResultContentTagDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/ContentTagDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "ResultLong" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "type" : "integer",
+            "description" : "响应数据",
+            "format" : "int64"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "CollectionPageReq" : {
+        "required" : [ "contentType", "userId" ],
+        "type" : "object",
+        "properties" : {
+          "pageNum" : {
+            "type" : "integer",
+            "description" : "当前第几页，默认1页开始",
+            "format" : "int32",
+            "example" : 1
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "description" : "每页数量",
+            "format" : "int32",
+            "example" : 20
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "名称（收藏夹名称）"
+          },
+          "userId" : {
+            "type" : "integer",
+            "description" : "用户ID",
+            "format" : "int64"
+          },
+          "contentType" : {
+            "type" : "string",
+            "description" : "内容类型(image:图片, note:笔记)"
+          }
+        }
+      },
+      "PageResultUserCollectionDTO" : {
+        "type" : "object",
+        "properties" : {
+          "pageNo" : {
+            "type" : "integer",
+            "description" : "第几页",
+            "format" : "int32"
+          },
+          "pageNum" : {
+            "type" : "integer",
+            "description" : "第几页",
+            "format" : "int32"
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "description" : "每页条数",
+            "format" : "int32"
+          },
+          "pageType" : {
+            "type" : "string",
+            "description" : "分页类型"
+          },
+          "pageTypeDesc" : {
+            "type" : "string",
+            "description" : "分页类型描述"
+          },
+          "totalPage" : {
+            "type" : "integer",
+            "description" : "总页数",
+            "format" : "int32"
+          },
+          "totalRows" : {
+            "type" : "integer",
+            "description" : "总记录数",
+            "format" : "int32"
+          },
+          "rows" : {
+            "type" : "array",
+            "description" : "结果集",
+            "items" : {
+              "$ref" : "#/components/schemas/UserCollectionDTO"
+            }
+          },
+          "rainbow" : {
+            "type" : "array",
+            "description" : "彩虹页",
+            "items" : {
+              "type" : "integer",
+              "description" : "彩虹页",
+              "format" : "int32"
+            }
+          }
+        },
+        "description" : "响应数据"
+      },
+      "ResultPageResultUserCollectionDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/PageResultUserCollectionDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "ResultBoolean" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "type" : "boolean",
+            "description" : "响应数据"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "SubCategoryPageReq" : {
+        "type" : "object",
+        "properties" : {
+          "pageNum" : {
+            "type" : "integer",
+            "description" : "当前第几页，默认1页开始",
+            "format" : "int32",
+            "example" : 1
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "description" : "每页数量",
+            "format" : "int32",
+            "example" : 20
+          },
+          "mainCategoryId" : {
+            "type" : "integer",
+            "description" : "主分类ID",
+            "format" : "int64"
+          }
+        }
+      },
+      "PageResultSubCategoryDTO" : {
+        "type" : "object",
+        "properties" : {
+          "pageNo" : {
+            "type" : "integer",
+            "description" : "第几页",
+            "format" : "int32"
+          },
+          "pageNum" : {
+            "type" : "integer",
+            "description" : "第几页",
+            "format" : "int32"
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "description" : "每页条数",
+            "format" : "int32"
+          },
+          "pageType" : {
+            "type" : "string",
+            "description" : "分页类型"
+          },
+          "pageTypeDesc" : {
+            "type" : "string",
+            "description" : "分页类型描述"
+          },
+          "totalPage" : {
+            "type" : "integer",
+            "description" : "总页数",
+            "format" : "int32"
+          },
+          "totalRows" : {
+            "type" : "integer",
+            "description" : "总记录数",
+            "format" : "int32"
+          },
+          "rows" : {
+            "type" : "array",
+            "description" : "结果集",
+            "items" : {
+              "$ref" : "#/components/schemas/SubCategoryDTO"
+            }
+          },
+          "rainbow" : {
+            "type" : "array",
+            "description" : "彩虹页",
+            "items" : {
+              "type" : "integer",
+              "description" : "彩虹页",
+              "format" : "int32"
+            }
+          }
+        },
+        "description" : "响应数据"
+      },
+      "ResultPageResultSubCategoryDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/PageResultSubCategoryDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "MainCategoryPageReq" : {
+        "type" : "object",
+        "properties" : {
+          "pageNum" : {
+            "type" : "integer",
+            "description" : "当前第几页，默认1页开始",
+            "format" : "int32",
+            "example" : 1
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "description" : "每页数量",
+            "format" : "int32",
+            "example" : 20
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "名称"
+          }
+        }
+      },
+      "PageResultMainCategoryDTO" : {
+        "type" : "object",
+        "properties" : {
+          "pageNo" : {
+            "type" : "integer",
+            "description" : "第几页",
+            "format" : "int32"
+          },
+          "pageNum" : {
+            "type" : "integer",
+            "description" : "第几页",
+            "format" : "int32"
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "description" : "每页条数",
+            "format" : "int32"
+          },
+          "pageType" : {
+            "type" : "string",
+            "description" : "分页类型"
+          },
+          "pageTypeDesc" : {
+            "type" : "string",
+            "description" : "分页类型描述"
+          },
+          "totalPage" : {
+            "type" : "integer",
+            "description" : "总页数",
+            "format" : "int32"
+          },
+          "totalRows" : {
+            "type" : "integer",
+            "description" : "总记录数",
+            "format" : "int32"
+          },
+          "rows" : {
+            "type" : "array",
+            "description" : "结果集",
+            "items" : {
+              "$ref" : "#/components/schemas/MainCategoryDTO"
+            }
+          },
+          "rainbow" : {
+            "type" : "array",
+            "description" : "彩虹页",
+            "items" : {
+              "type" : "integer",
+              "description" : "彩虹页",
+              "format" : "int32"
+            }
+          }
+        },
+        "description" : "响应数据"
+      },
+      "ResultPageResultMainCategoryDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/PageResultMainCategoryDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "ResultListString" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "type" : "array",
+            "description" : "响应数据",
+            "items" : {
+              "type" : "string",
+              "description" : "响应数据"
+            }
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "ContentPageReq" : {
+        "required" : [ "subCategoryId" ],
+        "type" : "object",
+        "properties" : {
+          "pageNum" : {
+            "type" : "integer",
+            "description" : "当前第几页，默认1页开始",
+            "format" : "int32",
+            "example" : 1
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "description" : "每页数量",
+            "format" : "int32",
+            "example" : 20
+          },
+          "subCategoryId" : {
+            "type" : "integer",
+            "description" : "子分类ID",
+            "format" : "int64"
+          },
+          "contentType" : {
+            "type" : "string",
+            "description" : "内容类型(image:图片, note:笔记)"
+          }
+        }
+      },
+      "PageResultContentDTO" : {
+        "type" : "object",
+        "properties" : {
+          "pageNo" : {
+            "type" : "integer",
+            "description" : "第几页",
+            "format" : "int32"
+          },
+          "pageNum" : {
+            "type" : "integer",
+            "description" : "第几页",
+            "format" : "int32"
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "description" : "每页条数",
+            "format" : "int32"
+          },
+          "pageType" : {
+            "type" : "string",
+            "description" : "分页类型"
+          },
+          "pageTypeDesc" : {
+            "type" : "string",
+            "description" : "分页类型描述"
+          },
+          "totalPage" : {
+            "type" : "integer",
+            "description" : "总页数",
+            "format" : "int32"
+          },
+          "totalRows" : {
+            "type" : "integer",
+            "description" : "总记录数",
+            "format" : "int32"
+          },
+          "rows" : {
+            "type" : "array",
+            "description" : "结果集",
+            "items" : {
+              "$ref" : "#/components/schemas/ContentDTO"
+            }
+          },
+          "rainbow" : {
+            "type" : "array",
+            "description" : "彩虹页",
+            "items" : {
+              "type" : "integer",
+              "description" : "彩虹页",
+              "format" : "int32"
+            }
+          }
+        },
+        "description" : "响应数据"
+      },
+      "ResultPageResultContentDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/PageResultContentDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "ResultListTagDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "type" : "array",
+            "description" : "响应数据",
+            "items" : {
+              "$ref" : "#/components/schemas/TagDTO"
+            }
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      }
+    }
+  }
+}

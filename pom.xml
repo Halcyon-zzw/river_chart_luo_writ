@@ -139,6 +139,28 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<!-- SpringDoc OpenAPI Maven Plugin - 生成API文档JSON文件 -->
+			<plugin>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-maven-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<id>generate-openapi-json</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- API文档访问URL -->
+					<apiDocsUrl>http://localhost:8080/v3/api-docs</apiDocsUrl>
+					<!-- 输出文件路径 -->
+					<outputFileName>river_chart_luo_writ.json</outputFileName>
+					<!-- 输出目录 -->
+					<outputDir>${project.basedir}/docs</outputDir>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>

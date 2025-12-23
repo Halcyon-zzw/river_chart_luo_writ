@@ -22,6 +22,26 @@ logging:
   level:
     com.example: DEBUG
 
+# SpringDoc OpenAPI 配置 (适用于 SpringDoc 2.x + Spring Boot 3)
+springdoc:
+  api-docs:
+    enabled: true                    # 启用API文档
+    path: /v3/api-docs               # API文档JSON访问路径（默认值）
+  swagger-ui:
+    enabled: true                    # 启用Swagger UI
+    path: /swagger-ui.html           # Swagger UI访问路径（默认值）
+    tags-sorter: alpha               # 标签排序：alpha-字母排序，默认按Controller定义顺序
+    operations-sorter: alpha         # 接口排序：alpha-字母排序，method-按HTTP方法排序
+  show-actuator: false               # 不显示Actuator端点
+  default-flat-param-object: true    # 扁平化参数对象
+
+# OpenAPI JSON文件生成配置
+openapi:
+  json:
+    auto-generate: true              # 是否在应用启动时自动生成JSON文件
+    output-dir: ${user.dir}/docs     # 输出目录（默认为项目根目录的docs文件夹）
+    file-name: river_chart_luo_writ.json  # 输出文件名
+
 # 文件上传配置
 file:
   upload:
