@@ -56,6 +56,6 @@ public class OperationLogResp implements Serializable {
     private Byte isDeleted;
 
     @Schema(description = "创建时间")
-    private LocalDateTime createdTime;
+    private LocalDateTime createTime;
 
 }

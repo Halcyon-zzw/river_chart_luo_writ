@@ -86,7 +86,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
         if (subCategoryPageReq.getMainCategoryId() != null) {
             queryWrapper.eq(SubCategory::getMainCategoryId, subCategoryPageReq.getMainCategoryId());
         }
-        queryWrapper.orderByDesc(SubCategory::getCreatedTime);
+        queryWrapper.orderByDesc(SubCategory::getCreateTime);
 
         // 2. 分页查询主数据
         Page<SubCategory> page = subCategoryDao.page(subCategoryPageReq.convertToPage(), queryWrapper);

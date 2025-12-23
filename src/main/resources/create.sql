@@ -35,17 +35,17 @@ CREATE TABLE IF NOT EXISTS `user` (
                         `account_expire_time` DATETIME DEFAULT NULL COMMENT '账号过期时间',
 
     -- 审计字段
-                        `created_by` BIGINT DEFAULT NULL COMMENT '创建人ID',
-                        `updated_by` BIGINT DEFAULT NULL COMMENT '更新人ID',
-                        `created_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                        `updated_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                        `create_by` BIGINT DEFAULT NULL COMMENT '创建人ID',
+                        `update_by` BIGINT DEFAULT NULL COMMENT '更新人ID',
+                        `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                        `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
 
                         PRIMARY KEY (`id`),
                         UNIQUE KEY `uk_username` (`username`),
                         UNIQUE KEY `uk_openid` (`openid`),
                         UNIQUE KEY `uk_unionid` (`unionid`),
                         KEY `idx_phone` (`phone`),
-                        KEY `idx_created_time` (`created_time`),
+                        KEY `idx_create_time` (`create_time`),
                         KEY `idx_status_deleted` (`status`, `is_deleted`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户表';
 
@@ -57,8 +57,8 @@ CREATE TABLE IF NOT EXISTS tag (
                       name VARCHAR(50) NOT NULL UNIQUE COMMENT '标签名称',
                       color VARCHAR(7) DEFAULT '#007AFF' COMMENT '标签颜色(十六进制)',
                       is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
-                      created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                      updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+                      create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                      update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='标签表';
 
 -- ====================================
@@ -71,10 +71,10 @@ CREATE TABLE IF NOT EXISTS main_category (
                                  thumbnail_url VARCHAR(500) COMMENT '缩略图URL',
                                  sort_order INT DEFAULT 0 COMMENT '排序权重',
                                  is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
-                                 created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                                 updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                                 create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                 update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
 
-                                 INDEX idx_sort_deleted_time (sort_order, is_deleted, created_time)
+                                 INDEX idx_sort_deleted_time (sort_order, is_deleted, create_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='主分类表';
 
 -- ====================================
@@ -88,12 +88,12 @@ CREATE TABLE IF NOT EXISTS sub_category (
                                 thumbnail_url VARCHAR(500) COMMENT '缩略图URL',
                                 sort_order INT DEFAULT 0 COMMENT '排序权重',
                                 is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
-                                created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                                updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                                create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
 
                                 INDEX idx_main_category_id (main_category_id),
                                 INDEX idx_main_category_deleted (main_category_id, is_deleted, sort_order),
-                                INDEX idx_sort_deleted_time (sort_order, is_deleted, created_time)
+                                INDEX idx_sort_deleted_time (sort_order, is_deleted, create_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='小分类表';
 
 -- ====================================
@@ -120,13 +120,13 @@ CREATE TABLE IF NOT EXISTS content (
                           description TEXT COMMENT '内容描述',
                           sort_order INT DEFAULT 0 COMMENT '排序权重',
                           is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
-                          created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                          updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                          create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                          update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
 
                           INDEX idx_sub_category_id (sub_category_id),
                           INDEX idx_sort_order (sort_order),
-                          INDEX idx_created_time (created_time),
-                          INDEX idx_type_deleted_time (content_type, is_deleted, created_time DESC)
+                          INDEX idx_create_time (create_time),
+                          INDEX idx_type_deleted_time (content_type, is_deleted, create_time DESC)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='数据内容表';
 
 -- ====================================
@@ -137,8 +137,8 @@ CREATE TABLE IF NOT EXISTS main_category_tag (
                                     main_category_id BIGINT NOT NULL COMMENT '主分类ID',
                                     tag_id BIGINT NOT NULL COMMENT '标签ID',
                                     is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
-                                    created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                                    updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                                    create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                    update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
 
                                     UNIQUE KEY uk_main_category_tag (main_category_id, tag_id),
                                     INDEX idx_main_category_id (main_category_id),
@@ -153,8 +153,8 @@ CREATE TABLE IF NOT EXISTS sub_category_tag (
                                    sub_category_id BIGINT NOT NULL COMMENT '小分类ID',
                                    tag_id BIGINT NOT NULL COMMENT '标签ID',
                                    is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
-                                   created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                                   updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                                   create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                   update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
 
                                    UNIQUE KEY uk_sub_category_tag (sub_category_id, tag_id),
                                    INDEX idx_sub_category_id (sub_category_id),
@@ -169,8 +169,8 @@ CREATE TABLE IF NOT EXISTS content_tag (
                               content_id BIGINT NOT NULL COMMENT '内容ID',
                               tag_id BIGINT NOT NULL COMMENT '标签ID',
                               is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
-                              created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                              updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                              create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                              update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
 
                               UNIQUE KEY uk_content_tag (content_id, tag_id),
                               INDEX idx_content_id (content_id),
@@ -188,14 +188,14 @@ CREATE TABLE IF NOT EXISTS user_collection (
                                 tags JSON COMMENT '收藏标签，JSON数组格式',
                                 notes TEXT COMMENT '收藏备注',
                                 is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
-                                created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                                updated_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                                create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
 
                                 UNIQUE KEY uk_user_content (user_id, content_id),
                                 INDEX idx_user_id (user_id),
                                 INDEX idx_content_id (content_id),
-                                INDEX idx_created_time (created_time),
-                                INDEX idx_user_deleted_time (user_id, is_deleted, created_time)
+                                INDEX idx_create_time (create_time),
+                                INDEX idx_user_deleted_time (user_id, is_deleted, create_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户收藏表';
 
 
@@ -214,13 +214,13 @@ CREATE TABLE IF NOT EXISTS operation_log (
                                 ip_address VARCHAR(64) COMMENT '操作IP地址',
                                 user_agent VARCHAR(500) COMMENT '用户代理',
                                 is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',
-                                created_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
 
                                 INDEX idx_user_id (user_id),
                                 INDEX idx_operation_type (operation_type),
                                 INDEX idx_target_table (target_table),
-                                INDEX idx_created_time (created_time),
-                                INDEX idx_user_operation_time (user_id, operation_type, created_time)
+                                INDEX idx_create_time (create_time),
+                                INDEX idx_user_operation_time (user_id, operation_type, create_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='操作日志表';
 
 

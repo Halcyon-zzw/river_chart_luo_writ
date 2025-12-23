@@ -87,7 +87,7 @@ public class MainCategoryServiceImpl implements MainCategoryService {
         if (StringUtils.hasText(mainCategoryPageReq.getName())) {
             queryWrapper.like(MainCategory::getName, mainCategoryPageReq.getName());
         }
-        queryWrapper.orderByDesc(MainCategory::getCreatedTime);
+        queryWrapper.orderByDesc(MainCategory::getCreateTime);
 
         // 2. 分页查询主数据
         Page<MainCategory> page = mainCategoryDao.page(mainCategoryPageReq.convertToPage(), queryWrapper);

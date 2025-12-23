@@ -89,7 +89,7 @@ public class UserCollectionServiceImpl implements UserCollectionService {
         if (StringUtils.hasText(collectionPageReq.getName())) {
             queryWrapper.like(UserCollection::getFolderName, collectionPageReq.getName());
         }
-        queryWrapper.orderByDesc(UserCollection::getCreatedTime);
+        queryWrapper.orderByDesc(UserCollection::getCreateTime);
 
         // 5. 分页查询
         Page<UserCollection> page = userCollectionDao.page(collectionPageReq.convertToPage(), queryWrapper);

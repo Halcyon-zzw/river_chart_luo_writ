@@ -61,7 +61,7 @@ public class TagServiceImpl implements TagService {
         if (StringUtils.hasText(name)) {
             queryWrapper.like(Tag::getName, name);
         }
-        queryWrapper.orderByDesc(Tag::getCreatedTime);
+        queryWrapper.orderByDesc(Tag::getCreateTime);
         List<Tag> tags = tagDao.list(queryWrapper);
         return tagConvert.toTagDTOList(tags);
     }

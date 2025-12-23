@@ -82,15 +82,15 @@ public class UserResp implements Serializable {
     private LocalDateTime accountExpireTime;
 
     @Schema(description = "创建人ID")
-    private Long createdBy;
+    private Long createBy;
 
     @Schema(description = "更新人ID")
-    private Long updatedBy;
+    private Long updateBy;
 
     @Schema(description = "创建时间")
-    private LocalDateTime createdTime;
+    private LocalDateTime createTime;
 
     @Schema(description = "更新时间")
-    private LocalDateTime updatedTime;
+    private LocalDateTime updateTime;
 
 }

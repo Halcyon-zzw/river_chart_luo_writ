@@ -97,6 +97,6 @@ public class OperationLog implements Serializable {
     /**
      * 创建时间
      */
-    @TableField("created_time")
-    private LocalDateTime createdTime;
+    @TableField("create_time")
+    private LocalDateTime createTime;
 }

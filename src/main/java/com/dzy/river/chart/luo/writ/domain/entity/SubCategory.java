@@ -73,12 +73,12 @@ public class SubCategory implements Serializable {
     /**
      * 创建时间
      */
-    @TableField("created_time")
-    private LocalDateTime createdTime;
+    @TableField("create_time")
+    private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
-    @TableField("updated_time")
-    private LocalDateTime updatedTime;
+    @TableField("update_time")
+    private LocalDateTime updateTime;
 }

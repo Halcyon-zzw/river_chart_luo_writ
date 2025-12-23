@@ -139,24 +139,24 @@ public class User implements Serializable {
     /**
      * 创建人ID
      */
-    @TableField("created_by")
-    private Long createdBy;
+    @TableField("create_by")
+    private Long createBy;
 
     /**
      * 更新人ID
      */
-    @TableField("updated_by")
-    private Long updatedBy;
+    @TableField("update_by")
+    private Long updateBy;
 
     /**
      * 创建时间
      */
-    @TableField("created_time")
-    private LocalDateTime createdTime;
+    @TableField("create_time")
+    private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
-    @TableField("updated_time")
-    private LocalDateTime updatedTime;
+    @TableField("update_time")
+    private LocalDateTime updateTime;
 }
