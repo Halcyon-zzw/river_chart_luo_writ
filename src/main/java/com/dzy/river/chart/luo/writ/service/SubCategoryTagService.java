@@ -45,4 +45,14 @@ public interface SubCategoryTagService {
      */
     SubCategoryTagDTO updateById(Long id, SubCategoryTagDTO subCategoryTagDTO);
 
+    /**
+     * 批量关联标签到子分类
+     * 先删除该子分类的所有旧关联，再批量插入新的关联记录
+     *
+     * @param subCategoryId 子分类ID
+     * @param tagIds 标签ID列表
+     * @return 成功关联的数量
+     */
+    int batchLinkTags(Long subCategoryId, java.util.List<Long> tagIds);
+
 }

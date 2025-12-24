@@ -76,16 +76,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -112,6 +102,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultUserDTO"
                 }
               }
             }
@@ -153,16 +153,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -189,6 +179,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultUserDTO"
                 }
               }
             }
@@ -220,16 +220,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -256,6 +246,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -289,16 +289,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -325,6 +315,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
                 }
               }
             }
@@ -366,16 +366,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -402,6 +392,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
                 }
               }
             }
@@ -433,16 +433,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -469,6 +459,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -502,16 +502,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultTagDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -538,6 +528,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultTagDTO"
                 }
               }
             }
@@ -579,16 +579,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultTagDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -615,6 +605,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultTagDTO"
                 }
               }
             }
@@ -646,16 +646,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -682,6 +672,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -715,16 +715,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -751,6 +741,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
                 }
               }
             }
@@ -792,16 +792,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -828,6 +818,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
                 }
               }
             }
@@ -859,16 +859,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -895,6 +885,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -928,16 +928,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -964,6 +954,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
                 }
               }
             }
@@ -1005,16 +1005,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1041,6 +1031,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
                 }
               }
             }
@@ -1072,16 +1072,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1108,6 +1098,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -1141,16 +1141,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1177,6 +1167,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
                 }
               }
             }
@@ -1218,16 +1218,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1254,6 +1244,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
                 }
               }
             }
@@ -1285,16 +1285,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1321,6 +1311,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -1354,16 +1354,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1390,6 +1380,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
                 }
               }
             }
@@ -1431,16 +1431,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1467,6 +1457,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
                 }
               }
             }
@@ -1498,16 +1498,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1534,6 +1524,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -1567,16 +1567,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1603,6 +1593,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
                 }
               }
             }
@@ -1644,16 +1644,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1680,6 +1670,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
                 }
               }
             }
@@ -1711,16 +1711,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1747,6 +1737,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -1780,16 +1780,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultContentDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1816,6 +1806,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultContentDTO"
                 }
               }
             }
@@ -1857,16 +1857,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultContentDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1893,6 +1883,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultContentDTO"
                 }
               }
             }
@@ -1924,16 +1924,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -1960,6 +1950,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -1993,16 +1993,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultContentTagDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -2029,6 +2019,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultContentTagDTO"
                 }
               }
             }
@@ -2070,16 +2070,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultContentTagDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -2106,6 +2096,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultContentTagDTO"
                 }
               }
             }
@@ -2137,16 +2137,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -2173,6 +2163,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -2207,16 +2207,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultLong"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -2243,6 +2233,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultLong"
                 }
               }
             }
@@ -2277,16 +2277,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -2313,6 +2303,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultUserDTO"
                 }
               }
             }
@@ -2347,16 +2347,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultPageResultUserCollectionDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -2383,6 +2373,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultPageResultUserCollectionDTO"
                 }
               }
             }
@@ -2417,16 +2417,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -2453,6 +2443,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
                 }
               }
             }
@@ -2487,12 +2487,72 @@
               }
             }
           },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
           "200" : {
             "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultTagDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tag/batch-link-sub-category" : {
+      "post" : {
+        "tags" : [ "标签表管理" ],
+        "summary" : "子分类批量关联标签",
+        "description" : "为子分类批量关联标签，会先删除旧关联再添加新关联",
+        "operationId" : "batchLinkSubCategoryTags",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BatchLinkSubCategoryTagReq"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2523,6 +2583,156 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultInteger"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tag/batch-link-main-category" : {
+      "post" : {
+        "tags" : [ "标签表管理" ],
+        "summary" : "主分类批量关联标签",
+        "description" : "为主分类批量关联标签，会先删除旧关联再添加新关联",
+        "operationId" : "batchLinkMainCategoryTags",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BatchLinkMainCategoryTagReq"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultInteger"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tag/batch-link-content" : {
+      "post" : {
+        "tags" : [ "标签表管理" ],
+        "summary" : "内容批量关联标签",
+        "description" : "为内容批量关联标签，会先删除旧关联再添加新关联",
+        "operationId" : "batchLinkContentTags",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BatchLinkContentTagReq"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultInteger"
                 }
               }
             }
@@ -2570,16 +2780,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -2606,6 +2806,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -2640,16 +2850,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultPageResultSubCategoryDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -2676,6 +2876,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultPageResultSubCategoryDTO"
                 }
               }
             }
@@ -2710,16 +2920,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -2746,6 +2946,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
                 }
               }
             }
@@ -2780,16 +2990,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -2816,6 +3016,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
                 }
               }
             }
@@ -2850,16 +3060,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -2886,6 +3086,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
                 }
               }
             }
@@ -2933,16 +3143,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -2969,6 +3169,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -3003,16 +3213,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultPageResultMainCategoryDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -3039,6 +3239,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultPageResultMainCategoryDTO"
                 }
               }
             }
@@ -3073,16 +3283,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -3109,6 +3309,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
                 }
               }
             }
@@ -3143,16 +3353,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -3179,6 +3379,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
                 }
               }
             }
@@ -3226,16 +3436,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -3262,6 +3462,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -3298,16 +3508,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultListString"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -3334,6 +3534,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultListString"
                 }
               }
             }
@@ -3368,16 +3578,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultPageResultContentDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -3404,6 +3604,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultPageResultContentDTO"
                 }
               }
             }
@@ -3438,16 +3648,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultContentDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -3474,6 +3674,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultContentDTO"
                 }
               }
             }
@@ -3508,16 +3718,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultContentTagDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -3544,6 +3744,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultContentTagDTO"
                 }
               }
             }
@@ -3576,16 +3786,6 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultListTagDTO"
-                }
-              }
-            }
-          },
           "404" : {
             "description" : "Not Found",
             "content" : {
@@ -3612,6 +3812,16 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultListTagDTO"
                 }
               }
             }
@@ -4702,6 +4912,103 @@
           }
         },
         "description" : "统一响应结果"
+      },
+      "BatchLinkSubCategoryTagReq" : {
+        "required" : [ "subCategoryId", "tagIds" ],
+        "type" : "object",
+        "properties" : {
+          "subCategoryId" : {
+            "type" : "integer",
+            "description" : "子分类ID",
+            "format" : "int64"
+          },
+          "tagIds" : {
+            "type" : "array",
+            "description" : "标签ID列表",
+            "items" : {
+              "type" : "integer",
+              "description" : "标签ID列表",
+              "format" : "int64"
+            }
+          }
+        },
+        "description" : "子分类批量关联标签请求"
+      },
+      "ResultInteger" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "type" : "integer",
+            "description" : "响应数据",
+            "format" : "int32"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "BatchLinkMainCategoryTagReq" : {
+        "required" : [ "mainCategoryId", "tagIds" ],
+        "type" : "object",
+        "properties" : {
+          "mainCategoryId" : {
+            "type" : "integer",
+            "description" : "主分类ID",
+            "format" : "int64"
+          },
+          "tagIds" : {
+            "type" : "array",
+            "description" : "标签ID列表",
+            "items" : {
+              "type" : "integer",
+              "description" : "标签ID列表",
+              "format" : "int64"
+            }
+          }
+        },
+        "description" : "主分类批量关联标签请求"
+      },
+      "BatchLinkContentTagReq" : {
+        "required" : [ "contentId", "tagIds" ],
+        "type" : "object",
+        "properties" : {
+          "contentId" : {
+            "type" : "integer",
+            "description" : "内容ID",
+            "format" : "int64"
+          },
+          "tagIds" : {
+            "type" : "array",
+            "description" : "标签ID列表",
+            "items" : {
+              "type" : "integer",
+              "description" : "标签ID列表",
+              "format" : "int64"
+            }
+          }
+        },
+        "description" : "内容批量关联标签请求"
       },
       "ResultBoolean" : {
         "type" : "object",

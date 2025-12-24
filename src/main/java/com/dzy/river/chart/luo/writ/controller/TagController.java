@@ -1,9 +1,15 @@
 package com.dzy.river.chart.luo.writ.controller;
 
 import com.dzy.river.chart.luo.writ.domain.dto.TagDTO;
+import com.dzy.river.chart.luo.writ.domain.req.BatchLinkMainCategoryTagReq;
+import com.dzy.river.chart.luo.writ.domain.req.BatchLinkSubCategoryTagReq;
+import com.dzy.river.chart.luo.writ.domain.req.BatchLinkContentTagReq;
 import com.dzy.river.chart.luo.writ.common.Result;
 import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.TagService;
+import com.dzy.river.chart.luo.writ.service.MainCategoryTagService;
+import com.dzy.river.chart.luo.writ.service.SubCategoryTagService;
+import com.dzy.river.chart.luo.writ.service.ContentTagService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -28,6 +34,15 @@ public class TagController {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private MainCategoryTagService mainCategoryTagService;
+
+    @Autowired
+    private SubCategoryTagService subCategoryTagService;
+
+    @Autowired
+    private ContentTagService contentTagService;
 
     /**
      * 根据ID获取标签表
@@ -89,6 +104,36 @@ public class TagController {
     public Result<List<TagDTO>> query(@RequestParam(required = false) String name) {
         List<TagDTO> tags = tagService.queryByName(name);
         return Result.success(tags);
+    }
+
+    /**
+     * 主分类批量关联标签
+     */
+    @PostMapping("/batch-link-main-category")
+    @Operation(summary = "主分类批量关联标签", description = "为主分类批量关联标签，会先删除旧关联再添加新关联")
+    public Result<Integer> batchLinkMainCategoryTags(@RequestBody @Validated BatchLinkMainCategoryTagReq req) {
+        int count = mainCategoryTagService.batchLinkTags(req.getMainCategoryId(), req.getTagIds());
+        return Result.success("批量关联成功", count);
+    }
+
+    /**
+     * 子分类批量关联标签
+     */
+    @PostMapping("/batch-link-sub-category")
+    @Operation(summary = "子分类批量关联标签", description = "为子分类批量关联标签，会先删除旧关联再添加新关联")
+    public Result<Integer> batchLinkSubCategoryTags(@RequestBody @Validated BatchLinkSubCategoryTagReq req) {
+        int count = subCategoryTagService.batchLinkTags(req.getSubCategoryId(), req.getTagIds());
+        return Result.success("批量关联成功", count);
+    }
+
+    /**
+     * 内容批量关联标签
+     */
+    @PostMapping("/batch-link-content")
+    @Operation(summary = "内容批量关联标签", description = "为内容批量关联标签，会先删除旧关联再添加新关联")
+    public Result<Integer> batchLinkContentTags(@RequestBody @Validated BatchLinkContentTagReq req) {
+        int count = contentTagService.batchLinkTags(req.getContentId(), req.getTagIds());
+        return Result.success("批量关联成功", count);
     }
 
 }

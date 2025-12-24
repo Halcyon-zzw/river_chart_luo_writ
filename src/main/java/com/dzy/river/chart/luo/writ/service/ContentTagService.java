@@ -45,4 +45,14 @@ public interface ContentTagService {
      */
     ContentTagDTO updateById(Long id, ContentTagDTO contentTagDTO);
 
+    /**
+     * 批量关联标签到内容
+     * 先删除该内容的所有旧关联，再批量插入新的关联记录
+     *
+     * @param contentId 内容ID
+     * @param tagIds 标签ID列表
+     * @return 成功关联的数量
+     */
+    int batchLinkTags(Long contentId, java.util.List<Long> tagIds);
+
 }

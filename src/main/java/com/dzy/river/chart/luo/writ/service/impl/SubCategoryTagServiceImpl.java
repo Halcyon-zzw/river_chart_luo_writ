@@ -1,5 +1,6 @@
 package com.dzy.river.chart.luo.writ.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.dzy.river.chart.luo.writ.domain.entity.SubCategoryTag;
 import com.dzy.river.chart.luo.writ.domain.dto.SubCategoryTagDTO;
 import com.dzy.river.chart.luo.writ.domain.convert.SubCategoryTagConvert;
@@ -7,6 +8,10 @@ import com.dzy.river.chart.luo.writ.dao.SubCategoryTagDao;
 import com.dzy.river.chart.luo.writ.service.SubCategoryTagService;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -49,6 +54,33 @@ public class SubCategoryTagServiceImpl implements SubCategoryTagService {
         SubCategoryTag subCategoryTag = subCategoryTagConvert.toSubCategoryTag(subCategoryTagDTO);
         boolean success = subCategoryTagDao.updateById(subCategoryTag);
         return success ? subCategoryTagConvert.toSubCategoryTagDTO(subCategoryTag) : null;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int batchLinkTags(Long subCategoryId, List<Long> tagIds) {
+        // 1. 删除该子分类的所有旧关联记录
+        LambdaQueryWrapper<SubCategoryTag> deleteWrapper = new LambdaQueryWrapper<>();
+        deleteWrapper.eq(SubCategoryTag::getSubCategoryId, subCategoryId);
+        subCategoryTagDao.remove(deleteWrapper);
+
+        // 2. 如果标签列表为空，直接返回
+        if (tagIds == null || tagIds.isEmpty()) {
+            return 0;
+        }
+
+        // 3. 批量插入新的关联记录
+        List<SubCategoryTag> tags = new ArrayList<>();
+        for (Long tagId : tagIds) {
+            SubCategoryTag tag = new SubCategoryTag();
+            tag.setSubCategoryId(subCategoryId);
+            tag.setTagId(tagId);
+            tags.add(tag);
+        }
+
+        // 4. 批量保存
+        boolean success = subCategoryTagDao.saveBatch(tags);
+        return success ? tags.size() : 0;
     }
 
 }
