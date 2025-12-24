@@ -20,4 +20,8 @@ public class ContentPageReq extends PageReq {
 
     @Schema(description = "内容类型(image:图片, note:笔记)")
     private String contentType;
+
+
+    @Schema(description = "标题")
+    private String title;
 }

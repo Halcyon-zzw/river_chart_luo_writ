@@ -15,4 +15,8 @@ public class SubCategoryPageReq extends PageReq {
 
     @Schema(description = "主分类ID")
     private Long mainCategoryId;
+
+
+    @Schema(description = "子分类名称")
+    private String name;
 }

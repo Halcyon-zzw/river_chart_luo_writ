@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -85,6 +86,9 @@ public class SubCategoryServiceImpl implements SubCategoryService {
         LambdaQueryWrapper<SubCategory> queryWrapper = new LambdaQueryWrapper<>();
         if (subCategoryPageReq.getMainCategoryId() != null) {
             queryWrapper.eq(SubCategory::getMainCategoryId, subCategoryPageReq.getMainCategoryId());
+        }
+        if (StringUtils.hasText(subCategoryPageReq.getName())) {
+            queryWrapper.like(SubCategory::getName, subCategoryPageReq.getName());
         }
         queryWrapper.orderByDesc(SubCategory::getCreateTime);
 

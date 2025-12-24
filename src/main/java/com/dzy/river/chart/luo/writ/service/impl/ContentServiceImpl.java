@@ -84,6 +84,9 @@ public class ContentServiceImpl implements ContentService {
         if (StringUtils.hasText(contentPageReq.getContentType())) {
             queryWrapper.eq(Content::getContentType, contentPageReq.getContentType());
         }
+        if (StringUtils.hasText(contentPageReq.getTitle())) {
+            queryWrapper.like(Content::getTitle, contentPageReq.getTitle());
+        }
         queryWrapper.orderByDesc(Content::getCreateTime);
 
         // 2. 分页查询主数据
