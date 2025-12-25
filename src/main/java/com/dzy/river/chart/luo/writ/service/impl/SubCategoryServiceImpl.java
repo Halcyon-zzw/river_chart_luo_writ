@@ -57,7 +57,29 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     @Override
     public SubCategoryDTO getById(Long id) {
         SubCategory subCategory = subCategoryDao.getById(id);
-        return subCategory != null ? subCategoryConvert.toSubCategoryDTO(subCategory) : null;
+        if (subCategory == null) {
+            return null;
+        }
+
+        // 转换为DTO
+        SubCategoryDTO subCategoryDTO = subCategoryConvert.toSubCategoryDTO(subCategory);
+
+        // 查询并填充标签列表
+        LambdaQueryWrapper<SubCategoryTag> tagWrapper = new LambdaQueryWrapper<>();
+        tagWrapper.eq(SubCategoryTag::getSubCategoryId, id);
+        List<SubCategoryTag> subCategoryTags = subCategoryTagDao.list(tagWrapper);
+
+        if (!CollectionUtils.isEmpty(subCategoryTags)) {
+            List<Long> tagIds = subCategoryTags.stream()
+                    .map(SubCategoryTag::getTagId)
+                    .collect(Collectors.toList());
+            List<Tag> tags = tagDao.listByIds(tagIds);
+            subCategoryDTO.setTagDTOList(tagConvert.toTagDTOList(tags));
+        } else {
+            subCategoryDTO.setTagDTOList(new ArrayList<>());
+        }
+
+        return subCategoryDTO;
     }
 
     @Override
@@ -211,17 +233,24 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean associateTags(Long subCategoryId, List<Long> tagIds) {
-        // 1. 删除现有的标签关联
+        // 1. 先物理删除该子分类下所有已逻辑删除的记录，避免后续插入时唯一键冲突
+        subCategoryTagDao.getBaseMapper().delete(
+                new LambdaQueryWrapper<SubCategoryTag>()
+                        .eq(SubCategoryTag::getSubCategoryId, subCategoryId)
+                        .eq(SubCategoryTag::getIsDeleted, 1)
+        );
+
+        // 2. 删除现有的标签关联（逻辑删除）
         LambdaQueryWrapper<SubCategoryTag> deleteWrapper = new LambdaQueryWrapper<>();
         deleteWrapper.eq(SubCategoryTag::getSubCategoryId, subCategoryId);
         subCategoryTagDao.remove(deleteWrapper);
 
-        // 2. 如果标签列表为空，直接返回
+        // 3. 如果标签列表为空，直接返回
         if (CollectionUtils.isEmpty(tagIds)) {
             return true;
         }
 
-        // 3. 创建新的标签关联
+        // 4. 创建新的标签关联
         List<SubCategoryTag> subCategoryTags = tagIds.stream()
                 .map(tagId -> {
                     SubCategoryTag subCategoryTag = new SubCategoryTag();

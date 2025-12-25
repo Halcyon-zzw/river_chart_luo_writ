@@ -57,7 +57,29 @@ public class MainCategoryServiceImpl implements MainCategoryService {
     @Override
     public MainCategoryDTO getById(Long id) {
         MainCategory mainCategory = mainCategoryDao.getById(id);
-        return mainCategory != null ? mainCategoryConvert.toMainCategoryDTO(mainCategory) : null;
+        if (mainCategory == null) {
+            return null;
+        }
+
+        // 转换为DTO
+        MainCategoryDTO mainCategoryDTO = mainCategoryConvert.toMainCategoryDTO(mainCategory);
+
+        // 查询并填充标签列表
+        LambdaQueryWrapper<MainCategoryTag> tagWrapper = new LambdaQueryWrapper<>();
+        tagWrapper.eq(MainCategoryTag::getMainCategoryId, id);
+        List<MainCategoryTag> mainCategoryTags = mainCategoryTagDao.list(tagWrapper);
+
+        if (!CollectionUtils.isEmpty(mainCategoryTags)) {
+            List<Long> tagIds = mainCategoryTags.stream()
+                    .map(MainCategoryTag::getTagId)
+                    .collect(Collectors.toList());
+            List<Tag> tags = tagDao.listByIds(tagIds);
+            mainCategoryDTO.setTagDTOList(tagConvert.toTagDTOList(tags));
+        } else {
+            mainCategoryDTO.setTagDTOList(new ArrayList<>());
+        }
+
+        return mainCategoryDTO;
     }
 
     @Override
@@ -208,17 +230,24 @@ public class MainCategoryServiceImpl implements MainCategoryService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean associateTags(Long mainCategoryId, List<Long> tagIds) {
-        // 1. 删除现有的标签关联
+        // 1. 先物理删除该主分类下所有已逻辑删除的记录，避免后续插入时唯一键冲突
+        mainCategoryTagDao.getBaseMapper().delete(
+                new LambdaQueryWrapper<MainCategoryTag>()
+                        .eq(MainCategoryTag::getMainCategoryId, mainCategoryId)
+                        .eq(MainCategoryTag::getIsDeleted, 1)
+        );
+
+        // 2. 删除现有的标签关联（逻辑删除）
         LambdaQueryWrapper<MainCategoryTag> deleteWrapper = new LambdaQueryWrapper<>();
         deleteWrapper.eq(MainCategoryTag::getMainCategoryId, mainCategoryId);
         mainCategoryTagDao.remove(deleteWrapper);
 
-        // 2. 如果标签列表为空，直接返回
+        // 3. 如果标签列表为空，直接返回
         if (CollectionUtils.isEmpty(tagIds)) {
             return true;
         }
 
-        // 3. 创建新的标签关联
+        // 4. 创建新的标签关联
         List<MainCategoryTag> mainCategoryTags = tagIds.stream()
                 .map(tagId -> {
                     MainCategoryTag mainCategoryTag = new MainCategoryTag();

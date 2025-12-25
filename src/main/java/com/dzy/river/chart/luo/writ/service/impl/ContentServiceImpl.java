@@ -53,7 +53,29 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public ContentDTO getById(Long id) {
         Content content = contentDao.getById(id);
-        return content != null ? contentConvert.toContentDTO(content) : null;
+        if (content == null) {
+            return null;
+        }
+
+        // 转换为DTO
+        ContentDTO contentDTO = contentConvert.toContentDTO(content);
+
+        // 查询并填充标签列表
+        LambdaQueryWrapper<ContentTag> tagWrapper = new LambdaQueryWrapper<>();
+        tagWrapper.eq(ContentTag::getContentId, id);
+        List<ContentTag> contentTags = contentTagDao.list(tagWrapper);
+
+        if (!CollectionUtils.isEmpty(contentTags)) {
+            List<Long> tagIds = contentTags.stream()
+                    .map(ContentTag::getTagId)
+                    .collect(Collectors.toList());
+            List<Tag> tags = tagDao.listByIds(tagIds);
+            contentDTO.setTagDTOList(tagConvert.toTagDTOList(tags));
+        } else {
+            contentDTO.setTagDTOList(new ArrayList<>());
+        }
+
+        return contentDTO;
     }
 
     @Override
@@ -197,17 +219,24 @@ public class ContentServiceImpl implements ContentService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean associateTags(Long contentId, List<Long> tagIds) {
-        // 1. 删除现有的标签关联
+        // 1. 先物理删除该内容下所有已逻辑删除的记录，避免后续插入时唯一键冲突
+        contentTagDao.getBaseMapper().delete(
+                new LambdaQueryWrapper<ContentTag>()
+                        .eq(ContentTag::getContentId, contentId)
+                        .eq(ContentTag::getIsDeleted, 1)
+        );
+
+        // 2. 删除现有的标签关联（逻辑删除）
         LambdaQueryWrapper<ContentTag> deleteWrapper = new LambdaQueryWrapper<>();
         deleteWrapper.eq(ContentTag::getContentId, contentId);
         contentTagDao.remove(deleteWrapper);
 
-        // 2. 如果标签列表为空，直接返回
+        // 3. 如果标签列表为空，直接返回
         if (CollectionUtils.isEmpty(tagIds)) {
             return true;
         }
 
-        // 3. 创建新的标签关联
+        // 4. 创建新的标签关联
         List<ContentTag> contentTags = tagIds.stream()
                 .map(tagId -> {
                     ContentTag contentTag = new ContentTag();
