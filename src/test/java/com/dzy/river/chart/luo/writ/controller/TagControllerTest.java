@@ -2,7 +2,6 @@ package com.dzy.river.chart.luo.writ.controller;
 
 import com.dzy.river.chart.luo.writ.domain.dto.TagDTO;
 import com.dzy.river.chart.luo.writ.domain.req.BatchLinkContentTagReq;
-import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.ContentTagService;
 import com.dzy.river.chart.luo.writ.service.MainCategoryTagService;
 import com.dzy.river.chart.luo.writ.service.SubCategoryTagService;
@@ -12,7 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,10 +31,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * TagController 集成测试
  *
- * 使用 @WebMvcTest 只加载Web层组件
+ * 使用 @SpringBootTest 和 @AutoConfigureMockMvc 进行完整的集成测试
+ * 使用 @MockBean 模拟服务层
  * 使用 MockMvc 模拟HTTP请求
  */
-@WebMvcTest(TagController.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
 @DisplayName("标签控制器集成测试")
 class TagControllerTest {
 
