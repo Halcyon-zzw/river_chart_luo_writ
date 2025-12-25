@@ -61,23 +61,66 @@ public class MainCategoryServiceImpl implements MainCategoryService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public MainCategoryDTO save(MainCategoryDTO mainCategoryDTO) {
+        // 1. 保存主分类
         MainCategory mainCategory = mainCategoryConvert.toMainCategory(mainCategoryDTO);
         boolean success = mainCategoryDao.save(mainCategory);
-        return success ? mainCategoryConvert.toMainCategoryDTO(mainCategory) : null;
+        if (!success) {
+            return null;
+        }
+
+        // 2. 关联标签（如果有）
+        if (mainCategoryDTO.getTagIdList() != null) {
+            associateTags(mainCategory.getId(), mainCategoryDTO.getTagIdList());
+        }
+
+        // 3. 返回结果（包含标签信息）
+        MainCategoryDTO result = mainCategoryConvert.toMainCategoryDTO(mainCategory);
+        if (!CollectionUtils.isEmpty(mainCategoryDTO.getTagIdList())) {
+            // 查询并填充标签信息
+            List<Tag> tags = tagDao.listByIds(mainCategoryDTO.getTagIdList());
+            result.setTagDTOList(tagConvert.toTagDTOList(tags));
+        }
+        return result;
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean removeById(Long id) {
+        // 1. 删除标签关联
+        LambdaQueryWrapper<MainCategoryTag> deleteWrapper = new LambdaQueryWrapper<>();
+        deleteWrapper.eq(MainCategoryTag::getMainCategoryId, id);
+        mainCategoryTagDao.remove(deleteWrapper);
+
+        // 2. 删除主分类
         return mainCategoryDao.removeById(id);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public MainCategoryDTO updateById(Long id, MainCategoryDTO mainCategoryDTO) {
+        // 1. 更新主分类
         mainCategoryDTO.setId(id);
         MainCategory mainCategory = mainCategoryConvert.toMainCategory(mainCategoryDTO);
         boolean success = mainCategoryDao.updateById(mainCategory);
-        return success ? mainCategoryConvert.toMainCategoryDTO(mainCategory) : null;
+        if (!success) {
+            return null;
+        }
+
+        // 2. 更新标签关联（如果有）
+        if (mainCategoryDTO.getTagIdList() != null) {
+            associateTags(id, mainCategoryDTO.getTagIdList());
+        }
+
+        // 3. 返回结果（包含标签信息）
+        MainCategoryDTO result = mainCategoryConvert.toMainCategoryDTO(mainCategory);
+        if (!CollectionUtils.isEmpty(mainCategoryDTO.getTagIdList())) {
+            // 查询并填充标签信息
+            List<Tag> tags = tagDao.listByIds(mainCategoryDTO.getTagIdList());
+            result.setTagDTOList(tagConvert.toTagDTOList(tags));
+        }
+        return result;
     }
 
     @Override

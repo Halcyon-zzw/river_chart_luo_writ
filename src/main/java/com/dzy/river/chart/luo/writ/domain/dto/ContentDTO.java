@@ -60,7 +60,10 @@ public class ContentDTO implements Serializable {
     @Schema(description = "内容描述")
     private String description;
 
-    @Schema(description = "标签列表")
+    @Schema(description = "标签id列表, 用于创建页、编辑页的标签传输")
+    private List<Long> tagIdList;
+
+    @Schema(description = "标签列表, 用于查询返回标签列表")
     private List<TagDTO> tagDTOList;
 
     @Schema(description = "排序权重")

@@ -57,23 +57,66 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public ContentDTO save(ContentDTO contentDTO) {
+        // 1. 保存内容
         Content content = contentConvert.toContent(contentDTO);
         boolean success = contentDao.save(content);
-        return success ? contentConvert.toContentDTO(content) : null;
+        if (!success) {
+            return null;
+        }
+
+        // 2. 关联标签（如果有）
+        if (contentDTO.getTagIdList() != null) {
+            associateTags(content.getId(), contentDTO.getTagIdList());
+        }
+
+        // 3. 返回结果（包含标签信息）
+        ContentDTO result = contentConvert.toContentDTO(content);
+        if (!CollectionUtils.isEmpty(contentDTO.getTagIdList())) {
+            // 查询并填充标签信息
+            List<Tag> tags = tagDao.listByIds(contentDTO.getTagIdList());
+            result.setTagDTOList(tagConvert.toTagDTOList(tags));
+        }
+        return result;
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean removeById(Long id) {
+        // 1. 删除标签关联
+        LambdaQueryWrapper<ContentTag> deleteWrapper = new LambdaQueryWrapper<>();
+        deleteWrapper.eq(ContentTag::getContentId, id);
+        contentTagDao.remove(deleteWrapper);
+
+        // 2. 删除内容
         return contentDao.removeById(id);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public ContentDTO updateById(Long id, ContentDTO contentDTO) {
+        // 1. 更新内容
         contentDTO.setId(id);
         Content content = contentConvert.toContent(contentDTO);
         boolean success = contentDao.updateById(content);
-        return success ? contentConvert.toContentDTO(content) : null;
+        if (!success) {
+            return null;
+        }
+
+        // 2. 更新标签关联（如果有）
+        if (contentDTO.getTagIdList() != null) {
+            associateTags(id, contentDTO.getTagIdList());
+        }
+
+        // 3. 返回结果（包含标签信息）
+        ContentDTO result = contentConvert.toContentDTO(content);
+        if (!CollectionUtils.isEmpty(contentDTO.getTagIdList())) {
+            // 查询并填充标签信息
+            List<Tag> tags = tagDao.listByIds(contentDTO.getTagIdList());
+            result.setTagDTOList(tagConvert.toTagDTOList(tags));
+        }
+        return result;
     }
 
     @Override

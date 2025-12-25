@@ -61,23 +61,66 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public SubCategoryDTO save(SubCategoryDTO subCategoryDTO) {
+        // 1. 保存子分类
         SubCategory subCategory = subCategoryConvert.toSubCategory(subCategoryDTO);
         boolean success = subCategoryDao.save(subCategory);
-        return success ? subCategoryConvert.toSubCategoryDTO(subCategory) : null;
+        if (!success) {
+            return null;
+        }
+
+        // 2. 关联标签（如果有）
+        if (subCategoryDTO.getTagIdList() != null) {
+            associateTags(subCategory.getId(), subCategoryDTO.getTagIdList());
+        }
+
+        // 3. 返回结果（包含标签信息）
+        SubCategoryDTO result = subCategoryConvert.toSubCategoryDTO(subCategory);
+        if (!CollectionUtils.isEmpty(subCategoryDTO.getTagIdList())) {
+            // 查询并填充标签信息
+            List<Tag> tags = tagDao.listByIds(subCategoryDTO.getTagIdList());
+            result.setTagDTOList(tagConvert.toTagDTOList(tags));
+        }
+        return result;
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean removeById(Long id) {
+        // 1. 删除标签关联
+        LambdaQueryWrapper<SubCategoryTag> deleteWrapper = new LambdaQueryWrapper<>();
+        deleteWrapper.eq(SubCategoryTag::getSubCategoryId, id);
+        subCategoryTagDao.remove(deleteWrapper);
+
+        // 2. 删除子分类
         return subCategoryDao.removeById(id);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public SubCategoryDTO updateById(Long id, SubCategoryDTO subCategoryDTO) {
+        // 1. 更新子分类
         subCategoryDTO.setId(id);
         SubCategory subCategory = subCategoryConvert.toSubCategory(subCategoryDTO);
         boolean success = subCategoryDao.updateById(subCategory);
-        return success ? subCategoryConvert.toSubCategoryDTO(subCategory) : null;
+        if (!success) {
+            return null;
+        }
+
+        // 2. 更新标签关联（如果有）
+        if (subCategoryDTO.getTagIdList() != null) {
+            associateTags(id, subCategoryDTO.getTagIdList());
+        }
+
+        // 3. 返回结果（包含标签信息）
+        SubCategoryDTO result = subCategoryConvert.toSubCategoryDTO(subCategory);
+        if (!CollectionUtils.isEmpty(subCategoryDTO.getTagIdList())) {
+            // 查询并填充标签信息
+            List<Tag> tags = tagDao.listByIds(subCategoryDTO.getTagIdList());
+            result.setTagDTOList(tagConvert.toTagDTOList(tags));
+        }
+        return result;
     }
 
     @Override
