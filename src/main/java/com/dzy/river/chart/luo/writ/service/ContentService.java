@@ -2,6 +2,8 @@ package com.dzy.river.chart.luo.writ.service;
 
 import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.ContentDTO;
+import com.dzy.river.chart.luo.writ.domain.dto.MainCategoryDTO;
+import com.dzy.river.chart.luo.writ.domain.dto.SubCategoryDTO;
 import com.dzy.river.chart.luo.writ.domain.req.ContentPageReq;
 
 import java.util.List;
@@ -65,5 +67,16 @@ public interface ContentService {
      * @return 是否关联成功
      */
     boolean associateTags(Long contentId, List<Long> tagIds);
+
+    /**
+     * 级联创建内容
+     * 依次创建主分类、子分类和内容，并关联各自的标签
+     *
+     * @param mainCategoryDTO 主分类DTO
+     * @param subCategoryDTO 子分类DTO
+     * @param contentDTO 内容DTO
+     * @return 创建成功的内容DTO（包含标签列表）
+     */
+    ContentDTO createWithCategories(MainCategoryDTO mainCategoryDTO, SubCategoryDTO subCategoryDTO, ContentDTO contentDTO);
 
 }

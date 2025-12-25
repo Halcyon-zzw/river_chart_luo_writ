@@ -4,6 +4,7 @@ import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.ContentDTO;
 import com.dzy.river.chart.luo.writ.common.Result;
 import com.dzy.river.chart.luo.writ.domain.req.ContentPageReq;
+import com.dzy.river.chart.luo.writ.domain.req.CreateContentWithCategoriesReq;
 import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.ContentService;
 import com.dzy.river.chart.luo.writ.service.FileUploadService;
@@ -116,6 +117,21 @@ public class ContentController {
     public Result<List<String>> uploadImages(@RequestParam("files") MultipartFile[] files) {
         List<String> imageUrls = fileUploadService.uploadImages(files, 20);
         return Result.success("上传成功", imageUrls);
+    }
+
+    /**
+     * 级联创建内容
+     * 依次创建主分类、子分类和内容，并关联各自的标签
+     */
+    @PostMapping("/create-with-categories")
+    @Operation(summary = "级联创建内容", description = "一次性创建主分类、子分类和内容，并关联各自的标签。保证事务一致性。")
+    public Result<ContentDTO> createWithCategories(@RequestBody @Validated CreateContentWithCategoriesReq request) {
+        ContentDTO result = contentService.createWithCategories(
+                request.getMainCategory(),
+                request.getSubCategory(),
+                request.getContent()
+        );
+        return Result.success("创建成功", result);
     }
 
 }

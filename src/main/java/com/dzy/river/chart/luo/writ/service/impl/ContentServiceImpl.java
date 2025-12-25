@@ -6,6 +6,8 @@ import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.dao.ContentTagDao;
 import com.dzy.river.chart.luo.writ.dao.TagDao;
 import com.dzy.river.chart.luo.writ.domain.convert.TagConvert;
+import com.dzy.river.chart.luo.writ.domain.dto.MainCategoryDTO;
+import com.dzy.river.chart.luo.writ.domain.dto.SubCategoryDTO;
 import com.dzy.river.chart.luo.writ.domain.dto.TagDTO;
 import com.dzy.river.chart.luo.writ.domain.entity.Content;
 import com.dzy.river.chart.luo.writ.domain.dto.ContentDTO;
@@ -15,6 +17,8 @@ import com.dzy.river.chart.luo.writ.domain.entity.ContentTag;
 import com.dzy.river.chart.luo.writ.domain.entity.Tag;
 import com.dzy.river.chart.luo.writ.domain.req.ContentPageReq;
 import com.dzy.river.chart.luo.writ.service.ContentService;
+import com.dzy.river.chart.luo.writ.service.MainCategoryService;
+import com.dzy.river.chart.luo.writ.service.SubCategoryService;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +53,12 @@ public class ContentServiceImpl implements ContentService {
 
     @Autowired
     private TagConvert tagConvert;
+
+    @Autowired
+    private MainCategoryService mainCategoryService;
+
+    @Autowired
+    private SubCategoryService subCategoryService;
 
     @Override
     public ContentDTO getById(Long id) {
@@ -247,6 +257,36 @@ public class ContentServiceImpl implements ContentService {
                 .collect(Collectors.toList());
 
         return contentTagDao.saveBatch(contentTags);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public ContentDTO createWithCategories(MainCategoryDTO mainCategoryDTO, SubCategoryDTO subCategoryDTO, ContentDTO contentDTO) {
+        // 1. 创建主分类及关联标签（忽略传入的ID）
+        mainCategoryDTO.setId(null);
+        MainCategoryDTO createdMainCategory = mainCategoryService.save(mainCategoryDTO);
+        if (createdMainCategory == null) {
+            throw new RuntimeException("创建主分类失败");
+        }
+
+        // 2. 创建子分类及关联标签（忽略传入的ID，设置主分类ID）
+        subCategoryDTO.setId(null);
+        subCategoryDTO.setMainCategoryId(createdMainCategory.getId());
+        SubCategoryDTO createdSubCategory = subCategoryService.save(subCategoryDTO);
+        if (createdSubCategory == null) {
+            throw new RuntimeException("创建子分类失败");
+        }
+
+        // 3. 创建内容及关联标签（忽略传入的ID，设置子分类ID）
+        contentDTO.setId(null);
+        contentDTO.setSubCategoryId(createdSubCategory.getId());
+        ContentDTO createdContent = save(contentDTO);
+        if (createdContent == null) {
+            throw new RuntimeException("创建内容失败");
+        }
+
+        // 4. 返回完整的内容信息（包含标签列表）
+        return getById(createdContent.getId());
     }
 
 }
