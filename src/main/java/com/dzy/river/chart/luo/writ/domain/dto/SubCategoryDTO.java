@@ -41,7 +41,7 @@ public class SubCategoryDTO implements Serializable {
     @Schema(description = "缩略图URL")
     private String thumbnailUrl;
 
-    @Schema(description = "标签id列表, 用于创建页、编辑页的标签传输")
+    @Schema(description = "标签id列表, 用于创建页、编辑页的标签传输; null表示不修改, []表示情况标签")
     private List<Long> tagIdList;
 
     @Schema(description = "标签列表, 用于查询返回标签列表")
