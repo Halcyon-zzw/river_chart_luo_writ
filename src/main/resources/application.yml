@@ -45,8 +45,9 @@ openapi:
 # 文件上传配置
 file:
   upload:
-    path: /tmp/uploads/
+    path: /Users/zhuzhiwei/tmp/uploads/
     url-prefix: /uploads/
+
 
 myapp:
   feature:
