@@ -29,4 +29,47 @@
         LIMIT 1
     </select>
 
+    <!-- DTO ResultMap（包含内容标题） -->
+    <resultMap id="DTOResultMap" type="com.dzy.river.chart.luo.writ.domain.dto.BrowseHistoryDTO">
+        <id column="id" property="id" />
+        <result column="content_id" property="contentId" />
+        <result column="content_title" property="contentTitle" />
+        <result column="user_id" property="userId" />
+        <result column="browse_count" property="browseCount" />
+        <result column="last_browse_time" property="lastBrowseTime" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="isDeleted" />
+    </resultMap>
+
+    <!-- 分页查询浏览历史（关联查询内容标题） -->
+    <select id="selectPageWithContentTitle" resultMap="DTOResultMap">
+        SELECT
+            bh.id,
+            bh.content_id,
+            c.title AS content_title,
+            bh.user_id,
+            bh.browse_count,
+            bh.last_browse_time,
+            bh.create_time,
+            bh.update_time,
+            bh.is_deleted
+        FROM browse_history bh
+        LEFT JOIN content c ON bh.content_id = c.id AND c.is_deleted = 0
+        WHERE bh.is_deleted = 0
+        <if test="req.userId != null">
+            AND bh.user_id = #{req.userId}
+        </if>
+        <if test="req.contentTitle != null and req.contentTitle != ''">
+            AND c.title LIKE CONCAT('%', #{req.contentTitle}, '%')
+        </if>
+        <if test="req.startTime != null">
+            AND bh.last_browse_time &gt;= #{req.startTime}
+        </if>
+        <if test="req.endTime != null">
+            AND bh.last_browse_time &lt;= #{req.endTime}
+        </if>
+        ORDER BY bh.last_browse_time DESC
+    </select>
+
 </mapper>
