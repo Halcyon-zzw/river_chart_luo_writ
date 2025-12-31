@@ -46,10 +46,22 @@ public class User implements Serializable {
     private String email;
 
     /**
+     * 邮箱验证标志：0-未验证，1-已验证
+     */
+    @TableField("email_verified")
+    private Byte emailVerified;
+
+    /**
      * 手机号
      */
     @TableField("phone")
     private String phone;
+
+    /**
+     * 手机号验证标志：0-未验证，1-已验证
+     */
+    @TableField("phone_verified")
+    private Byte phoneVerified;
 
     /**
      * 加密后的密码

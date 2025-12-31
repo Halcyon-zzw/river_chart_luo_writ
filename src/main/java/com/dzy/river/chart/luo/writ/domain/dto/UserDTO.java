@@ -35,9 +35,15 @@ public class UserDTO implements Serializable {
 //    @Email(message = "邮箱格式不正确")
     private String email;
 
+    @Schema(description = "邮箱验证标志：0-未验证，1-已验证")
+    private Byte emailVerified;
+
     @Schema(description = "手机号")
     @Pattern(regexp = "^1[3-9]\\d{9}$", message = "手机号格式不正确")
     private String phone;
+
+    @Schema(description = "手机号验证标志：0-未验证，1-已验证")
+    private Byte phoneVerified;
 
     @Schema(description = "加密后的密码")
     private String passwordHash;

@@ -1,0 +1,60 @@
+# ===========================================
+# Nacos配置示例
+# 配置中心Data ID: river-chart-luo-writ-dev.yml
+# 命名空间: dev
+# 分组: DEFAULT_GROUP
+# ===========================================
+
+# JWT配置
+jwt:
+  secret: your-256-bit-secret-key-change-this-in-production-environment-must-be-at-least-32-characters
+  access-token-expiration: 7200  # access_token过期时间（秒），默认2小时
+  refresh-token-expiration: 604800  # refresh_token过期时间（秒），默认7天
+  issuer: river-chart-luo-writ  # 签发者
+
+# Redis配置
+spring:
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password:  # Redis密码，如果没有则留空
+      database: 0
+      timeout: 3000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+
+  # 邮件配置
+  mail:
+    host: smtp.qq.com  # QQ邮箱SMTP服务器
+    port: 587
+    username: your-email@qq.com  # 发件邮箱
+    password: your-auth-code  # QQ邮箱授权码
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    default-encoding: UTF-8
+
+# 微信配置
+wechat:
+  miniapp:
+    app-id: your-miniapp-appid
+    app-secret: your-miniapp-secret
+  open-platform:
+    app-id: your-open-platform-appid
+    app-secret: your-open-platform-secret
+
+# 验证码配置
+verification-code:
+  expire-minutes: 5  # 验证码有效期（分钟）
+  send-interval-seconds: 60  # 发送间隔（秒）
+  max-send-times: 3  # 5分钟内最多发送次数
+  code-length: 6  # 验证码长度
