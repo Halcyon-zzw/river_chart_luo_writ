@@ -6,6 +6,35 @@
 
 1、浏览历史分页请求BrowseHistoryPageReq新增contentType字段；
 
+-----------分界线，上述需求已经处理，请忽略------------------
+通过前端请求头中的token，获取用户ID，并设置到请求头x-user-id中。并创建获取userId的工具方法UserUtil.getUserId()。支持在项目中任何地方调用
+如果没有获取到，返回默认值-1。
+
+❓ 需要确认的问题
+
+1. Token请求头的Key：
+   - 选项A: Authorization（标准，格式：Bearer <token>）
+   - 选项B: token
+   - 选项C: 其他
+   A
+2. 拦截器的拦截路径：
+   - 选项A: 拦截所有路径（/**），排除登录/注册等公开接口
+   - 选项B: 只拦截需要认证的路径（如 /api/**）
+   A
+3. Token验证失败的处理：
+   - 选项A: 返回401未授权
+   - 选项B: 设置userId为-1，继续执行（允许匿名访问）
+   B
+
+我的建议
+
+根据之前实现的认证系统，我建议：
+
+1. Token请求头Key: Authorization，格式：Bearer <token>
+2. 拦截路径: 拦截所有路径，排除 /auth/**、/verification-code/**、/swagger-ui/**
+3. Token验证失败: 设置userId为-1（允许部分接口支持匿名访问）
+
+
 # 说明
 1. 已完成的需求追加到demand_tree_completed.md中，不需要修改本文件.
 2. 忽略最后出现的“-----------分界线，上述需求已经处理，请忽略------------------”字样以上的需求

@@ -180,3 +180,141 @@ POST /browse-history/page
 ✅ 已完成并编译成功
 
 ---
+
+## 2025-12-31: 用户上下文系统（JWT认证拦截器）
+
+### 需求概述
+实现基于JWT的用户上下文系统，通过拦截器从请求头中解析JWT令牌，提取用户ID并存储到ThreadLocal中，支持在项目中任何地方调用 `UserUtil.getUserId()` 获取当前用户ID。
+
+### 实现功能
+
+#### 1. ThreadLocal用户上下文
+- ✅ 创建 `UserContext` 类，使用ThreadLocal存储用户ID
+- ✅ 提供 `setUserId()`、`getUserId()`、`clear()` 方法
+- ✅ 默认用户ID为 `-1`（未登录或token验证失败）
+
+#### 2. 用户工具类
+- ✅ 创建 `UserUtil` 工具类
+- ✅ 提供静态方法 `getUserId()`，可在项目中任何地方调用
+- ✅ 无需传递 `HttpServletRequest` 参数
+
+#### 3. JWT工具类
+- ✅ 基于 Hutool JWT 实现
+- ✅ 支持生成 Access Token 和 Refresh Token（双令牌策略）
+- ✅ 支持从令牌中提取用户ID
+- ✅ 支持从 `Authorization: Bearer <token>` 请求头中提取令牌
+- ✅ 完整的令牌验证（签名验证、过期时间验证）
+
+#### 4. JWT认证拦截器
+- ✅ 实现 `HandlerInterceptor` 接口
+- ✅ 在 `preHandle` 中解析JWT令牌并设置用户ID到ThreadLocal
+- ✅ 在 `afterCompletion` 中清理ThreadLocal，防止内存泄漏
+- ✅ Token验证失败时设置userId为 `-1`，允许匿名访问
+
+#### 5. 拦截器注册
+- ✅ 在 `WebMvcConfig` 中注册JWT拦截器
+- ✅ 拦截所有路径（`/**`）
+- ✅ 排除公开接口：
+  - `/auth/**` - 认证相关接口
+  - `/verification-code/**` - 验证码接口
+  - `/swagger-ui/**` - Swagger UI
+  - `/v3/api-docs/**` - OpenAPI文档
+
+### 技术实现
+
+**新增文件**:
+- `UserContext.java` - ThreadLocal用户上下文
+- `UserUtil.java` - 用户工具类
+- `JwtUtil.java` - JWT工具类（基于Hutool）
+- `JwtAuthenticationInterceptor.java` - JWT认证拦截器
+
+**修改文件**:
+- `WebMvcConfig.java` - 注册JWT拦截器
+- `pom.xml` - 添加 `hutool-jwt` 依赖
+
+**拦截器执行流程**:
+```
+Request (Authorization: Bearer <token>)
+  ↓
+JwtAuthenticationInterceptor.preHandle()
+  ├─ 提取JWT令牌
+  ├─ 解析令牌，提取userId
+  ├─ 验证签名和过期时间
+  ├─ 存储到 UserContext (ThreadLocal)
+  └─ 失败时设置 userId = -1
+  ↓
+Controller/Service 调用 UserUtil.getUserId()
+  └─ 从 ThreadLocal 获取 userId
+  ↓
+JwtAuthenticationInterceptor.afterCompletion()
+  └─ UserContext.clear() (清理ThreadLocal)
+```
+
+### JWT配置参数
+
+| 配置项 | 说明 | 默认值 |
+|--------|------|--------|
+| jwt.secret | JWT密钥 | river-chart-luo-writ-secret-key-2025 |
+| jwt.access-token-expire | Access Token过期时间（秒） | 7200（2小时） |
+| jwt.refresh-token-expire | Refresh Token过期时间（秒） | 604800（7天） |
+
+### 使用示例
+
+**在Controller中获取当前用户ID**:
+```java
+@RestController
+@RequestMapping("/api")
+public class MyController {
+
+    @GetMapping("/profile")
+    public Result<UserProfile> getProfile() {
+        // 无需传递HttpServletRequest，直接获取用户ID
+        Long userId = UserUtil.getUserId();
+
+        if (userId == -1) {
+            // 未登录用户
+            return Result.error(401, "请先登录");
+        }
+
+        // 已登录用户逻辑
+        return Result.success(userService.getProfile(userId));
+    }
+}
+```
+
+**在Service中获取当前用户ID**:
+```java
+@Service
+public class MyServiceImpl implements MyService {
+
+    public void doSomething() {
+        Long userId = UserUtil.getUserId();
+        log.info("当前用户ID: {}", userId);
+    }
+}
+```
+
+**生成JWT令牌**:
+```java
+@Autowired
+private JwtUtil jwtUtil;
+
+// 生成Access Token
+String accessToken = jwtUtil.generateAccessToken(userId);
+
+// 生成Refresh Token
+String refreshToken = jwtUtil.generateRefreshToken(userId);
+```
+
+### 安全特性
+
+1. **线程安全**: 使用ThreadLocal确保多线程环境下用户上下文隔离
+2. **内存安全**: 请求完成后自动清理ThreadLocal，防止内存泄漏
+3. **匿名访问**: Token验证失败时不阻断请求，允许部分接口支持匿名访问
+4. **签名验证**: 使用密钥验证JWT签名，防止令牌被篡改
+5. **过期检查**: 自动检查令牌是否过期
+
+### 状态
+✅ 已完成并编译成功
+
+---
