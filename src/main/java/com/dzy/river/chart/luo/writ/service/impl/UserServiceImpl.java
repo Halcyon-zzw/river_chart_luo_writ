@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         UserDTO userDTO = new UserDTO();
         userDTO.setUserId(1L);
 
-        return null;
+        return userDTO;
     }
 
 }
