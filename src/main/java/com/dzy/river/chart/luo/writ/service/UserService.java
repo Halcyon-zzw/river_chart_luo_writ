@@ -45,4 +45,5 @@ public interface UserService {
      */
     UserDTO updateById(Long id, UserDTO userDTO);
 
+    UserDTO login(Object obj);
 }

@@ -51,4 +51,12 @@ public class UserServiceImpl implements UserService {
         return success ? userConvert.toUserDTO(user) : null;
     }
 
+    @Override
+    public UserDTO login(Object obj) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserId(1L);
+
+        return null;
+    }
+
 }

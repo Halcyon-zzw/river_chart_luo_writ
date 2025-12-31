@@ -2,6 +2,9 @@
 -----------分界线，上述需求已经处理，请忽略------------------
 1、浏览历史分页请求BrowseHistoryPageReq删除contentId字段，新增contentTitle字段，支持模糊查询。新增时间范围查询字段，通过最后浏览时间过滤；结果通过最后浏览时间倒排；
 
+-----------分界线，上述需求已经处理，请忽略------------------
+
+1、浏览历史分页请求BrowseHistoryPageReq新增contentType字段；
 
 # 说明
 1. 已完成的需求追加到demand_tree_completed.md中，不需要修改本文件.

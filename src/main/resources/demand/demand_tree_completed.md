@@ -89,3 +89,94 @@ POST /browse-history/page
 ✅ 已完成并编译成功
 
 ---
+
+## 2025-12-31: 浏览历史新增内容类型过滤
+
+### 需求概述
+在浏览历史分页查询中新增内容类型字段，支持按内容类型（图片/笔记）过滤浏览记录。
+
+### 实现功能
+
+#### 1. 请求参数新增
+- ✅ 在 `BrowseHistoryPageReq` 中新增 `contentType` 字段
+- ✅ 支持按内容类型过滤（`image`-图片, `note`-笔记）
+
+#### 2. 响应数据新增
+- ✅ 在 `BrowseHistoryDTO` 中新增 `contentType` 字段
+- ✅ 返回每条浏览记录的内容类型
+
+#### 3. 查询逻辑优化
+- ✅ 关联查询 `content` 表的 `content_type` 字段
+- ✅ 支持按内容类型精确过滤
+
+### 技术实现
+
+**修改文件**:
+- `BrowseHistoryPageReq.java` - 新增 contentType 过滤字段
+- `BrowseHistoryDTO.java` - 新增 contentType 返回字段
+- `BrowseHistoryMapper.xml` - 更新SQL查询和ResultMap
+
+**SQL查询增强**:
+```sql
+SELECT
+    bh.id,
+    bh.content_id,
+    c.title AS content_title,
+    c.content_type AS content_type,  -- 新增
+    bh.user_id,
+    bh.browse_count,
+    bh.last_browse_time,
+    ...
+FROM browse_history bh
+LEFT JOIN content c ON bh.content_id = c.id AND c.is_deleted = 0
+WHERE bh.is_deleted = 0
+  AND c.content_type = ?  -- 新增过滤条件
+ORDER BY bh.last_browse_time DESC
+```
+
+### 使用示例
+
+**查询图片类型的浏览历史**:
+```json
+POST /browse-history/page
+{
+  "contentType": "image",
+  "pageNum": 1,
+  "pageSize": 10
+}
+```
+
+**查询笔记类型的浏览历史**:
+```json
+POST /browse-history/page
+{
+  "contentType": "note",
+  "pageNum": 1,
+  "pageSize": 10
+}
+```
+
+**组合查询（某用户的图片浏览历史）**:
+```json
+POST /browse-history/page
+{
+  "userId": 1,
+  "contentType": "image",
+  "startTime": "2025-12-01T00:00:00",
+  "endTime": "2025-12-31T23:59:59",
+  "pageNum": 1,
+  "pageSize": 10
+}
+```
+
+### 支持的内容类型
+
+| 类型值 | 说明 |
+|--------|------|
+| image | 图片内容 |
+| note | 笔记内容 |
+
+### 状态
+✅ 已完成并编译成功
+
+---

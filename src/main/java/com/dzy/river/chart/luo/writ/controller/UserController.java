@@ -84,8 +84,9 @@ public class UserController {
      */
     @PostMapping("/login")
     @Operation(summary = "更新用户表", description = "根据ID更新用户表信息")
-    public Result<Long> login(@RequestBody @Validated Object obj) {
-        return Result.success(1L);
+    public Result<UserDTO> login(@RequestBody @Validated Object obj) {
+        UserDTO result = userService.login(obj);
+        return Result.success(result);
     }
 
 }

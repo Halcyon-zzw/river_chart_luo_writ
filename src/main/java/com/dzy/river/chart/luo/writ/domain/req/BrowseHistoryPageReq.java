@@ -24,6 +24,9 @@ public class BrowseHistoryPageReq extends PageReq {
     @Schema(description = "内容标题（支持模糊查询）", example = "Spring Boot")
     private String contentTitle;
 
+    @Schema(description = "内容类型（image:图片, note:笔记）", example = "image")
+    private String contentType;
+
     @Schema(description = "开始时间（最后浏览时间范围-起）", example = "2025-01-01T00:00:00")
     private LocalDateTime startTime;
 

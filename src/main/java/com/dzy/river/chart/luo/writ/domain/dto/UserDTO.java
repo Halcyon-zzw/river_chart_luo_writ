@@ -22,8 +22,11 @@ public class UserDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "用户ID，主键", example = "1")
+    @Schema(description = "主键ID，主键", example = "1")
     private Long id;
+
+    @Schema(description = "用户ID，唯一")
+    private Long userId;
 
     @Schema(description = "用户名，唯一")
     @NotBlank(message = "用户名不能为空")
