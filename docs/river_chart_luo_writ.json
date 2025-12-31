@@ -3834,76 +3834,6 @@
         }
       }
     },
-    "/browse-history/record" : {
-      "post" : {
-        "tags" : [ "浏览历史管理" ],
-        "summary" : "记录浏览",
-        "description" : "记录用户浏览内容，如果已存在则更新浏览次数和时间",
-        "operationId" : "recordBrowse",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/RecordBrowseReq"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "500" : {
-            "description" : "Internal Server Error",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "Bad Request",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
-          "409" : {
-            "description" : "Conflict",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBrowseHistoryDTO"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/browse-history/page" : {
       "post" : {
         "tags" : [ "浏览历史管理" ],
@@ -3967,6 +3897,76 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultPageResultBrowseHistoryDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/browse-history/create" : {
+      "post" : {
+        "tags" : [ "浏览历史管理" ],
+        "summary" : "记录浏览",
+        "description" : "记录用户浏览内容，如果已存在则更新浏览次数和时间",
+        "operationId" : "recordBrowse",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RecordBrowseReq"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBrowseHistoryDTO"
                 }
               }
             }
@@ -4297,6 +4297,10 @@
             "type" : "integer",
             "description" : "用户ID，唯一",
             "format" : "int64"
+          },
+          "token" : {
+            "type" : "string",
+            "description" : "令牌"
           },
           "username" : {
             "maxLength" : 64,
@@ -5851,24 +5855,49 @@
         },
         "description" : "级联创建内容请求"
       },
-      "RecordBrowseReq" : {
-        "required" : [ "contentId" ],
+      "BrowseHistoryPageReq" : {
         "type" : "object",
         "properties" : {
-          "contentId" : {
+          "pageNum" : {
             "type" : "integer",
-            "description" : "内容ID",
-            "format" : "int64",
+            "description" : "当前第几页，默认1页开始",
+            "format" : "int32",
             "example" : 1
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "description" : "每页数量",
+            "format" : "int32",
+            "example" : 20
           },
           "userId" : {
             "type" : "integer",
-            "description" : "用户ID（可为空，表示匿名浏览）",
+            "description" : "用户ID（查询某个用户的浏览历史）",
             "format" : "int64",
             "example" : 1
+          },
+          "contentTitle" : {
+            "type" : "string",
+            "description" : "内容标题（支持模糊查询）",
+            "example" : "Spring Boot"
+          },
+          "contentType" : {
+            "type" : "string",
+            "description" : "内容类型（image:图片, note:笔记）",
+            "example" : "image"
+          },
+          "startTime" : {
+            "type" : "string",
+            "description" : "开始时间（最后浏览时间范围-起）",
+            "format" : "date-time"
+          },
+          "endTime" : {
+            "type" : "string",
+            "description" : "结束时间（最后浏览时间范围-止）",
+            "format" : "date-time"
           }
         },
-        "description" : "记录浏览请求"
+        "description" : "浏览历史分页查询请求"
       },
       "BrowseHistoryDTO" : {
         "type" : "object",
@@ -5929,82 +5958,6 @@
           }
         },
         "description" : "浏览历史表 DTO"
-      },
-      "ResultBrowseHistoryDTO" : {
-        "type" : "object",
-        "properties" : {
-          "code" : {
-            "type" : "integer",
-            "description" : "响应码",
-            "format" : "int32",
-            "example" : 200
-          },
-          "message" : {
-            "type" : "string",
-            "description" : "响应消息",
-            "example" : "操作成功"
-          },
-          "traceId" : {
-            "type" : "string",
-            "description" : "traceId"
-          },
-          "data" : {
-            "$ref" : "#/components/schemas/BrowseHistoryDTO"
-          },
-          "timestamp" : {
-            "type" : "integer",
-            "description" : "响应时间戳",
-            "format" : "int64"
-          },
-          "success" : {
-            "type" : "boolean"
-          }
-        },
-        "description" : "统一响应结果"
-      },
-      "BrowseHistoryPageReq" : {
-        "type" : "object",
-        "properties" : {
-          "pageNum" : {
-            "type" : "integer",
-            "description" : "当前第几页，默认1页开始",
-            "format" : "int32",
-            "example" : 1
-          },
-          "pageSize" : {
-            "type" : "integer",
-            "description" : "每页数量",
-            "format" : "int32",
-            "example" : 20
-          },
-          "userId" : {
-            "type" : "integer",
-            "description" : "用户ID（查询某个用户的浏览历史）",
-            "format" : "int64",
-            "example" : 1
-          },
-          "contentTitle" : {
-            "type" : "string",
-            "description" : "内容标题（支持模糊查询）",
-            "example" : "Spring Boot"
-          },
-          "contentType" : {
-            "type" : "string",
-            "description" : "内容类型（image:图片, note:笔记）",
-            "example" : "image"
-          },
-          "startTime" : {
-            "type" : "string",
-            "description" : "开始时间（最后浏览时间范围-起）",
-            "format" : "date-time"
-          },
-          "endTime" : {
-            "type" : "string",
-            "description" : "结束时间（最后浏览时间范围-止）",
-            "format" : "date-time"
-          }
-        },
-        "description" : "浏览历史分页查询请求"
       },
       "PageResultBrowseHistoryDTO" : {
         "type" : "object",
@@ -6081,6 +6034,57 @@
           },
           "data" : {
             "$ref" : "#/components/schemas/PageResultBrowseHistoryDTO"
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "RecordBrowseReq" : {
+        "required" : [ "contentId" ],
+        "type" : "object",
+        "properties" : {
+          "contentId" : {
+            "type" : "integer",
+            "description" : "内容ID",
+            "format" : "int64",
+            "example" : 1
+          },
+          "userId" : {
+            "type" : "integer",
+            "description" : "用户ID（可为空，表示匿名浏览）",
+            "format" : "int64",
+            "example" : 1
+          }
+        },
+        "description" : "记录浏览请求"
+      },
+      "ResultBrowseHistoryDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/BrowseHistoryDTO"
           },
           "timestamp" : {
             "type" : "integer",
