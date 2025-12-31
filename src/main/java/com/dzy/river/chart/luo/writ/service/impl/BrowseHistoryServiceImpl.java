@@ -1,6 +1,7 @@
 package com.dzy.river.chart.luo.writ.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.dao.BrowseHistoryDao;
@@ -8,6 +9,7 @@ import com.dzy.river.chart.luo.writ.domain.convert.BrowseHistoryConvert;
 import com.dzy.river.chart.luo.writ.domain.dto.BrowseHistoryDTO;
 import com.dzy.river.chart.luo.writ.domain.entity.BrowseHistory;
 import com.dzy.river.chart.luo.writ.domain.req.BrowseHistoryPageReq;
+import com.dzy.river.chart.luo.writ.mapper.BrowseHistoryMapper;
 import com.dzy.river.chart.luo.writ.service.BrowseHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,9 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
 
     @Autowired
     private BrowseHistoryDao browseHistoryDao;
+
+    @Autowired
+    private BrowseHistoryMapper browseHistoryMapper;
 
     @Autowired
     private BrowseHistoryConvert browseHistoryConvert;
@@ -81,31 +86,11 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
 
     @Override
     public PageResult<BrowseHistoryDTO> page(BrowseHistoryPageReq pageReq) {
-        // 1. 构建查询条件
-        LambdaQueryWrapper<BrowseHistory> queryWrapper = new LambdaQueryWrapper<>();
+        // 使用新的关联查询方法（包含内容标题、时间范围过滤、模糊查询）
+        Page<BrowseHistoryDTO> page = new Page<>(pageReq.getPageNum(), pageReq.getPageSize());
+        IPage<BrowseHistoryDTO> resultPage = browseHistoryMapper.selectPageWithContentTitle(page, pageReq);
 
-        if (pageReq.getUserId() != null) {
-            queryWrapper.eq(BrowseHistory::getUserId, pageReq.getUserId());
-        }
-
-        if (pageReq.getContentId() != null) {
-            queryWrapper.eq(BrowseHistory::getContentId, pageReq.getContentId());
-        }
-
-        // 按最后浏览时间倒序
-        queryWrapper.orderByDesc(BrowseHistory::getLastBrowseTime);
-
-        // 2. 分页查询
-        Page<BrowseHistory> page = browseHistoryDao.page(pageReq.convertToPage(), queryWrapper);
-        List<BrowseHistory> records = page.getRecords();
-
-        // 3. 转换为DTO
-        List<BrowseHistoryDTO> dtoList = records.stream()
-                .map(browseHistoryConvert::toBrowseHistoryDTO)
-                .collect(Collectors.toList());
-
-        // 4. 返回分页结果
-        return new PageResult<>(page, dtoList);
+        return new PageResult<>(resultPage);
     }
 
     @Override

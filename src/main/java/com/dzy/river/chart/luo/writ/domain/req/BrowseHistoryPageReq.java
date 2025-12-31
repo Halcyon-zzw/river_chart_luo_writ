@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDateTime;
+
 /**
  * 浏览历史分页查询请求
  *
@@ -19,6 +21,12 @@ public class BrowseHistoryPageReq extends PageReq {
     @Schema(description = "用户ID（查询某个用户的浏览历史）", example = "1")
     private Long userId;
 
-    @Schema(description = "内容ID（查询某个内容的浏览记录）", example = "1")
-    private Long contentId;
+    @Schema(description = "内容标题（支持模糊查询）", example = "Spring Boot")
+    private String contentTitle;
+
+    @Schema(description = "开始时间（最后浏览时间范围-起）", example = "2025-01-01T00:00:00")
+    private LocalDateTime startTime;
+
+    @Schema(description = "结束时间（最后浏览时间范围-止）", example = "2025-12-31T23:59:59")
+    private LocalDateTime endTime;
 }

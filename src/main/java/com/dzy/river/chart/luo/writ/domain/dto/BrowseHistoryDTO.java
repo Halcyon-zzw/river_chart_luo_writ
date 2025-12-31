@@ -28,6 +28,9 @@ public class BrowseHistoryDTO implements Serializable {
     @Schema(description = "内容ID", example = "1")
     private Long contentId;
 
+    @Schema(description = "内容标题", example = "Spring Boot入门教程")
+    private String contentTitle;
+
     @Schema(description = "用户ID（可为空）", example = "1")
     private Long userId;
 
