@@ -29,35 +29,66 @@
         LIMIT 1
     </select>
 
-    <!-- DTO ResultMap（包含内容标题和类型） -->
+    <!-- DTO ResultMap（包含完整的内容信息） -->
     <resultMap id="DTOResultMap" type="com.dzy.river.chart.luo.writ.domain.dto.BrowseHistoryDTO">
         <id column="id" property="id" />
         <result column="content_id" property="contentId" />
-        <result column="content_title" property="contentTitle" />
-        <result column="content_type" property="contentType" />
         <result column="user_id" property="userId" />
         <result column="browse_count" property="browseCount" />
         <result column="last_browse_time" property="lastBrowseTime" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="is_deleted" property="isDeleted" />
+        <!-- 嵌套ContentDTO -->
+        <association property="contentDTO" javaType="com.dzy.river.chart.luo.writ.domain.dto.ContentDTO">
+            <id column="c_id" property="id" />
+            <result column="c_sub_category_id" property="subCategoryId" />
+            <result column="c_title" property="title" />
+            <result column="c_content_type" property="contentType" />
+            <result column="c_image_url" property="imageUrl" />
+            <result column="c_image_thumbnail_url" property="imageThumbnailUrl" />
+            <result column="c_image_size" property="imageSize" />
+            <result column="c_image_width" property="imageWidth" />
+            <result column="c_image_height" property="imageHeight" />
+            <result column="c_note_content" property="noteContent" />
+            <result column="c_note_format" property="noteFormat" />
+            <result column="c_description" property="description" />
+            <result column="c_sort_order" property="sortOrder" />
+            <result column="c_is_deleted" property="isDeleted" />
+            <result column="c_create_time" property="createTime" />
+            <result column="c_update_time" property="updateTime" />
+        </association>
     </resultMap>
 
-    <!-- 分页查询浏览历史（关联查询内容标题和类型） -->
+    <!-- 分页查询浏览历史（关联查询完整内容信息，包含已删除内容） -->
     <select id="selectPageWithContentTitle" resultMap="DTOResultMap">
         SELECT
             bh.id,
             bh.content_id,
-            c.title AS content_title,
-            c.content_type AS content_type,
             bh.user_id,
             bh.browse_count,
             bh.last_browse_time,
             bh.create_time,
             bh.update_time,
-            bh.is_deleted
+            bh.is_deleted,
+            c.id AS c_id,
+            c.sub_category_id AS c_sub_category_id,
+            c.title AS c_title,
+            c.content_type AS c_content_type,
+            c.image_url AS c_image_url,
+            c.image_thumbnail_url AS c_image_thumbnail_url,
+            c.image_size AS c_image_size,
+            c.image_width AS c_image_width,
+            c.image_height AS c_image_height,
+            c.note_content AS c_note_content,
+            c.note_format AS c_note_format,
+            c.description AS c_description,
+            c.sort_order AS c_sort_order,
+            c.is_deleted AS c_is_deleted,
+            c.create_time AS c_create_time,
+            c.update_time AS c_update_time
         FROM browse_history bh
-        LEFT JOIN content c ON bh.content_id = c.id AND c.is_deleted = 0
+        LEFT JOIN content c ON bh.content_id = c.id
         WHERE bh.is_deleted = 0
         <if test="req.userId != null">
             AND bh.user_id = #{req.userId}

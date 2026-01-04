@@ -318,3 +318,173 @@ String refreshToken = jwtUtil.generateRefreshToken(userId);
 ✅ 已完成并编译成功
 
 ---
+
+## 2025-12-31: 浏览历史分页接口响应优化
+
+### 需求概述
+优化浏览历史分页接口响应结构，将扁平化的内容字段（contentTitle、contentType）整合为嵌套的 contentDTO 对象，提供完整的内容信息。
+
+### 实现功能
+
+#### 1. BrowseHistoryDTO 结构调整
+- ✅ 删除 `contentTitle` 字段（扁平化字段）
+- ✅ 删除 `contentType` 字段（扁平化字段）
+- ✅ 保留 `contentId` 字段（方便直接引用）
+- ✅ 新增 `contentDTO` 字段（嵌套完整的 ContentDTO 对象）
+
+#### 2. 查询逻辑优化
+- ✅ LEFT JOIN content 表获取所有内容字段
+- ✅ 使用 MyBatis `<association>` 标签映射嵌套对象
+- ✅ 支持已删除内容的返回（is_deleted = 1 的内容也会返回）
+- ✅ contentDTO 包含完整内容信息（包括已删除标记）
+
+#### 3. ResultMap 增强
+- ✅ 创建支持嵌套 ContentDTO 的 ResultMap
+- ✅ 为 content 表的所有字段设置别名（前缀 `c_`）
+- ✅ 正确映射所有字段到 ContentDTO
+
+### 技术实现
+
+**修改文件**:
+- `BrowseHistoryDTO.java` - 调整字段结构
+- `BrowseHistoryMapper.xml` - 增强 ResultMap 和 SQL 查询
+
+**ResultMap 结构**:
+```xml
+<resultMap id="DTOResultMap" type="BrowseHistoryDTO">
+    <id column="id" property="id" />
+    <result column="content_id" property="contentId" />
+    <!-- ... 其他浏览历史字段 ... -->
+
+    <!-- 嵌套 ContentDTO -->
+    <association property="contentDTO" javaType="ContentDTO">
+        <id column="c_id" property="id" />
+        <result column="c_title" property="title" />
+        <result column="c_content_type" property="contentType" />
+        <result column="c_is_deleted" property="isDeleted" />
+        <!-- ... 其他内容字段 ... -->
+    </association>
+</resultMap>
+```
+
+**SQL 查询优化**:
+```sql
+SELECT
+    bh.id,
+    bh.content_id,
+    bh.user_id,
+    bh.browse_count,
+    bh.last_browse_time,
+    -- ... 其他浏览历史字段 ...
+    c.id AS c_id,
+    c.title AS c_title,
+    c.content_type AS c_content_type,
+    c.image_url AS c_image_url,
+    c.is_deleted AS c_is_deleted,
+    -- ... 其他内容字段 ...
+FROM browse_history bh
+LEFT JOIN content c ON bh.content_id = c.id  -- 不再过滤已删除内容
+WHERE bh.is_deleted = 0
+ORDER BY bh.last_browse_time DESC
+```
+
+### 响应数据结构
+
+**优化前**（扁平化结构）:
+```json
+{
+  "id": 1,
+  "contentId": 100,
+  "contentTitle": "Spring Boot教程",
+  "contentType": "note",
+  "userId": 1,
+  "browseCount": 5,
+  "lastBrowseTime": "2025-12-31T10:00:00"
+}
+```
+
+**优化后**（嵌套结构）:
+```json
+{
+  "id": 1,
+  "contentId": 100,
+  "contentDTO": {
+    "id": 100,
+    "subCategoryId": 10,
+    "title": "Spring Boot教程",
+    "contentType": "note",
+    "noteContent": "教程内容...",
+    "noteFormat": "markdown",
+    "description": "详细描述",
+    "sortOrder": 1,
+    "isDeleted": 0,
+    "createTime": "2025-12-20T10:00:00",
+    "updateTime": "2025-12-30T15:00:00"
+  },
+  "userId": 1,
+  "browseCount": 5,
+  "lastBrowseTime": "2025-12-31T10:00:00"
+}
+```
+
+**已删除内容示例**:
+```json
+{
+  "id": 2,
+  "contentId": 101,
+  "contentDTO": {
+    "id": 101,
+    "title": "已删除的内容",
+    "contentType": "image",
+    "isDeleted": 1,  // 标记为已删除
+    "createTime": "2025-12-15T10:00:00",
+    "updateTime": "2025-12-31T10:00:00"
+  },
+  "userId": 1,
+  "browseCount": 3,
+  "lastBrowseTime": "2025-12-31T09:00:00"
+}
+```
+
+### ContentDTO 包含的字段
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| id | Long | 内容ID |
+| subCategoryId | Long | 所属小分类ID |
+| title | String | 内容标题 |
+| contentType | String | 内容类型（image/note） |
+| imageUrl | String | 图片URL（图片类型） |
+| imageThumbnailUrl | String | 缩略图URL |
+| imageSize | Long | 图片大小（字节） |
+| imageWidth | Integer | 图片宽度 |
+| imageHeight | Integer | 图片高度 |
+| noteContent | String | 笔记内容（笔记类型） |
+| noteFormat | String | 笔记格式 |
+| description | String | 内容描述 |
+| sortOrder | Integer | 排序权重 |
+| isDeleted | Byte | 删除标志（0-未删除，1-已删除） |
+| createTime | LocalDateTime | 创建时间 |
+| updateTime | LocalDateTime | 更新时间 |
+
+### 优势
+
+1. **结构清晰**: 内容信息集中在 contentDTO 中，更符合面向对象设计
+2. **扩展性强**: 后续添加内容字段无需修改 BrowseHistoryDTO
+3. **信息完整**: 提供完整的内容信息，减少额外的查询请求
+4. **已删除内容处理**: 即使内容被删除，仍保留基本信息供查看
+5. **向下兼容**: 保留 contentId 字段，方便直接引用
+
+### 注意事项
+
+**关于其他 Service 方法**:
+- `page()` 方法：✅ 返回完整的 contentDTO
+- `recordBrowse()` 方法：contentDTO 为 null（仅记录浏览行为，不返回内容详情）
+- `getById()` 方法：contentDTO 为 null（如需完整信息，请使用 page 方法）
+
+如需在其他方法中返回 contentDTO，需要在 Mapper 中添加对应的关联查询方法。
+
+### 状态
+✅ 已完成并编译成功
+
+---

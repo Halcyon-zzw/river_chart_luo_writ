@@ -33,6 +33,14 @@
 1. Token请求头Key: Authorization，格式：Bearer <token>
 2. 拦截路径: 拦截所有路径，排除 /auth/**、/verification-code/**、/swagger-ui/**
 3. Token验证失败: 设置userId为-1（允许部分接口支持匿名访问）
+   
+-----------分界线，上述需求已经处理，请忽略------------------
+1. 浏览历史分页接口响应调整，删除其他内容相关字段，新增contentDTO字段，记录内容信息。优化接口。
+
+-----------分界线，上述需求已经处理，请忽略------------------
+检查项目，为什么分页查询结果中total返回的0。如
+- IPage<BrowseHistoryDTO> resultPage = browseHistoryMapper.selectPageWithContentTitle(page, pageReq);
+- Page<MainCategory> page = mainCategoryDao.page(mainCategoryPageReq.convertToPage(), queryWrapper);
 
 
 # 说明
