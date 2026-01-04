@@ -488,3 +488,141 @@ ORDER BY bh.last_browse_time DESC
 ✅ 已完成并编译成功
 
 ---
+
+## 2025-12-31: 修复分页查询total返回0的问题
+
+### 需求概述
+修复项目中所有分页查询的 total 字段返回 0 的问题，影响范围包括自定义Mapper方法和MyBatis Plus BaseMapper的分页查询。
+
+### 问题分析
+
+#### 问题现象
+所有分页查询的返回结果中，`total`（总记录数）字段始终为 0，导致前端无法正确显示分页信息。
+
+**受影响的查询**:
+1. `BrowseHistoryMapper.selectPageWithContentTitle()` - 浏览历史分页查询
+2. `MainCategoryDao.page()` - 主分类分页查询
+3. 其他所有使用 MyBatis Plus 分页的查询
+
+#### 根本原因
+`MybatisPlusConfig` 中**缺少分页插件配置**。MyBatis Plus 的分页功能依赖 `PaginationInnerInterceptor` 拦截器：
+- 拦截器会自动执行 COUNT 查询获取总记录数
+- 拦截器会自动执行分页查询获取当前页数据
+- 没有拦截器，Page 对象的 total 字段默认为 0
+
+**原配置**（仅有乐观锁插件）:
+```java
+@Bean
+public MybatisPlusInterceptor mybatisPlusInterceptor() {
+    MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+    interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
+    return interceptor;
+}
+```
+
+### 解决方案
+
+#### 添加分页插件配置
+
+在 `MybatisPlusConfig` 中添加 `PaginationInnerInterceptor` 分页拦截器。
+
+**修改后的完整配置**:
+```java
+@Bean
+public MybatisPlusInterceptor mybatisPlusInterceptor() {
+    MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+
+    // 1. 添加分页插件（必须在最前面）
+    PaginationInnerInterceptor paginationInterceptor = new PaginationInnerInterceptor(DbType.MYSQL);
+    // 设置请求的页面大于最大页后的操作，true返回首页，false继续请求
+    paginationInterceptor.setOverflow(false);
+    // 单页分页条数限制，默认无限制
+    paginationInterceptor.setMaxLimit(1000L);
+    interceptor.addInnerInterceptor(paginationInterceptor);
+
+    // 2. 添加乐观锁插件
+    interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
+
+    return interceptor;
+}
+```
+
+### 技术实现
+
+**修改文件**:
+- `MybatisPlusConfig.java` - 添加分页插件配置
+
+**关键配置说明**:
+1. **DbType.MYSQL**: 指定数据库类型为 MySQL，确保生成正确的分页SQL
+2. **setOverflow(false)**: 当请求页码超过最大页时，继续请求（不返回首页）
+3. **setMaxLimit(1000L)**: 限制单页最大查询 1000 条数据，防止大量数据查询
+4. **插件顺序**: 分页插件必须添加在最前面，确保优先执行
+
+### 分页插件工作原理
+
+1. **拦截分页查询**: 当检测到方法参数中有 `IPage` 对象时，自动拦截
+2. **执行 COUNT 查询**:
+   ```sql
+   SELECT COUNT(*) FROM (原始SQL) AS total
+   ```
+3. **执行分页查询**:
+   ```sql
+   原始SQL LIMIT #{offset}, #{pageSize}
+   ```
+4. **封装结果**: 将 count 结果设置到 Page 对象的 total 字段
+
+### 验证方法
+
+**测试分页查询**:
+```java
+// 1. 浏览历史分页查询
+Page<BrowseHistoryDTO> page = new Page<>(1, 10);
+IPage<BrowseHistoryDTO> result = browseHistoryMapper.selectPageWithContentTitle(page, req);
+System.out.println("Total: " + result.getTotal()); // 应该返回正确的总数
+
+// 2. 主分类分页查询
+Page<MainCategory> page = new Page<>(1, 10);
+Page<MainCategory> result = mainCategoryDao.page(page, queryWrapper);
+System.out.println("Total: " + result.getTotal()); // 应该返回正确的总数
+```
+
+### 影响范围
+
+**修复后的功能**:
+- ✅ 浏览历史分页查询
+- ✅ 主分类分页查询
+- ✅ 子分类分页查询
+- ✅ 内容分页查询
+- ✅ 收藏分页查询
+- ✅ 所有其他使用 MyBatis Plus 分页的查询
+
+### 注意事项
+
+1. **插件顺序很重要**: 分页插件必须在其他插件之前添加
+2. **数据库类型**: 确保 `DbType` 与实际数据库一致（MySQL、Oracle、PostgreSQL等）
+3. **性能考虑**:
+   - COUNT 查询会增加一次数据库查询
+   - 对于大数据量表，COUNT 查询可能较慢
+   - 可以考虑使用 `setOptimizeCountSql(true)` 优化 COUNT SQL
+4. **自定义 Mapper**: 分页插件对自定义 XML 的分页查询同样有效
+
+### 扩展配置（可选）
+
+**优化 COUNT 查询性能**:
+```java
+PaginationInnerInterceptor paginationInterceptor = new PaginationInnerInterceptor(DbType.MYSQL);
+// 优化COUNT SQL，自动去除 ORDER BY 等不必要的语句
+paginationInterceptor.setOptimizeJoin(true);
+```
+
+**禁用某些查询的 COUNT**:
+```java
+// 在查询时设置不执行 count
+page.setOptimizeCountSql(false); // 优化count查询
+page.setSearchCount(false);      // 完全不执行count
+```
+
+### 状态
+✅ 已完成并编译成功
+
+---
