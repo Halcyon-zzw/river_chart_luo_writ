@@ -5,7 +5,7 @@ CREATE TABLE browse_history (
     content_type VARCHAR(20) COMMENT '内容类型(image:图片, note:笔记)',
     user_id BIGINT COMMENT '用户ID（可为空，支持匿名浏览）',
     browse_count INT NOT NULL DEFAULT 1 COMMENT '浏览次数',
-    last_browse_time DATETIME NOT NULL COMMENT '最后浏览时间',
+    last_browse_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后浏览时间',
     create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     is_deleted TINYINT NOT NULL DEFAULT 0 COMMENT '删除标志：0-未删除，1-已删除',

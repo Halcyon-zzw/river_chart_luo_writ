@@ -23,7 +23,7 @@ public interface BrowseHistoryService {
      * @param userId 用户ID（可为空）
      * @return 浏览历史DTO
      */
-    BrowseHistoryDTO recordBrowse(Long contentId, Long userId);
+    Boolean recordBrowse(Long contentId, Long userId);
 
     /**
      * 根据ID获取浏览历史

@@ -37,9 +37,9 @@ public class BrowseHistoryController {
      */
     @PostMapping("/create")
     @Operation(summary = "记录浏览", description = "记录用户浏览内容，如果已存在则更新浏览次数和时间")
-    public Result<BrowseHistoryDTO> recordBrowse(@RequestBody @Validated RecordBrowseReq req) {
-        BrowseHistoryDTO result = browseHistoryService.recordBrowse(req.getContentId(), req.getUserId());
-        return Result.success("记录成功", result);
+    public Result<Boolean> recordBrowse(@RequestBody @Validated RecordBrowseReq req) {
+        browseHistoryService.recordBrowse(req.getContentId(), req.getUserId());
+        return Result.success("记录成功", true);
     }
 
     /**

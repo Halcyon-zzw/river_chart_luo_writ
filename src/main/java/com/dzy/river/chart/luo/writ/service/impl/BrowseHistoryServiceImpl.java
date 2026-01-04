@@ -17,7 +17,9 @@ import com.dzy.river.chart.luo.writ.domain.req.ClearReq;
 import com.dzy.river.chart.luo.writ.mapper.BrowseHistoryMapper;
 import com.dzy.river.chart.luo.writ.service.BrowseHistoryService;
 import com.dzy.river.chart.luo.writ.util.UserUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +35,7 @@ import java.util.stream.Collectors;
  * @author zhuzhiwei
  * @since 2025-12-26
  */
+@Slf4j
 @Service
 public class BrowseHistoryServiceImpl implements BrowseHistoryService {
 
@@ -50,7 +53,7 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public BrowseHistoryDTO recordBrowse(Long contentId, Long userId) {
+    public Boolean recordBrowse(Long contentId, Long userId) {
         // 1. 查询内容的类型
         Content content = contentDao.getById(contentId);
         String contentType = (content != null) ? content.getContentType() : null;
@@ -59,32 +62,50 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
         BrowseHistory existingRecord = browseHistoryDao.getBaseMapper()
                 .selectByContentIdAndUserId(contentId, userId);
 
-        if (existingRecord != null) {
-            // 3. 如果记录已存在
-            if (existingRecord.getIsDeleted() == 1) {
-                // 3.1 如果记录已被逻辑删除，则恢复并重置计数
-                existingRecord.setIsDeleted((byte) 0);
-                existingRecord.setBrowseCount(1);
-            } else {
-                // 3.2 如果记录未删除，则增加浏览次数
-                existingRecord.setBrowseCount(existingRecord.getBrowseCount() + 1);
+        if (existingRecord == null) {
+            // 3. 如果记录不存在，尝试插入新记录
+            try {
+                BrowseHistory newRecord = new BrowseHistory();
+                newRecord.setContentId(contentId);
+                newRecord.setContentType(contentType);
+                newRecord.setUserId(userId);
+                newRecord.setBrowseCount(1);
+                newRecord.setLastBrowseTime(LocalDateTime.now());
+                browseHistoryDao.save(newRecord);
+                return true;
+            } catch (DuplicateKeyException e) {
+                // 4. 插入失败（唯一约束冲突），说明存在已删除的记录，重新查询并更新
+                log.warn("Insert browse history failed due to duplicate key, retry with update. contentId={}, userId={}", contentId, userId);
+                existingRecord = browseHistoryDao.getBaseMapper()
+                        .selectByContentIdAndUserId(contentId, userId);
+                if (existingRecord == null) {
+                    log.error("Failed to find existing browse history record after duplicate key exception. contentId={}, userId={}", contentId, userId);
+                    throw new RuntimeException("记录浏览历史失败");
+                }
             }
-            // 更新最后浏览时间和内容类型（内容类型可能改变）
-            existingRecord.setLastBrowseTime(LocalDateTime.now());
-            existingRecord.setContentType(contentType);
-            browseHistoryDao.updateById(existingRecord);
-            return browseHistoryConvert.toBrowseHistoryDTO(existingRecord);
-        } else {
-            // 4. 如果记录不存在，则插入新记录
-            BrowseHistory newRecord = new BrowseHistory();
-            newRecord.setContentId(contentId);
-            newRecord.setContentType(contentType);
-            newRecord.setUserId(userId);
-            newRecord.setBrowseCount(1);
-            newRecord.setLastBrowseTime(LocalDateTime.now());
-            browseHistoryDao.save(newRecord);
-            return browseHistoryConvert.toBrowseHistoryDTO(newRecord);
         }
+
+        // 5. 如果记录已存在，使用 UpdateWrapper 更新（绕过 @TableLogic 限制）
+        LambdaUpdateWrapper<BrowseHistory> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(BrowseHistory::getId, existingRecord.getId());
+
+        // 更新最后浏览时间和内容类型
+        updateWrapper.set(BrowseHistory::getLastBrowseTime, LocalDateTime.now());
+        updateWrapper.set(BrowseHistory::getContentType, contentType);
+
+        if (existingRecord.getIsDeleted() == 1) {
+            // 5.1 如果记录已被逻辑删除，则恢复并重置计数
+            updateWrapper.set(BrowseHistory::getIsDeleted, 0);
+            updateWrapper.set(BrowseHistory::getBrowseCount, 1);
+        } else {
+            // 5.2 如果记录未删除，则增加浏览次数
+            int newCount = existingRecord.getBrowseCount() + 1;
+            updateWrapper.set(BrowseHistory::getBrowseCount, newCount);
+        }
+
+        // 执行更新
+        browseHistoryDao.update(null, updateWrapper);
+        return true;
     }
 
     @Override

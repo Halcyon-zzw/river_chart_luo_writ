@@ -91,7 +91,6 @@ public class OperationLog implements Serializable {
      * 删除标志：0-未删除，1-已删除
      */
     @TableField("is_deleted")
-    @TableLogic
     private Byte isDeleted;
 
     /**
