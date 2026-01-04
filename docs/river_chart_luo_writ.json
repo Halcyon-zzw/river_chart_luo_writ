@@ -4253,14 +4253,16 @@
         "summary" : "清空浏览历史",
         "description" : "清空当前用户的所有浏览历史记录，可选按类型过滤",
         "operationId" : "clearBrowseHistory",
-        "parameters" : [ {
-          "name" : "contentType",
-          "in" : "query",
-          "required" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ClearReq"
+              }
+            }
+          },
+          "required" : true
+        },
         "responses" : {
           "500" : {
             "description" : "Internal Server Error",
@@ -6223,6 +6225,15 @@
           }
         },
         "description" : "统一响应结果"
+      },
+      "ClearReq" : {
+        "type" : "object",
+        "properties" : {
+          "contentType" : {
+            "type" : "string",
+            "description" : "内容类型"
+          }
+        }
       }
     }
   }

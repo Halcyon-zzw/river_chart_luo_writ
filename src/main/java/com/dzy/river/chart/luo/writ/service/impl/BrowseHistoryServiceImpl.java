@@ -13,8 +13,10 @@ import com.dzy.river.chart.luo.writ.domain.dto.BrowseHistoryDTO;
 import com.dzy.river.chart.luo.writ.domain.entity.BrowseHistory;
 import com.dzy.river.chart.luo.writ.domain.entity.Content;
 import com.dzy.river.chart.luo.writ.domain.req.BrowseHistoryPageReq;
+import com.dzy.river.chart.luo.writ.domain.req.ClearReq;
 import com.dzy.river.chart.luo.writ.mapper.BrowseHistoryMapper;
 import com.dzy.river.chart.luo.writ.service.BrowseHistoryService;
+import com.dzy.river.chart.luo.writ.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -121,7 +123,7 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Integer clearByUserId(Long userId, String contentType) {
+    public Integer clearByUserId(ClearReq clearReq) {
         // 构建更新条件：使用 LambdaUpdateWrapper 同时指定 SET 和 WHERE 子句
         LambdaUpdateWrapper<BrowseHistory> updateWrapper = new LambdaUpdateWrapper<>();
 
@@ -129,9 +131,11 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
         updateWrapper.set(BrowseHistory::getIsDeleted, 1);
 
         // WHERE 子句：根据 userId 和未删除状态过滤
+        Long userId = UserUtil.getUserId();
         updateWrapper.eq(BrowseHistory::getUserId, userId);
         updateWrapper.eq(BrowseHistory::getIsDeleted, 0);
 
+        String contentType = clearReq.getContentType();
         // 如果指定了内容类型，则添加类型过滤条件
         if (contentType != null && !contentType.trim().isEmpty()) {
             updateWrapper.eq(BrowseHistory::getContentType, contentType);

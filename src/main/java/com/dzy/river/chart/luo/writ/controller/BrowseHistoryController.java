@@ -4,6 +4,7 @@ import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.common.Result;
 import com.dzy.river.chart.luo.writ.domain.dto.BrowseHistoryDTO;
 import com.dzy.river.chart.luo.writ.domain.req.BrowseHistoryPageReq;
+import com.dzy.river.chart.luo.writ.domain.req.ClearReq;
 import com.dzy.river.chart.luo.writ.domain.req.RecordBrowseReq;
 import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.BrowseHistoryService;
@@ -96,13 +97,12 @@ public class BrowseHistoryController {
      */
     @DeleteMapping("/clear")
     @Operation(summary = "清空浏览历史", description = "清空当前用户的所有浏览历史记录，可选按类型过滤")
-    public Result<Integer> clearBrowseHistory(
-            @RequestParam(required = false) String contentType) {
+    public Result<Integer> clearBrowseHistory(@RequestBody @Validated ClearReq clearReq) {
         // 从 ThreadLocal 中获取当前用户ID
         Long userId = UserUtil.getUserId();
 
         // 清空该用户的所有浏览历史（可按类型过滤）
-        Integer count = browseHistoryService.clearByUserId(userId, contentType);
+        Integer count = browseHistoryService.clearByUserId(clearReq);
 
         return Result.success("已清空 " + count + " 条浏览历史", count);
     }

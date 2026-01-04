@@ -22,7 +22,7 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
 
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String USER_ID_HEADER = "x-user-id";
-    private static final Long DEFAULT_USER_ID = -1L;
+    private static final Long DEFAULT_USER_ID = 1L;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -34,7 +34,7 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String requestURI = request.getRequestURI();
-        log.info("JWT拦截器执行 - 请求路径: {} {}", request.getMethod(), requestURI);
+        log.debug("JWT拦截器执行 - 请求路径: {} {}", request.getMethod(), requestURI);
 
         // 1. 获取Authorization请求头
         String authorizationHeader = request.getHeader(AUTHORIZATION_HEADER);
@@ -68,7 +68,7 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
         // 5. 设置用户ID到请求头（兼容旧代码）
         request.setAttribute(USER_ID_HEADER, userId);
 
-        log.info("JWT拦截器完成 - userId已设置为: {}", userId);
+        log.debug("JWT拦截器完成 - userId已设置为: {}", userId);
 
         // 继续执行后续处理器
         return true;
@@ -82,6 +82,6 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         // 清理ThreadLocal
         UserContext.clear();
-        log.info("JWT拦截器清理 - ThreadLocal已清理，请求路径: {}", request.getRequestURI());
+        log.debug("JWT拦截器清理 - ThreadLocal已清理，请求路径: {}", request.getRequestURI());
     }
 }

@@ -3,6 +3,7 @@ package com.dzy.river.chart.luo.writ.service;
 import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.BrowseHistoryDTO;
 import com.dzy.river.chart.luo.writ.domain.req.BrowseHistoryPageReq;
+import com.dzy.river.chart.luo.writ.domain.req.ClearReq;
 
 /**
  * <p>
@@ -63,5 +64,5 @@ public interface BrowseHistoryService {
      * @param contentType 内容类型（可选，为空则清空所有类型）
      * @return 清空的记录数
      */
-    Integer clearByUserId(Long userId, String contentType);
+    Integer clearByUserId(ClearReq clearReq);
 }
