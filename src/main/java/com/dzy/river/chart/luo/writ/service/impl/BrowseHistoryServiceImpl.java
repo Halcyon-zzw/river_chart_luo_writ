@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.dao.BrowseHistoryDao;
+import com.dzy.river.chart.luo.writ.dao.ContentDao;
 import com.dzy.river.chart.luo.writ.domain.convert.BrowseHistoryConvert;
 import com.dzy.river.chart.luo.writ.domain.dto.BrowseHistoryDTO;
 import com.dzy.river.chart.luo.writ.domain.entity.BrowseHistory;
+import com.dzy.river.chart.luo.writ.domain.entity.Content;
 import com.dzy.river.chart.luo.writ.domain.req.BrowseHistoryPageReq;
 import com.dzy.river.chart.luo.writ.mapper.BrowseHistoryMapper;
 import com.dzy.river.chart.luo.writ.service.BrowseHistoryService;
@@ -39,31 +41,40 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
     @Autowired
     private BrowseHistoryConvert browseHistoryConvert;
 
+    @Autowired
+    private ContentDao contentDao;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public BrowseHistoryDTO recordBrowse(Long contentId, Long userId) {
-        // 1. 查询是否已存在浏览记录（包括已删除的记录）
+        // 1. 查询内容的类型
+        Content content = contentDao.getById(contentId);
+        String contentType = (content != null) ? content.getContentType() : null;
+
+        // 2. 查询是否已存在浏览记录（包括已删除的记录）
         BrowseHistory existingRecord = browseHistoryDao.getBaseMapper()
                 .selectByContentIdAndUserId(contentId, userId);
 
         if (existingRecord != null) {
-            // 2. 如果记录已存在
+            // 3. 如果记录已存在
             if (existingRecord.getIsDeleted() == 1) {
-                // 2.1 如果记录已被逻辑删除，则恢复并重置计数
+                // 3.1 如果记录已被逻辑删除，则恢复并重置计数
                 existingRecord.setIsDeleted((byte) 0);
                 existingRecord.setBrowseCount(1);
             } else {
-                // 2.2 如果记录未删除，则增加浏览次数
+                // 3.2 如果记录未删除，则增加浏览次数
                 existingRecord.setBrowseCount(existingRecord.getBrowseCount() + 1);
             }
-            // 更新最后浏览时间
+            // 更新最后浏览时间和内容类型（内容类型可能改变）
             existingRecord.setLastBrowseTime(LocalDateTime.now());
+            existingRecord.setContentType(contentType);
             browseHistoryDao.updateById(existingRecord);
             return browseHistoryConvert.toBrowseHistoryDTO(existingRecord);
         } else {
-            // 3. 如果记录不存在，则插入新记录
+            // 4. 如果记录不存在，则插入新记录
             BrowseHistory newRecord = new BrowseHistory();
             newRecord.setContentId(contentId);
+            newRecord.setContentType(contentType);
             newRecord.setUserId(userId);
             newRecord.setBrowseCount(1);
             newRecord.setLastBrowseTime(LocalDateTime.now());
@@ -108,11 +119,16 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Integer clearByUserId(Long userId) {
+    public Integer clearByUserId(Long userId, String contentType) {
         // 构建查询条件：根据 userId 查询未删除的浏览历史
         LambdaQueryWrapper<BrowseHistory> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(BrowseHistory::getUserId, userId);
         queryWrapper.eq(BrowseHistory::getIsDeleted, 0);
+
+        // 如果指定了内容类型，则添加类型过滤条件
+        if (contentType != null && !contentType.trim().isEmpty()) {
+            queryWrapper.eq(BrowseHistory::getContentType, contentType);
+        }
 
         // 查询符合条件的记录数
         long count = browseHistoryDao.count(queryWrapper);

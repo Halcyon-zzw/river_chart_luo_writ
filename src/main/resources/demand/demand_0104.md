@@ -1,4 +1,14 @@
 浏览历史新增清空接口， 删除当前用户所有浏览历史，userId从UserUtil中获取
+-----------分界线，上述需求已经处理，请忽略------------------
+清空浏览历史接口新增内容类型字段。通过类型清空
+不需要 LEFT JOIN content 表来过滤内容类型，brow se_history 表中新增contentType字段。
+
+问题确认：
+1. 对于历史数据（已存在但没有 content_type 的记录），是否需要数据迁移？
+不处理。
+2. 是否需要更新 BrowseHistoryDTO，让分页查询也返回 contentType？
+需要
+
 
 # 说明
 1. 已完成的需求追加到demand_tree_completed.md中，不需要修改本文件.

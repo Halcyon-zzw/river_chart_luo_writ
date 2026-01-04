@@ -28,6 +28,9 @@ public class BrowseHistoryDTO implements Serializable {
     @Schema(description = "内容ID", example = "1")
     private Long contentId;
 
+    @Schema(description = "内容类型（image:图片, note:笔记）", example = "image")
+    private String contentType;
+
     @Schema(description = "内容详情（包含完整内容信息，已删除的内容也会返回基本信息）")
     private ContentDTO contentDTO;
 

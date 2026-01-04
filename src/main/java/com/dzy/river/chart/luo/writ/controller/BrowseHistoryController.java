@@ -95,13 +95,14 @@ public class BrowseHistoryController {
      * 清空当前用户的浏览历史
      */
     @DeleteMapping("/clear")
-    @Operation(summary = "清空浏览历史", description = "清空当前用户的所有浏览历史记录")
-    public Result<Integer> clearBrowseHistory() {
+    @Operation(summary = "清空浏览历史", description = "清空当前用户的所有浏览历史记录，可选按类型过滤")
+    public Result<Integer> clearBrowseHistory(
+            @RequestParam(required = false) String contentType) {
         // 从 ThreadLocal 中获取当前用户ID
         Long userId = UserUtil.getUserId();
 
-        // 清空该用户的所有浏览历史
-        Integer count = browseHistoryService.clearByUserId(userId);
+        // 清空该用户的所有浏览历史（可按类型过滤）
+        Integer count = browseHistoryService.clearByUserId(userId, contentType);
 
         return Result.success("已清空 " + count + " 条浏览历史", count);
     }

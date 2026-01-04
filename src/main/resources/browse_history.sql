@@ -2,6 +2,7 @@
 CREATE TABLE browse_history (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '主键ID',
     content_id BIGINT NOT NULL COMMENT '内容ID',
+    content_type VARCHAR(20) COMMENT '内容类型(image:图片, note:笔记)',
     user_id BIGINT COMMENT '用户ID（可为空，支持匿名浏览）',
     browse_count INT NOT NULL DEFAULT 1 COMMENT '浏览次数',
     last_browse_time DATETIME NOT NULL COMMENT '最后浏览时间',

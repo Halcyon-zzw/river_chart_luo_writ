@@ -60,7 +60,8 @@ public interface BrowseHistoryService {
      * 清空指定用户的所有浏览历史
      *
      * @param userId 用户ID
+     * @param contentType 内容类型（可选，为空则清空所有类型）
      * @return 清空的记录数
      */
-    Integer clearByUserId(Long userId);
+    Integer clearByUserId(Long userId, String contentType);
 }

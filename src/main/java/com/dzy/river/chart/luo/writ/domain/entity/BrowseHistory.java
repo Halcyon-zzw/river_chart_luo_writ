@@ -37,6 +37,11 @@ public class BrowseHistory implements Serializable {
     private Long contentId;
 
     /**
+     * 内容类型(image:图片, note:笔记)
+     */
+    private String contentType;
+
+    /**
      * 用户ID（可为空，支持匿名浏览）
      */
     private Long userId;
