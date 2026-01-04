@@ -2186,14 +2186,14 @@
     "/user/login" : {
       "post" : {
         "tags" : [ "用户表管理" ],
-        "summary" : "更新用户表",
-        "description" : "根据ID更新用户表信息",
+        "summary" : "用户登录",
+        "description" : "支持用户名密码登录和微信登录，返回访问令牌和刷新令牌",
         "operationId" : "login",
         "requestBody" : {
           "content" : {
             "application/json" : {
               "schema" : {
-                "type" : "object"
+                "$ref" : "#/components/schemas/LoginReq"
               }
             }
           },
@@ -4368,7 +4368,11 @@
           },
           "token" : {
             "type" : "string",
-            "description" : "令牌"
+            "description" : "访问令牌"
+          },
+          "refreshToken" : {
+            "type" : "string",
+            "description" : "刷新令牌"
           },
           "username" : {
             "maxLength" : 64,
@@ -5282,6 +5286,27 @@
           }
         },
         "description" : "统一响应结果"
+      },
+      "LoginReq" : {
+        "type" : "object",
+        "properties" : {
+          "username" : {
+            "type" : "string",
+            "description" : "用户名（用户名密码登录时必填）",
+            "example" : "zhangsan"
+          },
+          "password" : {
+            "type" : "string",
+            "description" : "密码（用户名密码登录时必填）",
+            "example" : "123456"
+          },
+          "openid" : {
+            "type" : "string",
+            "description" : "微信openid（微信登录时必填）",
+            "example" : "wx_openid_123"
+          }
+        },
+        "description" : "登录请求"
       },
       "CollectionPageReq" : {
         "required" : [ "contentType", "userId" ],
