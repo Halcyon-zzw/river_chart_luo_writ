@@ -20,7 +20,8 @@ spring:
 
 logging:
   level:
-    com.example: DEBUG
+    com.dzy.river.chart.luo.writ: DEBUG
+    com.dzy.river.chart.luo.writ.interceptor: INFO  # 拦截器日志设置为INFO级别，便于查看
 
 # SpringDoc OpenAPI 配置 (适用于 SpringDoc 2.x + Spring Boot 3)
 springdoc:

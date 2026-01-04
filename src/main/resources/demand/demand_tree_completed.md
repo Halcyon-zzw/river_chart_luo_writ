@@ -626,3 +626,143 @@ page.setSearchCount(false);      // 完全不执行count
 ✅ 已完成并编译成功
 
 ---
+
+## 2026-01-04: 修复JWT拦截器不执行的问题
+
+### 需求概述
+修复 JwtAuthenticationInterceptor 拦截器无法执行的问题，导致用户无法看到拦截器的执行日志。
+
+### 问题分析
+
+#### 问题现象
+虽然 JWT 拦截器已正确配置并注册到 WebMvcConfig 中，但运行时看不到任何拦截器的日志输出，导致用户误以为拦截器没有执行。
+
+#### 根本原因
+**日志配置错误**：`application.yml` 中的日志配置为 `com.example: DEBUG`，但项目的包名是 `com.dzy.river.chart.luo.writ`，导致拦截器的日志无法输出。
+
+**原日志配置**:
+```yaml
+logging:
+  level:
+    com.example: DEBUG  # 错误：包名不匹配
+```
+
+**拦截器日志级别**: 拦截器的所有日志都使用 `log.debug()`，在没有正确配置包路径的情况下，这些日志不会输出。
+
+### 解决方案
+
+#### 1. 修复日志配置
+
+**修改 application.yml**:
+```yaml
+logging:
+  level:
+    com.dzy.river.chart.luo.writ: DEBUG
+    com.dzy.river.chart.luo.writ.interceptor: INFO  # 拦截器日志设置为INFO级别
+```
+
+#### 2. 提升拦截器日志级别
+
+将拦截器中的关键日志从 `DEBUG` 级别提升为 `INFO` 级别，确保在默认配置下也能看到拦截器的执行情况。
+
+**修改前**（使用 DEBUG）:
+```java
+log.debug("Processing request: {} {}", request.getMethod(), requestURI);
+log.debug("User authenticated successfully, userId: {}", userId);
+log.debug("ThreadLocal cleaned up for request: {}", request.getRequestURI());
+```
+
+**修改后**（使用 INFO）:
+```java
+log.info("JWT拦截器执行 - 请求路径: {} {}", request.getMethod(), requestURI);
+log.info("JWT认证成功 - userId: {}", userId);
+log.info("JWT拦截器清理 - ThreadLocal已清理，请求路径: {}", request.getRequestURI());
+```
+
+### 技术实现
+
+**修改文件**:
+- `application.yml` - 修复日志包路径配置
+- `JwtAuthenticationInterceptor.java` - 提升关键日志级别为 INFO
+
+**日志输出示例**:
+```
+INFO  [http-nio-8080-exec-1] c.d.r.c.l.w.i.JwtAuthenticationInterceptor : JWT拦截器执行 - 请求路径: GET /api/browse-history/page
+INFO  [http-nio-8080-exec-1] c.d.r.c.l.w.i.JwtAuthenticationInterceptor : 未找到Authorization请求头，使用默认userId: -1 (匿名访问)
+INFO  [http-nio-8080-exec-1] c.d.r.c.l.w.i.JwtAuthenticationInterceptor : JWT拦截器完成 - userId已设置为: -1
+INFO  [http-nio-8080-exec-1] c.d.r.c.l.w.i.JwtAuthenticationInterceptor : JWT拦截器清理 - ThreadLocal已清理，请求路径: /api/browse-history/page
+```
+
+**带Token的请求日志**:
+```
+INFO  [http-nio-8080-exec-2] c.d.r.c.l.w.i.JwtAuthenticationInterceptor : JWT拦截器执行 - 请求路径: GET /api/user/profile
+INFO  [http-nio-8080-exec-2] c.d.r.c.l.w.i.JwtAuthenticationInterceptor : JWT认证成功 - userId: 123
+INFO  [http-nio-8080-exec-2] c.d.r.c.l.w.i.JwtAuthenticationInterceptor : JWT拦截器完成 - userId已设置为: 123
+INFO  [http-nio-8080-exec-2] c.d.r.c.l.w.i.JwtAuthenticationInterceptor : JWT拦截器清理 - ThreadLocal已清理，请求路径: /api/user/profile
+```
+
+### 验证方法
+
+1. **启动应用**:
+   ```bash
+   ./mvnw spring-boot:run
+   ```
+
+2. **访问任意接口**（不带Token）:
+   ```bash
+   curl http://localhost:8080/api/browse-history/page
+   ```
+   应该看到日志：`未找到Authorization请求头，使用默认userId: -1 (匿名访问)`
+
+3. **访问接口**（带Token）:
+   ```bash
+   curl -H "Authorization: Bearer <token>" http://localhost:8080/api/user/profile
+   ```
+   应该看到日志：`JWT认证成功 - userId: <用户ID>`
+
+### 拦截器执行流程
+
+```
+请求到达
+  ↓
+JwtAuthenticationInterceptor.preHandle()
+  ├─ 日志：JWT拦截器执行 - 请求路径: ...
+  ├─ 解析 Authorization 头
+  ├─ 提取 JWT Token
+  ├─ 验证 Token 并提取 userId
+  ├─ 存储到 ThreadLocal
+  ├─ 日志：JWT拦截器完成 - userId已设置为: ...
+  └─ 返回 true（继续执行）
+  ↓
+Controller 处理请求
+  ├─ 可以通过 UserUtil.getUserId() 获取 userId
+  └─ 业务逻辑执行
+  ↓
+JwtAuthenticationInterceptor.afterCompletion()
+  ├─ 清理 ThreadLocal
+  ├─ 日志：JWT拦截器清理 - ThreadLocal已清理，请求路径: ...
+  └─ 请求完成
+```
+
+### 注意事项
+
+1. **日志级别建议**:
+   - 开发环境：使用 INFO 级别，便于调试
+   - 生产环境：可调整为 WARN 级别，减少日志量
+
+2. **包路径配置**:
+   - 确保日志配置的包路径与实际项目包名一致
+   - 可以为不同的包设置不同的日志级别
+
+3. **拦截器顺序**:
+   - JWT 拦截器应该在业务拦截器之前执行
+   - 确保 UserContext 在业务逻辑中可用
+
+4. **排除路径**:
+   - 公开接口（`/auth/**`、`/swagger-ui/**` 等）已正确排除
+   - 这些接口不会执行拦截器
+
+### 状态
+✅ 已完成并编译成功
+
+---

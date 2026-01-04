@@ -7,6 +7,7 @@ import com.dzy.river.chart.luo.writ.domain.req.BrowseHistoryPageReq;
 import com.dzy.river.chart.luo.writ.domain.req.RecordBrowseReq;
 import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.BrowseHistoryService;
+import com.dzy.river.chart.luo.writ.util.UserUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,8 @@ public class BrowseHistoryController {
     @PostMapping("/page")
     @Operation(summary = "分页查询浏览历史", description = "分页查询浏览历史列表，支持按用户ID或内容ID过滤")
     public Result<PageResult<BrowseHistoryDTO>> page(@RequestBody @Validated BrowseHistoryPageReq pageReq) {
+        Long userId = UserUtil.getUserId();
+        pageReq.setUserId(userId);
         PageResult<BrowseHistoryDTO> pageResult = browseHistoryService.page(pageReq);
         return Result.success(pageResult);
     }

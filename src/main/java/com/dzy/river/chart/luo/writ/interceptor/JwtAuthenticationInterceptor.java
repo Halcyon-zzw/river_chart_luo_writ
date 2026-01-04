@@ -34,7 +34,7 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String requestURI = request.getRequestURI();
-        log.debug("Processing request: {} {}", request.getMethod(), requestURI);
+        log.info("JWT拦截器执行 - 请求路径: {} {}", request.getMethod(), requestURI);
 
         // 1. 获取Authorization请求头
         String authorizationHeader = request.getHeader(AUTHORIZATION_HEADER);
@@ -51,15 +51,15 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
 
                 if (extractedUserId != null) {
                     userId = extractedUserId;
-                    log.debug("User authenticated successfully, userId: {}", userId);
+                    log.info("JWT认证成功 - userId: {}", userId);
                 } else {
-                    log.warn("Failed to extract userId from JWT token, using default userId: {}", DEFAULT_USER_ID);
+                    log.warn("JWT令牌解析失败，无法提取userId，使用默认值: {}", DEFAULT_USER_ID);
                 }
             } else {
-                log.warn("Invalid Authorization header format, using default userId: {}", DEFAULT_USER_ID);
+                log.warn("Authorization请求头格式错误，使用默认userId: {}", DEFAULT_USER_ID);
             }
         } else {
-            log.debug("No Authorization header found, using default userId: {} (anonymous access)", DEFAULT_USER_ID);
+            log.info("未找到Authorization请求头，使用默认userId: {} (匿名访问)", DEFAULT_USER_ID);
         }
 
         // 4. 设置用户ID到ThreadLocal
@@ -68,7 +68,7 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
         // 5. 设置用户ID到请求头（兼容旧代码）
         request.setAttribute(USER_ID_HEADER, userId);
 
-        log.debug("Request processing completed, userId set to: {}", userId);
+        log.info("JWT拦截器完成 - userId已设置为: {}", userId);
 
         // 继续执行后续处理器
         return true;
@@ -82,6 +82,6 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         // 清理ThreadLocal
         UserContext.clear();
-        log.debug("ThreadLocal cleaned up for request: {}", request.getRequestURI());
+        log.info("JWT拦截器清理 - ThreadLocal已清理，请求路径: {}", request.getRequestURI());
     }
 }

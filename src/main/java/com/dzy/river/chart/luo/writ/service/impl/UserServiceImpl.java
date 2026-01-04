@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO login(Object obj) {
         UserDTO userDTO = new UserDTO();
-        userDTO.setUserId(1L);
+        userDTO.setUserId(-1L);
         userDTO.setToken("123456");
 
         return userDTO;
