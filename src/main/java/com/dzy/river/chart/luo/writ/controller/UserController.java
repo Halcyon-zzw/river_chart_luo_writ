@@ -1,6 +1,7 @@
 package com.dzy.river.chart.luo.writ.controller;
 
 import com.dzy.river.chart.luo.writ.domain.dto.UserDTO;
+import com.dzy.river.chart.luo.writ.domain.req.LoginReq;
 import com.dzy.river.chart.luo.writ.common.Result;
 import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.UserService;
@@ -80,13 +81,13 @@ public class UserController {
     }
 
     /**
-     * 根据ID更新用户表
+     * 用户登录
      */
     @PostMapping("/login")
-    @Operation(summary = "更新用户表", description = "根据ID更新用户表信息")
-    public Result<UserDTO> login(@RequestBody @Validated Object obj) {
-        UserDTO result = userService.login(obj);
-        return Result.success(result);
+    @Operation(summary = "用户登录", description = "支持用户名密码登录和微信登录，返回访问令牌和刷新令牌")
+    public Result<UserDTO> login(@RequestBody @Validated LoginReq loginReq) {
+        UserDTO result = userService.login(loginReq);
+        return Result.success("登录成功", result);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.dzy.river.chart.luo.writ.service;
 
 import com.dzy.river.chart.luo.writ.domain.dto.UserDTO;
+import com.dzy.river.chart.luo.writ.domain.req.LoginReq;
 
 /**
  * <p>
@@ -45,5 +46,11 @@ public interface UserService {
      */
     UserDTO updateById(Long id, UserDTO userDTO);
 
-    UserDTO login(Object obj);
+    /**
+     * 用户登录
+     *
+     * @param loginReq 登录请求参数
+     * @return 用户DTO（包含token和refreshToken）
+     */
+    UserDTO login(LoginReq loginReq);
 }
