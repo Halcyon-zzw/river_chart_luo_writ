@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -23,6 +24,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @TableName("user")
 @Schema(name = "User", description = "用户表")
+@Accessors(chain = true)
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,6 +1,8 @@
 package com.dzy.river.chart.luo.writ.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dzy.river.chart.luo.writ.common.PageResult;
@@ -120,24 +122,33 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer clearByUserId(Long userId, String contentType) {
-        // 构建查询条件：根据 userId 查询未删除的浏览历史
-        LambdaQueryWrapper<BrowseHistory> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(BrowseHistory::getUserId, userId);
-        queryWrapper.eq(BrowseHistory::getIsDeleted, 0);
+        // 构建更新条件：使用 LambdaUpdateWrapper 同时指定 SET 和 WHERE 子句
+        LambdaUpdateWrapper<BrowseHistory> updateWrapper = new LambdaUpdateWrapper<>();
+
+        // SET 子句：设置 is_deleted = 1
+        updateWrapper.set(BrowseHistory::getIsDeleted, 1);
+
+        // WHERE 子句：根据 userId 和未删除状态过滤
+        updateWrapper.eq(BrowseHistory::getUserId, userId);
+        updateWrapper.eq(BrowseHistory::getIsDeleted, 0);
 
         // 如果指定了内容类型，则添加类型过滤条件
         if (contentType != null && !contentType.trim().isEmpty()) {
-            queryWrapper.eq(BrowseHistory::getContentType, contentType);
+            updateWrapper.eq(BrowseHistory::getContentType, contentType);
         }
 
-        // 查询符合条件的记录数
+        // 先查询符合条件的记录数
+        LambdaQueryWrapper<BrowseHistory> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(BrowseHistory::getUserId, userId);
+        queryWrapper.eq(BrowseHistory::getIsDeleted, 0);
+        if (contentType != null && !contentType.trim().isEmpty()) {
+            queryWrapper.eq(BrowseHistory::getContentType, contentType);
+        }
         long count = browseHistoryDao.count(queryWrapper);
 
+        // 执行更新
         if (count > 0) {
-            // 逻辑删除：设置 is_deleted = 1
-            BrowseHistory updateEntity = new BrowseHistory();
-            updateEntity.setIsDeleted((byte) 1);
-            browseHistoryDao.update(updateEntity, queryWrapper);
+            browseHistoryDao.update(null, updateWrapper);
         }
 
         return (int) count;
