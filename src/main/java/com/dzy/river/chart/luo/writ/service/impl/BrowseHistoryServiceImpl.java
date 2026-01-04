@@ -105,4 +105,25 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
                 .mapToInt(BrowseHistory::getBrowseCount)
                 .sum();
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Integer clearByUserId(Long userId) {
+        // 构建查询条件：根据 userId 查询未删除的浏览历史
+        LambdaQueryWrapper<BrowseHistory> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(BrowseHistory::getUserId, userId);
+        queryWrapper.eq(BrowseHistory::getIsDeleted, 0);
+
+        // 查询符合条件的记录数
+        long count = browseHistoryDao.count(queryWrapper);
+
+        if (count > 0) {
+            // 逻辑删除：设置 is_deleted = 1
+            BrowseHistory updateEntity = new BrowseHistory();
+            updateEntity.setIsDeleted((byte) 1);
+            browseHistoryDao.update(updateEntity, queryWrapper);
+        }
+
+        return (int) count;
+    }
 }

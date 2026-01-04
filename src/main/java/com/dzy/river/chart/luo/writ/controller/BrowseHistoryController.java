@@ -90,4 +90,19 @@ public class BrowseHistoryController {
         Integer count = browseHistoryService.getContentBrowseCount(contentId);
         return Result.success(count);
     }
+
+    /**
+     * 清空当前用户的浏览历史
+     */
+    @DeleteMapping("/clear")
+    @Operation(summary = "清空浏览历史", description = "清空当前用户的所有浏览历史记录")
+    public Result<Integer> clearBrowseHistory() {
+        // 从 ThreadLocal 中获取当前用户ID
+        Long userId = UserUtil.getUserId();
+
+        // 清空该用户的所有浏览历史
+        Integer count = browseHistoryService.clearByUserId(userId);
+
+        return Result.success("已清空 " + count + " 条浏览历史", count);
+    }
 }

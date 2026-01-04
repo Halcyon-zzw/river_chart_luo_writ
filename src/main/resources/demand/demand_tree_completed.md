@@ -766,3 +766,186 @@ JwtAuthenticationInterceptor.afterCompletion()
 ✅ 已完成并编译成功
 
 ---
+
+## 2026-01-04: 浏览历史清空接口
+
+### 需求概述
+新增清空浏览历史接口，允许用户一键清空自己的所有浏览历史记录。用户ID从 UserUtil 中自动获取，无需前端传递。
+
+### 实现功能
+
+#### 1. Service 层方法
+- ✅ 在 `BrowseHistoryService` 接口中新增 `clearByUserId(Long userId)` 方法
+- ✅ 在 `BrowseHistoryServiceImpl` 中实现该方法
+- ✅ 使用逻辑删除（设置 `is_deleted = 1`）
+- ✅ 返回清空的记录数
+
+#### 2. Controller 层接口
+- ✅ 在 `BrowseHistoryController` 中新增 `DELETE /browse-history/clear` 接口
+- ✅ 从 `UserUtil.getUserId()` 获取当前用户ID
+- ✅ 调用 Service 层方法清空浏览历史
+- ✅ 返回清空的记录数
+
+#### 3. 用户身份识别
+- ✅ 使用 `UserUtil.getUserId()` 从 ThreadLocal 获取用户ID
+- ✅ 支持已登录用户（userId > 0）清空历史
+- ✅ 支持匿名用户（userId = -1）清空历史
+
+### 技术实现
+
+**新增方法**:
+
+**BrowseHistoryService.java**:
+```java
+/**
+ * 清空指定用户的所有浏览历史
+ *
+ * @param userId 用户ID
+ * @return 清空的记录数
+ */
+Integer clearByUserId(Long userId);
+```
+
+**BrowseHistoryServiceImpl.java**:
+```java
+@Override
+@Transactional(rollbackFor = Exception.class)
+public Integer clearByUserId(Long userId) {
+    // 构建查询条件：根据 userId 查询未删除的浏览历史
+    LambdaQueryWrapper<BrowseHistory> queryWrapper = new LambdaQueryWrapper<>();
+    queryWrapper.eq(BrowseHistory::getUserId, userId);
+    queryWrapper.eq(BrowseHistory::getIsDeleted, 0);
+
+    // 查询符合条件的记录数
+    long count = browseHistoryDao.count(queryWrapper);
+
+    if (count > 0) {
+        // 逻辑删除：设置 is_deleted = 1
+        BrowseHistory updateEntity = new BrowseHistory();
+        updateEntity.setIsDeleted((byte) 1);
+        browseHistoryDao.update(updateEntity, queryWrapper);
+    }
+
+    return (int) count;
+}
+```
+
+**BrowseHistoryController.java**:
+```java
+/**
+ * 清空当前用户的浏览历史
+ */
+@DeleteMapping("/clear")
+@Operation(summary = "清空浏览历史", description = "清空当前用户的所有浏览历史记录")
+public Result<Integer> clearBrowseHistory() {
+    // 从 ThreadLocal 中获取当前用户ID
+    Long userId = UserUtil.getUserId();
+
+    // 清空该用户的所有浏览历史
+    Integer count = browseHistoryService.clearByUserId(userId);
+
+    return Result.success("已清空 " + count + " 条浏览历史", count);
+}
+```
+
+### 接口说明
+
+**请求**:
+```http
+DELETE /browse-history/clear
+Authorization: Bearer <token>  # 可选，不传则清空匿名浏览历史
+```
+
+**响应**（成功）:
+```json
+{
+  "code": 200,
+  "message": "已清空 15 条浏览历史",
+  "data": 15
+}
+```
+
+**响应**（无记录）:
+```json
+{
+  "code": 200,
+  "message": "已清空 0 条浏览历史",
+  "data": 0
+}
+```
+
+### 业务逻辑
+
+1. **获取用户ID**: 从 `UserUtil.getUserId()` 获取当前用户ID
+2. **查询记录数**: 统计该用户未删除的浏览历史记录数
+3. **逻辑删除**: 将所有符合条件的记录设置 `is_deleted = 1`
+4. **返回结果**: 返回清空的记录数
+
+### 用户场景
+
+#### 已登录用户清空
+```bash
+# 请求（带 Token）
+curl -X DELETE http://localhost:8080/browse-history/clear \
+  -H "Authorization: Bearer eyJhbGc..."
+
+# 响应
+{
+  "code": 200,
+  "message": "已清空 15 条浏览历史",
+  "data": 15
+}
+```
+
+#### 匿名用户清空
+```bash
+# 请求（不带 Token）
+curl -X DELETE http://localhost:8080/browse-history/clear
+
+# 响应
+{
+  "code": 200,
+  "message": "已清空 5 条浏览历史",
+  "data": 5
+}
+```
+
+### 技术特性
+
+1. **逻辑删除**: 使用逻辑删除而非物理删除，保留数据可恢复性
+2. **事务管理**: 使用 `@Transactional` 确保数据一致性
+3. **性能优化**: 先统计记录数，有记录时才执行更新操作
+4. **用户隔离**: 只清空当前用户的浏览历史，不影响其他用户
+5. **无需传参**: 用户ID从 ThreadLocal 自动获取，前端无需传递
+
+### 数据库操作
+
+**SQL 示例**:
+```sql
+-- 统计记录数
+SELECT COUNT(*) FROM browse_history 
+WHERE user_id = ? AND is_deleted = 0;
+
+-- 逻辑删除
+UPDATE browse_history 
+SET is_deleted = 1 
+WHERE user_id = ? AND is_deleted = 0;
+```
+
+### 注意事项
+
+1. **不校验登录状态**: 允许匿名用户（userId = -1）清空浏览历史
+2. **幂等性**: 多次调用清空接口，第二次开始返回 0（已无记录可清空）
+3. **数据恢复**: 使用逻辑删除，可在数据库层面恢复误删数据
+4. **性能考虑**: 清空操作使用批量更新，性能良好
+
+### 修改文件
+
+- `BrowseHistoryService.java` - 新增 clearByUserId 接口方法
+- `BrowseHistoryServiceImpl.java` - 实现 clearByUserId 方法
+- `BrowseHistoryController.java` - 新增 DELETE /clear 接口
+
+### 状态
+✅ 已完成并编译成功
+
+---

@@ -55,4 +55,12 @@ public interface BrowseHistoryService {
      * @return 浏览总次数
      */
     Integer getContentBrowseCount(Long contentId);
+
+    /**
+     * 清空指定用户的所有浏览历史
+     *
+     * @param userId 用户ID
+     * @return 清空的记录数
+     */
+    Integer clearByUserId(Long userId);
 }
