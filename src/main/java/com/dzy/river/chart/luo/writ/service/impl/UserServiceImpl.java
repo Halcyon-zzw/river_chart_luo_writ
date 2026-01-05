@@ -88,18 +88,16 @@ public class UserServiceImpl implements UserService {
             // 微信登录
             user = userDao.selectByOpenid(loginReq.getOpenid());
             if (user == null) {
-                log.warn("Login failed: user not found, openid={}", loginReq.getOpenid());
-                throw new BusinessException("微信用户不存在");
+                // 微信用户不存在，自动注册
+                log.info("Wechat user not found, auto register. openid={}", loginReq.getOpenid());
+                user = autoRegisterWechatUser(loginReq);
             }
 
         } else {
             // 两种登录方式都没有提供
-//            log.warn("Login failed: neither username nor openid provided");
-//            throw new BusinessException("请提供用户名密码或微信openid");
+            log.warn("Login failed: neither username nor openid provided");
+            throw new BusinessException("请提供用户名密码或微信openid");
         }
-        user = new User()
-                .setStatus((byte) 1)
-                .setId(1L);
 
 
 
@@ -126,6 +124,50 @@ public class UserServiceImpl implements UserService {
         log.info("Login success: userId={}, username={}", user.getId(), user.getUsername());
 
         return userDTO;
+    }
+
+    /**
+     * 自动注册微信用户
+     *
+     * @param loginReq 登录请求（包含微信用户信息）
+     * @return 创建的用户
+     */
+    private User autoRegisterWechatUser(LoginReq loginReq) {
+        User newUser = new User();
+
+        // 1. 设置微信信息
+        newUser.setOpenid(loginReq.getOpenid());
+        newUser.setUnionid(loginReq.getUnionid());
+        newUser.setWechatInfo(loginReq.getWechatInfo());
+
+        // 2. 设置用户名：优先使用微信昵称，如果没有则使用 openid
+        String username = loginReq.getNickname();
+        if (username == null || username.trim().isEmpty()) {
+            username = "wx_" + loginReq.getOpenid().substring(0, Math.min(10, loginReq.getOpenid().length()));
+        }
+        newUser.setUsername(username);
+
+        // 3. 设置昵称
+        newUser.setNickname(loginReq.getNickname());
+
+        // 4. 设置头像
+        newUser.setAvatar(loginReq.getAvatar());
+
+        // 5. 设置默认角色和状态
+        newUser.setRole("USER");
+        newUser.setStatus((byte) 1);  // 1-启用
+
+        // 6. 保存到数据库
+        boolean success = userDao.save(newUser);
+        if (!success) {
+            log.error("Failed to auto register wechat user. openid={}", loginReq.getOpenid());
+            throw new BusinessException("微信用户注册失败");
+        }
+
+        log.info("Wechat user auto registered successfully. userId={}, username={}, openid={}",
+                newUser.getId(), newUser.getUsername(), newUser.getOpenid());
+
+        return newUser;
     }
 
 }

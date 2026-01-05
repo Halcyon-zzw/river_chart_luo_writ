@@ -25,4 +25,16 @@ public class LoginReq implements Serializable {
 
     @Schema(description = "微信openid（微信登录时必填）", example = "wx_openid_123")
     private String openid;
+
+    @Schema(description = "微信unionid（微信登录时可选）", example = "wx_unionid_456")
+    private String unionid;
+
+    @Schema(description = "微信昵称（微信登录时推荐提供，用于自动注册）", example = "张三")
+    private String nickname;
+
+    @Schema(description = "微信头像URL（微信登录时可选）", example = "https://xxx.com/avatar.jpg")
+    private String avatar;
+
+    @Schema(description = "微信用户完整信息JSON（微信登录时可选）", example = "{\"nickName\":\"张三\",\"gender\":1}")
+    private String wechatInfo;
 }
