@@ -34,6 +34,9 @@
     "name" : "小分类表管理",
     "description" : "小分类表相关接口"
   }, {
+    "name" : "用户认证",
+    "description" : "登录、注册等认证相关接口"
+  }, {
     "name" : "数据内容表管理",
     "description" : "数据内容表相关接口"
   }, {
@@ -79,16 +82,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -101,6 +94,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -156,16 +159,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -178,6 +171,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -223,16 +226,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -245,6 +238,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -292,16 +295,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -314,6 +307,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -369,16 +372,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -391,6 +384,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -436,16 +439,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -458,6 +451,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -505,16 +508,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -527,6 +520,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -582,16 +585,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -604,6 +597,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -649,16 +652,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -671,6 +664,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -718,16 +721,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -740,6 +733,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -795,16 +798,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -817,6 +810,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -862,16 +865,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -884,6 +877,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -931,16 +934,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -953,6 +946,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1008,16 +1011,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1030,6 +1023,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1075,16 +1078,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1097,6 +1090,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1144,16 +1147,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1166,6 +1159,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1221,16 +1224,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1243,6 +1236,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1288,16 +1291,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1310,6 +1303,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1357,16 +1360,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1379,6 +1372,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1434,16 +1437,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1456,6 +1449,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1501,16 +1504,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1523,6 +1516,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1570,16 +1573,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1592,6 +1585,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1647,16 +1650,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1669,6 +1662,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1714,16 +1717,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1736,6 +1729,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1783,16 +1786,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1805,6 +1798,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1860,16 +1863,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1882,6 +1875,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1927,16 +1930,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -1949,6 +1942,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1996,16 +1999,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2018,6 +2011,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2073,16 +2076,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2095,6 +2088,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2140,16 +2143,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2162,6 +2155,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2210,16 +2213,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2232,6 +2225,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2280,16 +2283,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2302,6 +2295,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2350,16 +2353,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2372,6 +2365,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2420,16 +2423,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2442,6 +2435,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2490,16 +2493,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2512,6 +2505,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2560,16 +2563,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2582,6 +2575,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2630,16 +2633,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2652,6 +2645,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2700,16 +2703,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2722,6 +2715,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2783,16 +2786,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2805,6 +2798,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2853,16 +2856,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2875,6 +2868,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2923,16 +2926,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -2945,6 +2938,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2993,16 +2996,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -3015,6 +3008,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3063,16 +3066,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -3085,6 +3078,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3146,16 +3149,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -3168,6 +3161,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3216,16 +3219,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -3238,6 +3231,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3286,16 +3289,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -3308,6 +3301,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3356,16 +3359,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -3378,6 +3371,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3439,16 +3442,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -3461,6 +3454,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3511,16 +3514,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -3533,6 +3526,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3581,16 +3584,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -3603,6 +3596,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3651,16 +3654,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -3673,6 +3666,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3721,16 +3724,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -3743,6 +3736,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3791,16 +3794,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -3813,6 +3806,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3861,16 +3864,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -3883,6 +3876,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3931,8 +3934,68 @@
               }
             }
           },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
           "404" : {
             "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/wechat-login" : {
+      "post" : {
+        "tags" : [ "用户认证" ],
+        "summary" : "微信小程序登录",
+        "description" : "使用微信登录code进行登录，首次登录自动注册",
+        "operationId" : "wechatLogin",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/WechatLoginReq"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3961,12 +4024,22 @@
               }
             }
           },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
           "200" : {
             "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultUserDTO"
                 }
               }
             }
@@ -3999,16 +4072,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -4021,6 +4084,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -4068,16 +4141,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -4090,6 +4153,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -4135,16 +4208,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -4157,6 +4220,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -4204,16 +4277,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -4226,6 +4289,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -4274,16 +4347,6 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "Bad Request",
             "content" : {
@@ -4296,6 +4359,16 @@
           },
           "409" : {
             "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -6177,6 +6250,28 @@
           }
         },
         "description" : "记录浏览请求"
+      },
+      "WechatLoginReq" : {
+        "required" : [ "code" ],
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "description" : "微信登录code（由uni.login()获取）",
+            "example" : "0x1abc2def3ghi"
+          },
+          "avatarUrl" : {
+            "type" : "string",
+            "description" : "微信头像URL",
+            "example" : "https://example.com/avatar.png"
+          },
+          "nickName" : {
+            "type" : "string",
+            "description" : "微信昵称",
+            "example" : "张三"
+          }
+        },
+        "description" : "微信登录请求"
       },
       "ResultListTagDTO" : {
         "type" : "object",
