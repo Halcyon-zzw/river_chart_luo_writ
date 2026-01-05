@@ -63,10 +63,9 @@ public class FileUploadServiceImpl implements FileUploadService {
             // 6. 保存文件
             file.transferTo(fullPath.toFile());
 
-            // 7. 返回访问URL
-//            String accessUrl = urlPrefix + relativePath.replace("\\", "/");
-            String accessUrl = "file://" + fullPath;
-            log.info("文件上传成功: {}", accessUrl);
+            // 7. 返回访问URL（返回相对路径，前端可通过HTTP访问）
+            String accessUrl = urlPrefix + relativePath.replace("\\", "/");
+            log.info("文件上传成功，本地路径: {}, 访问URL: {}", fullPath, accessUrl);
             return accessUrl;
 
         } catch (IOException e) {

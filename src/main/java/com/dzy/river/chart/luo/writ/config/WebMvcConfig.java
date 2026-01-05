@@ -41,6 +41,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns(
                         "/auth/**",              // 排除认证相关接口
                         "/verification-code/**", // 排除验证码接口
+                        "/uploads/**",           // 排除上传文件访问路径
                         "/swagger-ui/**",        // 排除Swagger UI
                         "/swagger-ui.html",      // 排除Swagger UI首页
                         "/v3/api-docs/**",       // 排除OpenAPI文档
