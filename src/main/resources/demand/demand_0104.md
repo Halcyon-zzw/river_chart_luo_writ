@@ -63,6 +63,25 @@ browseHistoryDao.updateById(existingRecord);更新isDeleted失败
 
 /wechat-login新增昵称、头像url字段
 
+-- ----------------分界线，上述需求已经处理，请忽略------------------
+配置全局接口超时时间，默认10s，支持配置。
+
+需要确认的问题
+
+1. 超时配置的作用范围：
+   - 是配置 HTTP客户端（RestTemplate等）调用外部API的超时时间？
+   - 还是配置 服务端接口处理请求的超时时间？
+   - 还是两者都需要？
+   两者都需要
+2. 超时类型（如果是HTTP客户端）：
+   - 连接超时（Connection Timeout）：默认10s？
+   - 读取超时（Read Timeout）：默认10s？
+   - 还是两者都设置为10s？
+   两者都设置10s
+3. 配置方式：
+   - 在 application.yml 中配置？
+   - 配置项的key命名偏好（如 myapp.http.timeout 或 http.client.timeout）？
+可以
 
 # 说明
 1. 已完成的需求追加到demand_tree_completed.md中，不需要修改本文件.

@@ -46,6 +46,9 @@ public class WechatServiceImpl implements WechatService {
     @Autowired
     private UserManager userManager;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     private static final String WECHAT_API_URL = "https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code";
 
     @Override
@@ -95,8 +98,7 @@ public class WechatServiceImpl implements WechatService {
             String url = String.format(WECHAT_API_URL, appid, secret, code);
             log.info("Calling wechat API: {}", url.replace(secret, "******"));
 
-            // 调用微信API
-            RestTemplate restTemplate = new RestTemplate();
+            // 调用微信API（使用配置了超时时间的RestTemplate）
             String response = restTemplate.getForObject(url, String.class);
             log.info("Wechat API response: {}", response);
 

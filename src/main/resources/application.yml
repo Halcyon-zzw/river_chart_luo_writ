@@ -1,6 +1,9 @@
 # application.yml
 server:
   port: 8080
+  # Tomcat 服务端配置
+  tomcat:
+    connection-timeout: 10000  # 连接超时时间（毫秒），默认10秒
 
 spring:
   datasource:
@@ -54,6 +57,11 @@ myapp:
   feature:
     enabled: true
     max-items: 100
+  # HTTP客户端超时配置
+  http:
+    timeout:
+      connect: 10000  # 连接超时时间（毫秒），默认10秒
+      read: 10000     # 读取超时时间（毫秒），默认10秒
 
 # 微信小程序配置
 wechat:
