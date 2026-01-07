@@ -54,3 +54,9 @@ myapp:
   feature:
     enabled: true
     max-items: 100
+
+# 微信小程序配置
+wechat:
+  miniapp:
+    appid: wx89b6700993f002db
+    secret: 820f0350fcac153a725e27839d5a2456

@@ -54,6 +54,15 @@ browseHistoryDao.updateById(existingRecord);更新isDeleted失败
    - 角色：默认为 USER？y
    - 状态：默认为启用（status=1）？y
 
+下列微信登录流程是否合理？
+1. 前端uni.login() 获取微信登录 code
+2. 前端将 code 发给后端
+3. 后端用 code + appSecret 换取 openid
+4. 后端保存用户信息并返回token
+
+
+/wechat-login新增昵称、头像url字段
+
 
 # 说明
 1. 已完成的需求追加到demand_tree_completed.md中，不需要修改本文件.

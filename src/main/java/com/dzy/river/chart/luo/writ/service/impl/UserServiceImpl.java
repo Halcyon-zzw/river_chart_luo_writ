@@ -6,6 +6,7 @@ import com.dzy.river.chart.luo.writ.domain.convert.UserConvert;
 import com.dzy.river.chart.luo.writ.domain.req.LoginReq;
 import com.dzy.river.chart.luo.writ.dao.UserDao;
 import com.dzy.river.chart.luo.writ.exception.BusinessException;
+import com.dzy.river.chart.luo.writ.manager.UserManager;
 import com.dzy.river.chart.luo.writ.service.UserService;
 import com.dzy.river.chart.luo.writ.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserConvert userConvert;
+
+    @Autowired
+    private UserManager userManager;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -61,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO login(LoginReq loginReq) {
-        User user = null;
+        User user;
 
         // 1. 判断登录方式并查询用户
         if (loginReq.getUsername() != null && !loginReq.getUsername().trim().isEmpty()) {
@@ -102,14 +106,7 @@ public class UserServiceImpl implements UserService {
 
 
         // 2. 检查用户状态
-        if (user.getStatus() == null || user.getStatus() == 0) {
-            log.warn("Login failed: user is disabled, userId={}", user.getId());
-            throw new BusinessException("用户已被禁用");
-        }
-        if (user.getStatus() == 2) {
-            log.warn("Login failed: user is locked, userId={}", user.getId());
-            throw new BusinessException("用户已被锁定");
-        }
+        userManager.checkUser(user);
 
         // 3. 生成token
         String accessToken = jwtUtil.generateAccessToken(user.getId());
