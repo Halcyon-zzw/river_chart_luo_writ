@@ -39,6 +39,9 @@ public class ContentDTO implements Serializable {
     @Schema(description = "图片URL(当content_type为image时使用)")
     private String imageUrl;
 
+    @Schema(description = "图片URL列表(当content_type为image时使用)")
+    private List<String> imageUrlList;
+
     @Schema(description = "图片缩略图URL")
     private String imageThumbnailUrl;
 

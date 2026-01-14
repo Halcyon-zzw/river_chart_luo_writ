@@ -82,12 +82,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -102,8 +102,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -112,12 +112,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultUserDTO"
                 }
               }
             }
@@ -159,12 +159,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -179,8 +179,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -189,12 +189,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultUserDTO"
                 }
               }
             }
@@ -226,12 +226,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -246,8 +246,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -256,12 +256,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -295,12 +295,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -315,8 +315,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -325,12 +325,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
                 }
               }
             }
@@ -372,12 +372,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -392,8 +392,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -402,12 +402,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
                 }
               }
             }
@@ -439,12 +439,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -459,8 +459,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -469,12 +469,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -508,12 +508,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultTagDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -528,8 +528,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -538,12 +538,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultTagDTO"
                 }
               }
             }
@@ -585,12 +585,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultTagDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -605,8 +605,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -615,12 +615,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultTagDTO"
                 }
               }
             }
@@ -652,12 +652,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -672,8 +672,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -682,12 +682,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -721,12 +721,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -741,8 +741,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -751,12 +751,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
                 }
               }
             }
@@ -798,12 +798,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -818,8 +818,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -828,12 +828,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
                 }
               }
             }
@@ -865,12 +865,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -885,8 +885,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -895,12 +895,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -934,12 +934,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -954,8 +954,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -964,12 +964,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
                 }
               }
             }
@@ -1011,12 +1011,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1031,8 +1031,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1041,12 +1041,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
                 }
               }
             }
@@ -1078,12 +1078,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1098,8 +1098,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1108,12 +1108,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -1147,12 +1147,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1167,8 +1167,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1177,12 +1177,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
                 }
               }
             }
@@ -1224,12 +1224,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1244,8 +1244,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1254,12 +1254,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
                 }
               }
             }
@@ -1291,12 +1291,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1311,8 +1311,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1321,12 +1321,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -1360,12 +1360,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1380,8 +1380,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1390,12 +1390,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
                 }
               }
             }
@@ -1437,12 +1437,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1457,8 +1457,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1467,12 +1467,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
                 }
               }
             }
@@ -1504,12 +1504,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1524,8 +1524,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1534,12 +1534,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -1573,12 +1573,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1593,8 +1593,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1603,12 +1603,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
                 }
               }
             }
@@ -1650,12 +1650,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1670,8 +1670,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1680,12 +1680,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
                 }
               }
             }
@@ -1717,12 +1717,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1737,8 +1737,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1747,12 +1747,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -1786,12 +1786,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultContentDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1806,8 +1806,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1816,12 +1816,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultContentDTO"
                 }
               }
             }
@@ -1863,12 +1863,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultContentDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1883,8 +1883,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1893,12 +1893,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultContentDTO"
                 }
               }
             }
@@ -1930,12 +1930,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -1950,8 +1950,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -1960,12 +1960,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -1999,12 +1999,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultContentTagDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2019,8 +2019,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2029,12 +2029,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultContentTagDTO"
                 }
               }
             }
@@ -2076,12 +2076,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultContentTagDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2096,8 +2096,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2106,12 +2106,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultContentTagDTO"
                 }
               }
             }
@@ -2143,12 +2143,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2163,8 +2163,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2173,12 +2173,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -2213,12 +2213,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2233,8 +2233,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2243,12 +2243,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultUserDTO"
                 }
               }
             }
@@ -2283,12 +2283,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2303,8 +2303,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2313,12 +2313,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultUserDTO"
                 }
               }
             }
@@ -2353,12 +2353,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultPageResultUserCollectionDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2373,8 +2373,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2383,12 +2383,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultPageResultUserCollectionDTO"
                 }
               }
             }
@@ -2423,12 +2423,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2443,8 +2443,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2453,12 +2453,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultUserCollectionDTO"
                 }
               }
             }
@@ -2493,12 +2493,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultTagDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2513,8 +2513,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2523,12 +2523,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultTagDTO"
                 }
               }
             }
@@ -2563,12 +2563,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultInteger"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2583,8 +2583,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2593,12 +2593,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultInteger"
                 }
               }
             }
@@ -2633,12 +2633,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultInteger"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2653,8 +2653,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2663,12 +2663,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultInteger"
                 }
               }
             }
@@ -2703,12 +2703,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultInteger"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2723,8 +2723,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2733,12 +2733,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultInteger"
                 }
               }
             }
@@ -2786,12 +2786,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2806,8 +2806,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2816,12 +2816,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -2856,12 +2856,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultPageResultSubCategoryDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2876,8 +2876,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2886,12 +2886,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultPageResultSubCategoryDTO"
                 }
               }
             }
@@ -2926,12 +2926,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -2946,8 +2946,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -2956,12 +2956,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultSubCategoryDTO"
                 }
               }
             }
@@ -2996,12 +2996,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3016,8 +3016,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3026,12 +3026,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultSubCategoryTagDTO"
                 }
               }
             }
@@ -3066,12 +3066,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3086,8 +3086,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3096,12 +3096,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultOperationLogDTO"
                 }
               }
             }
@@ -3149,12 +3149,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3169,8 +3169,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3179,12 +3179,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -3219,12 +3219,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultPageResultMainCategoryDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3239,8 +3239,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3249,12 +3249,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultPageResultMainCategoryDTO"
                 }
               }
             }
@@ -3289,12 +3289,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3309,8 +3309,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3319,12 +3319,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultMainCategoryDTO"
                 }
               }
             }
@@ -3359,12 +3359,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3379,8 +3379,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3389,12 +3389,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultMainCategoryTagDTO"
                 }
               }
             }
@@ -3442,12 +3442,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3462,8 +3462,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3472,12 +3472,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -3514,12 +3514,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultListString"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3534,8 +3534,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3544,12 +3544,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultListString"
                 }
               }
             }
@@ -3584,12 +3584,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultPageResultContentDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3604,8 +3604,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3614,12 +3614,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultPageResultContentDTO"
                 }
               }
             }
@@ -3654,12 +3654,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultContentDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3674,8 +3674,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3684,12 +3684,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultContentDTO"
                 }
               }
             }
@@ -3724,12 +3724,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultContentDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3744,8 +3744,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3754,12 +3754,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultContentDTO"
                 }
               }
             }
@@ -3794,12 +3794,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultContentTagDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3814,8 +3814,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3824,12 +3824,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultContentTagDTO"
                 }
               }
             }
@@ -3864,12 +3864,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultPageResultBrowseHistoryDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3884,8 +3884,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3894,12 +3894,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultPageResultBrowseHistoryDTO"
                 }
               }
             }
@@ -3934,12 +3934,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -3954,8 +3954,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -3964,12 +3964,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -4004,12 +4004,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultUserDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -4024,8 +4024,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -4034,12 +4034,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultUserDTO"
                 }
               }
             }
@@ -4072,12 +4072,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultListTagDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -4092,8 +4092,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -4102,12 +4102,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultListTagDTO"
                 }
               }
             }
@@ -4141,12 +4141,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBrowseHistoryDTO"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -4161,8 +4161,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -4171,12 +4171,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBrowseHistoryDTO"
                 }
               }
             }
@@ -4208,12 +4208,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -4228,8 +4228,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -4238,12 +4238,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
@@ -4277,12 +4277,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultInteger"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -4297,8 +4297,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -4307,12 +4307,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultInteger"
                 }
               }
             }
@@ -4347,12 +4347,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "OK",
+          "404" : {
+            "description" : "Not Found",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultInteger"
+                  "$ref" : "#/components/schemas/ResultVoid"
                 }
               }
             }
@@ -4367,8 +4367,8 @@
               }
             }
           },
-          "404" : {
-            "description" : "Not Found",
+          "409" : {
+            "description" : "Conflict",
             "content" : {
               "*/*" : {
                 "schema" : {
@@ -4377,12 +4377,12 @@
               }
             }
           },
-          "409" : {
-            "description" : "Conflict",
+          "200" : {
+            "description" : "OK",
             "content" : {
               "*/*" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
+                  "$ref" : "#/components/schemas/ResultInteger"
                 }
               }
             }
@@ -5190,6 +5190,14 @@
           "imageUrl" : {
             "type" : "string",
             "description" : "图片URL(当content_type为image时使用)"
+          },
+          "imageUrlList" : {
+            "type" : "array",
+            "description" : "图片URL列表(当content_type为image时使用)",
+            "items" : {
+              "type" : "string",
+              "description" : "图片URL列表(当content_type为image时使用)"
+            }
           },
           "imageThumbnailUrl" : {
             "type" : "string",

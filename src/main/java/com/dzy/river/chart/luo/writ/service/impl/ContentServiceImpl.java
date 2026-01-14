@@ -84,13 +84,24 @@ public class ContentServiceImpl implements ContentService {
         } else {
             contentDTO.setTagDTOList(new ArrayList<>());
         }
+        contentDTO.setImageUrlList(getImageUrlList(content.getImageUrl()));
 
         return contentDTO;
+    }
+
+    private List<String> getImageUrlList(String imageUrl) {
+        if (StringUtils.hasText(imageUrl)) {
+            return Arrays.stream(imageUrl.split(",")).toList();
+        }
+        return new ArrayList<>();
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public ContentDTO save(ContentDTO contentDTO) {
+
+        convertContent(contentDTO);
+
         // 1. 保存内容
         Content content = contentConvert.toContent(contentDTO);
         boolean success = contentDao.save(content);
@@ -113,6 +124,12 @@ public class ContentServiceImpl implements ContentService {
         return result;
     }
 
+    private void convertContent(ContentDTO contentDTO) {
+        if (!CollectionUtils.isEmpty(contentDTO.getImageUrlList())) {
+            contentDTO.setImageUrl(String.join(",", contentDTO.getImageUrlList()));
+        }
+    }
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean removeById(Long id) {
@@ -128,6 +145,7 @@ public class ContentServiceImpl implements ContentService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public ContentDTO updateById(Long id, ContentDTO contentDTO) {
+        convertContent(contentDTO);
         // 1. 更新内容
         contentDTO.setId(id);
         Content content = contentConvert.toContent(contentDTO);
