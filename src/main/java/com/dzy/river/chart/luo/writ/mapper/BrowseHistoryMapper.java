@@ -37,4 +37,13 @@ public interface BrowseHistoryMapper extends BaseMapper<BrowseHistory> {
      * @return 浏览历史分页结果
      */
     IPage<BrowseHistoryDTO> selectPageWithContentTitle(Page<BrowseHistoryDTO> page, @Param("req") BrowseHistoryPageReq req);
+
+    /**
+     * 分页查询浏览历史（不使用 JOIN）
+     *
+     * @param page 分页对象
+     * @param req 查询条件
+     * @return 浏览历史分页结果
+     */
+    IPage<BrowseHistory> selectPageWithoutJoin(Page<BrowseHistory> page, @Param("req") BrowseHistoryPageReq req);
 }

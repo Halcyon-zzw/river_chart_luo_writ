@@ -9,12 +9,15 @@ import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.dao.BrowseHistoryDao;
 import com.dzy.river.chart.luo.writ.dao.ContentDao;
 import com.dzy.river.chart.luo.writ.domain.convert.BrowseHistoryConvert;
+import com.dzy.river.chart.luo.writ.domain.convert.ContentConvert;
 import com.dzy.river.chart.luo.writ.domain.dto.BrowseHistoryDTO;
+import com.dzy.river.chart.luo.writ.domain.dto.ContentDTO;
 import com.dzy.river.chart.luo.writ.domain.entity.BrowseHistory;
 import com.dzy.river.chart.luo.writ.domain.entity.Content;
 import com.dzy.river.chart.luo.writ.domain.req.BrowseHistoryPageReq;
 import com.dzy.river.chart.luo.writ.domain.req.ClearReq;
 import com.dzy.river.chart.luo.writ.mapper.BrowseHistoryMapper;
+import com.dzy.river.chart.luo.writ.mapper.ContentMapper;
 import com.dzy.river.chart.luo.writ.service.BrowseHistoryService;
 import com.dzy.river.chart.luo.writ.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -50,6 +53,12 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
 
     @Autowired
     private ContentDao contentDao;
+
+    @Autowired
+    private ContentMapper contentMapper;
+
+    @Autowired
+    private ContentConvert contentConvert;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -122,9 +131,67 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
 
     @Override
     public PageResult<BrowseHistoryDTO> page(BrowseHistoryPageReq pageReq) {
-        // 使用新的关联查询方法（包含内容标题、时间范围过滤、模糊查询）
-        Page<BrowseHistoryDTO> page = new Page<>(pageReq.getPageNum(), pageReq.getPageSize());
-        IPage<BrowseHistoryDTO> resultPage = browseHistoryMapper.selectPageWithContentTitle(page, pageReq);
+        // 方案A：分步查询，不使用 JOIN
+        // 1. 如果有 contentTitle 或 contentType（只在需要从 content 表过滤时），先查询 content_id 列表
+        if (pageReq.getContentTitle() != null && !pageReq.getContentTitle().trim().isEmpty()) {
+            List<Long> contentIds = contentMapper.selectIdsByTitleAndType(
+                    pageReq.getContentTitle(),
+                    pageReq.getContentType()
+            );
+
+            // 如果没有匹配的内容，直接返回空结果
+            if (contentIds.isEmpty()) {
+                Page<BrowseHistoryDTO> emptyPage = new Page<>(pageReq.getPageNum(), pageReq.getPageSize());
+                emptyPage.setRecords(new ArrayList<>());
+                emptyPage.setTotal(0);
+                return new PageResult<>(emptyPage);
+            }
+
+            pageReq.setContentIds(contentIds);
+        }
+
+        // 2. 查询 browse_history 表，获取分页数据（不使用 JOIN）
+        Page<BrowseHistory> page = new Page<>(pageReq.getPageNum(), pageReq.getPageSize());
+        IPage<BrowseHistory> browseHistoryPage = browseHistoryMapper.selectPageWithoutJoin(page, pageReq);
+
+        // 如果没有浏览历史，直接返回空结果
+        if (browseHistoryPage.getRecords().isEmpty()) {
+            Page<BrowseHistoryDTO> emptyPage = new Page<>(pageReq.getPageNum(), pageReq.getPageSize());
+            emptyPage.setRecords(new ArrayList<>());
+            emptyPage.setTotal(0);
+            return new PageResult<>(emptyPage);
+        }
+
+        // 3. 提取所有 content_id，批量查询 content 表
+        List<Long> contentIds = browseHistoryPage.getRecords().stream()
+                .map(BrowseHistory::getContentId)
+                .distinct()
+                .collect(Collectors.toList());
+
+        List<Content> contents = contentDao.listByIds(contentIds);
+
+        // 4. 使用 ContentConvert 将 Content → ContentDTO（这样 imageUrlList 会被正确填充）
+        List<ContentDTO> contentDTOs = contentConvert.toContentDTOList(contents);
+
+        // 创建 contentId -> ContentDTO 的映射
+        Map<Long, ContentDTO> contentMap = contentDTOs.stream()
+                .collect(Collectors.toMap(ContentDTO::getId, dto -> dto));
+
+        // 5. 在内存中组装 BrowseHistoryDTO
+        List<BrowseHistoryDTO> dtoList = browseHistoryPage.getRecords().stream()
+                .map(browseHistory -> {
+                    BrowseHistoryDTO dto = browseHistoryConvert.toBrowseHistoryDTO(browseHistory);
+                    // 设置 contentDTO（即使 content 已被删除，也设置 null）
+                    ContentDTO contentDTO = contentMap.get(browseHistory.getContentId());
+                    dto.setContentDTO(contentDTO);
+                    return dto;
+                })
+                .collect(Collectors.toList());
+
+        // 6. 构建分页结果
+        Page<BrowseHistoryDTO> resultPage = new Page<>(pageReq.getPageNum(), pageReq.getPageSize());
+        resultPage.setRecords(dtoList);
+        resultPage.setTotal(browseHistoryPage.getTotal());
 
         return new PageResult<>(resultPage);
     }

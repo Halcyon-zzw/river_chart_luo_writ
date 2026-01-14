@@ -38,4 +38,22 @@ public interface ContentMapper extends BaseMapper<Content> {
             "</script>")
     List<Map<String, Object>> countBySubCategoryIds(@Param("subCategoryIds") List<Long> subCategoryIds);
 
+    /**
+     * 根据标题和内容类型查询内容ID列表
+     *
+     * @param title 标题关键词（模糊查询）
+     * @param contentType 内容类型
+     * @return 内容ID列表
+     */
+    @Select("<script>" +
+            "SELECT id FROM content WHERE is_deleted = 0 " +
+            "<if test='title != null and title != \"\"'>" +
+            "AND title LIKE CONCAT('%', #{title}, '%') " +
+            "</if>" +
+            "<if test='contentType != null and contentType != \"\"'>" +
+            "AND content_type = #{contentType} " +
+            "</if>" +
+            "</script>")
+    List<Long> selectIdsByTitleAndType(@Param("title") String title, @Param("contentType") String contentType);
+
 }

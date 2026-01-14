@@ -7,6 +7,7 @@
         <id column="id" property="id" />
         <result column="content_id" property="contentId" />
         <result column="user_id" property="userId" />
+        <result column="content_type" property="contentType" />
         <result column="browse_count" property="browseCount" />
         <result column="last_browse_time" property="lastBrowseTime" />
         <result column="create_time" property="createTime" />
@@ -106,6 +107,41 @@
             AND bh.last_browse_time &lt;= #{req.endTime}
         </if>
         ORDER BY bh.last_browse_time DESC
+    </select>
+
+    <!-- 分页查询浏览历史（不使用 JOIN） -->
+    <select id="selectPageWithoutJoin" resultMap="BaseResultMap">
+        SELECT
+            id,
+            content_id,
+            user_id,
+            content_type,
+            browse_count,
+            last_browse_time,
+            create_time,
+            update_time,
+            is_deleted
+        FROM browse_history
+        WHERE is_deleted = 0
+        <if test="req.userId != null">
+            AND user_id = #{req.userId}
+        </if>
+        <if test="req.contentType != null and req.contentType != ''">
+            AND content_type = #{req.contentType}
+        </if>
+        <if test="req.contentIds != null and req.contentIds.size() > 0">
+            AND content_id IN
+            <foreach collection="req.contentIds" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+        <if test="req.startTime != null">
+            AND last_browse_time &gt;= #{req.startTime}
+        </if>
+        <if test="req.endTime != null">
+            AND last_browse_time &lt;= #{req.endTime}
+        </if>
+        ORDER BY last_browse_time DESC
     </select>
 
 </mapper>

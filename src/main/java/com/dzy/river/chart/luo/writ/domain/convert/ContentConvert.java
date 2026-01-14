@@ -3,7 +3,12 @@ package com.dzy.river.chart.luo.writ.domain.convert;
 import com.dzy.river.chart.luo.writ.domain.entity.Content;
 import com.dzy.river.chart.luo.writ.domain.dto.ContentDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -25,6 +30,7 @@ public interface ContentConvert {
      * @param content 数据内容表实体
      * @return 数据内容表DTO
      */
+    @Mapping(target = "imageUrlList", expression = "java(convertToImageUrlList(content.getImageUrl()))")
     ContentDTO toContentDTO(Content content);
 
     /**
@@ -50,5 +56,13 @@ public interface ContentConvert {
      * @return 数据内容表实体列表
      */
     List<Content> toContentList(List<ContentDTO> contentDTOList);
+
+
+    default List<String> convertToImageUrlList(String imageUrl) {
+        if (StringUtils.hasText(imageUrl)) {
+            return Arrays.stream(imageUrl.split(",")).toList();
+        }
+        return new ArrayList<>();
+    }
 
 }

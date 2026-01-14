@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 浏览历史分页查询请求
@@ -32,4 +33,7 @@ public class BrowseHistoryPageReq extends PageReq {
 
     @Schema(description = "结束时间（最后浏览时间范围-止）", example = "2025-12-31T23:59:59")
     private LocalDateTime endTime;
+
+    @Schema(description = "内容ID列表（内部使用，用于根据标题过滤后的ID列表）", hidden = true)
+    private List<Long> contentIds;
 }

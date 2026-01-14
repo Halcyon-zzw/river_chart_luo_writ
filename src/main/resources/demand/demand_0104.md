@@ -83,6 +83,9 @@ browseHistoryDao.updateById(existingRecord);更新isDeleted失败
    - 配置项的key命名偏好（如 myapp.http.timeout 或 http.client.timeout）？
 可以
 
+-----------分界线，上述需求已经处理，请忽略------------------
+IPage<BrowseHistoryDTO> resultPage = browseHistoryMapper.selectPageWithContentTitle(page, pageReq);
+不使用join，改为先查浏览历史表，再查内容表。注意imageUrlList字段赋值情况。
 # 说明
 1. 已完成的需求追加到demand_tree_completed.md中，不需要修改本文件.
 2. 忽略最后出现的“-----------分界线，上述需求已经处理，请忽略------------------”字样以上的需求
