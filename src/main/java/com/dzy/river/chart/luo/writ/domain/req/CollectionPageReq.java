@@ -17,8 +17,7 @@ public class CollectionPageReq extends PageReq {
     @Schema(description = "名称（收藏夹名称）")
     private String name;
 
-    @NotNull(message = "用户ID不能为空")
-    @Schema(description = "用户ID")
+    @Schema(description = "用户ID（内部使用，从登录用户获取）", hidden = true)
     private Long userId;
 
     @NotNull(message = "内容类型不能为空")

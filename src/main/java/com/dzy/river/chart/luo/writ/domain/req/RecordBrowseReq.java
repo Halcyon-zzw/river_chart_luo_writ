@@ -21,7 +21,4 @@ public class RecordBrowseReq implements Serializable {
     @NotNull(message = "内容ID不能为空")
     @Schema(description = "内容ID", required = true, example = "1")
     private Long contentId;
-
-    @Schema(description = "用户ID（可为空，表示匿名浏览）", example = "1")
-    private Long userId;
 }

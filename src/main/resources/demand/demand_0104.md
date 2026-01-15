@@ -86,6 +86,21 @@ browseHistoryDao.updateById(existingRecord);更新isDeleted失败
 -----------分界线，上述需求已经处理，请忽略------------------
 IPage<BrowseHistoryDTO> resultPage = browseHistoryMapper.selectPageWithContentTitle(page, pageReq);
 不使用join，改为先查浏览历史表，再查内容表。注意imageUrlList字段赋值情况。
+
+-----------分界线，上述需求已经处理，请忽略------------------
+检查所有接口，userId不从请求对象中获取，从UserUtil中获取；
+
+1. 关于"匿名浏览"功能：
+   - RecordBrowseReq.userId 的注释说"可为空，表示匿名浏览"
+   - 是否需要保留匿名浏览功能？保留，但在UserUtil设置时会拦截；
+   - 如果保留，应该如何处理？
+   - 方案A：未登录用户可以记录匿名浏览（userId = null）
+   - 方案B：只允许登录用户记录浏览，移除匿名功能
+2. 关于收藏功能：
+   - 收藏功能应该只能查看自己的收藏，对吗？是的；
+   - 不存在"查看他人收藏"的需求，对吗？是的；
+
+
 # 说明
 1. 已完成的需求追加到demand_tree_completed.md中，不需要修改本文件.
 2. 忽略最后出现的“-----------分界线，上述需求已经处理，请忽略------------------”字样以上的需求

@@ -4,6 +4,7 @@ import com.dzy.river.chart.luo.writ.domain.dto.OperationLogDTO;
 import com.dzy.river.chart.luo.writ.common.Result;
 import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.OperationLogService;
+import com.dzy.river.chart.luo.writ.util.UserUtil;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -45,8 +46,12 @@ public class OperationLogController {
      * 创建操作日志表
      */
     @PostMapping("/create")
-    @Operation(summary = "创建操作日志表", description = "创建新的操作日志表")
+    @Operation(summary = "创建操作日志", description = "创建新的操作日志，用户ID从登录用户获取")
     public Result<OperationLogDTO> createOperationLog(@RequestBody @Validated OperationLogDTO operationLogDTO) {
+        // 从当前登录用户获取 userId，防止用户伪造他人 userId
+        Long userId = UserUtil.getUserId();
+        operationLogDTO.setUserId(userId);
+
         OperationLogDTO result = operationLogService.save(operationLogDTO);
         return Result.success("创建成功", result);
     }

@@ -6,6 +6,7 @@ import com.dzy.river.chart.luo.writ.common.Result;
 import com.dzy.river.chart.luo.writ.domain.req.CollectionPageReq;
 import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.UserCollectionService;
+import com.dzy.river.chart.luo.writ.util.UserUtil;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -47,8 +48,12 @@ public class UserCollectionController {
      * 创建用户收藏表
      */
     @PostMapping("/create")
-    @Operation(summary = "创建用户收藏表", description = "创建新的用户收藏表")
+    @Operation(summary = "创建用户收藏", description = "创建新的收藏记录，用户ID从登录用户获取")
     public Result<UserCollectionDTO> createUserCollection(@RequestBody @Validated UserCollectionDTO userCollectionDTO) {
+        // 从当前登录用户获取 userId，防止用户伪造他人 userId
+        Long userId = UserUtil.getUserId();
+        userCollectionDTO.setUserId(userId);
+
         UserCollectionDTO result = userCollectionService.save(userCollectionDTO);
         return Result.success("创建成功", result);
     }
@@ -85,8 +90,12 @@ public class UserCollectionController {
      * 分页查询用户收藏列表
      */
     @PostMapping("/page")
-    @Operation(summary = "分页查询用户收藏", description = "根据用户ID和内容类型分页查询收藏列表")
+    @Operation(summary = "分页查询用户收藏", description = "分页查询当前用户的收藏列表，按内容类型过滤")
     public Result<PageResult<UserCollectionDTO>> page(@RequestBody @Validated CollectionPageReq collectionPageReq) {
+        // 从当前登录用户获取 userId，只能查看自己的收藏
+        Long userId = UserUtil.getUserId();
+        collectionPageReq.setUserId(userId);
+
         PageResult<UserCollectionDTO> pageResult = userCollectionService.page(collectionPageReq);
         return Result.success(pageResult);
     }
