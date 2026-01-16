@@ -4,6 +4,7 @@ import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.UserCollectionDTO;
 import com.dzy.river.chart.luo.writ.common.Result;
 import com.dzy.river.chart.luo.writ.domain.req.CollectionPageReq;
+import com.dzy.river.chart.luo.writ.exception.BusinessException;
 import com.dzy.river.chart.luo.writ.exception.DataNotFoundException;
 import com.dzy.river.chart.luo.writ.service.UserCollectionService;
 import com.dzy.river.chart.luo.writ.util.UserUtil;
@@ -61,14 +62,14 @@ public class UserCollectionController {
     /**
      * 根据ID删除用户收藏表
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{contentId}")
     @Operation(summary = "删除用户收藏表", description = "根据ID删除用户收藏表")
-    public Result<Boolean> deleteById(@PathVariable Long id) {
-        boolean success = userCollectionService.removeById(id);
+    public Result<Boolean> deleteByContentId(@PathVariable Long contentId) {
+        boolean success = userCollectionService.deleteByContentId(contentId);
         if (success) {
             return Result.success("删除成功", true);
         } else {
-            throw new DataNotFoundException("用户收藏表", id);
+            throw new BusinessException("已取消收藏，请刷新页面");
         }
     }
 

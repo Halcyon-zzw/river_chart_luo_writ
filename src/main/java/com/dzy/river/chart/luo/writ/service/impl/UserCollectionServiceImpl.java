@@ -11,6 +11,7 @@ import com.dzy.river.chart.luo.writ.domain.convert.UserCollectionConvert;
 import com.dzy.river.chart.luo.writ.dao.UserCollectionDao;
 import com.dzy.river.chart.luo.writ.domain.req.CollectionPageReq;
 import com.dzy.river.chart.luo.writ.service.UserCollectionService;
+import com.dzy.river.chart.luo.writ.util.UserUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -53,8 +54,11 @@ public class UserCollectionServiceImpl implements UserCollectionService {
     }
 
     @Override
-    public boolean removeById(Long id) {
-        return userCollectionDao.removeById(id);
+    public boolean deleteByContentId(Long contentId) {
+        LambdaQueryWrapper<UserCollection> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(UserCollection::getContentId, contentId)
+                .eq(UserCollection::getUserId, UserUtil.getUserId());
+        return userCollectionDao.remove(queryWrapper);
     }
 
     @Override

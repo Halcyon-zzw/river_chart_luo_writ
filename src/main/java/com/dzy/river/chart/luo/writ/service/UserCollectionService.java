@@ -36,7 +36,7 @@ public interface UserCollectionService {
      * @param id 主键ID
      * @return 是否删除成功
      */
-    boolean removeById(Long id);
+    boolean deleteByContentId(Long id);
 
     /**
      * 根据ID更新用户收藏表

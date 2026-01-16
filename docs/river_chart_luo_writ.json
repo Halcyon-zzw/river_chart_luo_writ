@@ -413,73 +413,6 @@
             }
           }
         }
-      },
-      "delete" : {
-        "tags" : [ "用户收藏表管理" ],
-        "summary" : "删除用户收藏表",
-        "description" : "根据ID删除用户收藏表",
-        "operationId" : "deleteById_1",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        } ],
-        "responses" : {
-          "500" : {
-            "description" : "Internal Server Error",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "Not Found",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "Bad Request",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
-          "409" : {
-            "description" : "Conflict",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultVoid"
-                }
-              }
-            }
-          },
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "*/*" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResultBoolean"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/tag/{id}" : {
@@ -631,7 +564,7 @@
         "tags" : [ "标签表管理" ],
         "summary" : "删除标签表",
         "description" : "根据ID删除标签表",
-        "operationId" : "deleteById_2",
+        "operationId" : "deleteById_1",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -844,7 +777,7 @@
         "tags" : [ "小分类表管理" ],
         "summary" : "删除小分类表",
         "description" : "根据ID删除小分类表",
-        "operationId" : "deleteById_3",
+        "operationId" : "deleteById_2",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -1057,7 +990,7 @@
         "tags" : [ "小分类标签关联表管理" ],
         "summary" : "删除小分类标签关联表",
         "description" : "根据ID删除小分类标签关联表",
-        "operationId" : "deleteById_4",
+        "operationId" : "deleteById_3",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -1270,7 +1203,7 @@
         "tags" : [ "操作日志表管理" ],
         "summary" : "删除操作日志表",
         "description" : "根据ID删除操作日志表",
-        "operationId" : "deleteById_5",
+        "operationId" : "deleteById_4",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -1483,7 +1416,7 @@
         "tags" : [ "主分类表管理" ],
         "summary" : "删除主分类表",
         "description" : "根据ID删除主分类表",
-        "operationId" : "deleteById_6",
+        "operationId" : "deleteById_5",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -1696,7 +1629,7 @@
         "tags" : [ "主分类标签关联表管理" ],
         "summary" : "删除主分类标签关联表",
         "description" : "根据ID删除主分类标签关联表",
-        "operationId" : "deleteById_7",
+        "operationId" : "deleteById_6",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -1909,7 +1842,7 @@
         "tags" : [ "数据内容表管理" ],
         "summary" : "删除数据内容表",
         "description" : "根据ID删除数据内容表",
-        "operationId" : "deleteById_8",
+        "operationId" : "deleteById_7",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -2122,7 +2055,7 @@
         "tags" : [ "内容标签关联表管理" ],
         "summary" : "删除内容标签关联表",
         "description" : "根据ID删除内容标签关联表",
-        "operationId" : "deleteById_9",
+        "operationId" : "deleteById_8",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -4187,7 +4120,7 @@
         "tags" : [ "浏览历史管理" ],
         "summary" : "删除浏览历史",
         "description" : "根据ID删除浏览历史",
-        "operationId" : "deleteById_10",
+        "operationId" : "deleteById_9",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -4372,6 +4305,75 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultInteger"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-collection/{contentId}" : {
+      "delete" : {
+        "tags" : [ "用户收藏表管理" ],
+        "summary" : "删除用户收藏表",
+        "description" : "根据ID删除用户收藏表",
+        "operationId" : "deleteByContentId",
+        "parameters" : [ {
+          "name" : "contentId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultBoolean"
                 }
               }
             }
