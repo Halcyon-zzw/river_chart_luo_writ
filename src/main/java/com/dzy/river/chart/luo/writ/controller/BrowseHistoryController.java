@@ -3,6 +3,7 @@ package com.dzy.river.chart.luo.writ.controller;
 import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.common.Result;
 import com.dzy.river.chart.luo.writ.domain.dto.BrowseHistoryDTO;
+import com.dzy.river.chart.luo.writ.domain.dto.TimeRangeTypeDTO;
 import com.dzy.river.chart.luo.writ.domain.req.BrowseHistoryPageReq;
 import com.dzy.river.chart.luo.writ.domain.req.ClearReq;
 import com.dzy.river.chart.luo.writ.domain.req.RecordBrowseReq;
@@ -14,6 +15,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -107,5 +110,13 @@ public class BrowseHistoryController {
         Integer count = browseHistoryService.clearByUserId(clearReq);
 
         return Result.success("已清空 " + count + " 条浏览历史", count);
+    }
+
+
+    @GetMapping("/listTimeRangeTypeList")
+    @Operation(summary = "获取浏览历史时间类型列表")
+    public Result<List<TimeRangeTypeDTO>> listTimeRangeTypeList() {
+        List<TimeRangeTypeDTO> pageResult = browseHistoryService.listTimeRangeTypeList();
+        return Result.success(pageResult);
     }
 }

@@ -1,8 +1,8 @@
 package com.dzy.river.chart.luo.writ.service.impl;
 
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dzy.river.chart.luo.writ.common.PageResult;
@@ -12,8 +12,10 @@ import com.dzy.river.chart.luo.writ.domain.convert.BrowseHistoryConvert;
 import com.dzy.river.chart.luo.writ.domain.convert.ContentConvert;
 import com.dzy.river.chart.luo.writ.domain.dto.BrowseHistoryDTO;
 import com.dzy.river.chart.luo.writ.domain.dto.ContentDTO;
+import com.dzy.river.chart.luo.writ.domain.dto.TimeRangeTypeDTO;
 import com.dzy.river.chart.luo.writ.domain.entity.BrowseHistory;
 import com.dzy.river.chart.luo.writ.domain.entity.Content;
+import com.dzy.river.chart.luo.writ.domain.enums.TimeRangeTypeEnum;
 import com.dzy.river.chart.luo.writ.domain.req.BrowseHistoryPageReq;
 import com.dzy.river.chart.luo.writ.domain.req.ClearReq;
 import com.dzy.river.chart.luo.writ.mapper.BrowseHistoryMapper;
@@ -25,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -131,6 +134,9 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
 
     @Override
     public PageResult<BrowseHistoryDTO> page(BrowseHistoryPageReq pageReq) {
+
+        setTimeRange(pageReq);
+
         // 方案A：分步查询，不使用 JOIN
         // 1. 如果有 contentTitle 或 contentType（只在需要从 content 表过滤时），先查询 content_id 列表
         if (pageReq.getContentTitle() != null && !pageReq.getContentTitle().trim().isEmpty()) {
@@ -153,6 +159,8 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
         // 2. 查询 browse_history 表，获取分页数据（不使用 JOIN）
         Page<BrowseHistory> page = new Page<>(pageReq.getPageNum(), pageReq.getPageSize());
         IPage<BrowseHistory> browseHistoryPage = browseHistoryMapper.selectPageWithoutJoin(page, pageReq);
+
+        log.info("BrowseHistoryServiceImpl.page: {}", JSONUtil.toJsonStr(browseHistoryPage));
 
         // 如果没有浏览历史，直接返回空结果
         if (browseHistoryPage.getRecords().isEmpty()) {
@@ -194,6 +202,37 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
         resultPage.setTotal(browseHistoryPage.getTotal());
 
         return new PageResult<>(resultPage);
+    }
+
+    private void setTimeRange(BrowseHistoryPageReq pageReq) {
+
+        TimeRangeTypeEnum value = TimeRangeTypeEnum.getByCode(pageReq.getTimeRangeType());
+        if (value == null) {
+            return;
+        }
+
+        LocalDateTime startTime = null;
+        LocalDateTime now = LocalDateTime.now();
+
+        switch (value) {
+            case ALL -> {
+                return;
+            }
+            case TODAY -> {
+                startTime = now.toLocalDate().atStartOfDay();
+            }
+            case THREE_DAYS -> {
+                startTime = now.minusDays(2).toLocalDate().atStartOfDay();
+            }
+            case SEVEN_DAYS -> {
+                startTime = now.minusDays(6).toLocalDate().atStartOfDay();
+            }
+            case ONE_MONTH -> {
+                startTime = now.minusDays(29).toLocalDate().atStartOfDay();
+            }
+        }
+        pageReq.setStartTime(startTime);
+        pageReq.setEndTime(now);
     }
 
     @Override
@@ -244,5 +283,23 @@ public class BrowseHistoryServiceImpl implements BrowseHistoryService {
         }
 
         return (int) count;
+    }
+
+    @Override
+    public List<TimeRangeTypeDTO> listTimeRangeTypeList() {
+
+
+
+        List<TimeRangeTypeDTO> result = new ArrayList<>();
+
+        // 通常ALL不需要在过滤器中显示
+        for (TimeRangeTypeEnum value : TimeRangeTypeEnum.values()) {
+            TimeRangeTypeDTO dto = new TimeRangeTypeDTO();
+            dto.setCode(value.getCode());
+            dto.setDesc(value.getDesc());
+
+            result.add(dto);
+        }
+        return result;
     }
 }

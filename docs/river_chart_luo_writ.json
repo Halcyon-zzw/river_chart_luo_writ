@@ -2330,7 +2330,7 @@
       "post" : {
         "tags" : [ "用户收藏表管理" ],
         "summary" : "分页查询用户收藏",
-        "description" : "根据用户ID和内容类型分页查询收藏列表",
+        "description" : "分页查询当前用户的收藏列表，按内容类型过滤",
         "operationId" : "page",
         "requestBody" : {
           "content" : {
@@ -2399,8 +2399,8 @@
     "/user-collection/create" : {
       "post" : {
         "tags" : [ "用户收藏表管理" ],
-        "summary" : "创建用户收藏表",
-        "description" : "创建新的用户收藏表",
+        "summary" : "创建用户收藏",
+        "description" : "创建新的收藏记录，用户ID从登录用户获取",
         "operationId" : "createUserCollection",
         "requestBody" : {
           "content" : {
@@ -3042,8 +3042,8 @@
     "/operation-log/create" : {
       "post" : {
         "tags" : [ "操作日志表管理" ],
-        "summary" : "创建操作日志表",
-        "description" : "创建新的操作日志表",
+        "summary" : "创建操作日志",
+        "description" : "创建新的操作日志，用户ID从登录用户获取",
         "operationId" : "createOperationLog",
         "requestBody" : {
           "content" : {
@@ -3911,7 +3911,7 @@
       "post" : {
         "tags" : [ "浏览历史管理" ],
         "summary" : "记录浏览",
-        "description" : "记录用户浏览内容，如果已存在则更新浏览次数和时间",
+        "description" : "记录用户浏览内容，如果已存在则更新浏览次数和时间。支持匿名浏览（未登录用户）",
         "operationId" : "recordBrowse",
         "requestBody" : {
           "content" : {
@@ -4244,6 +4244,65 @@
               "*/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/ResultBoolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/browse-history/listTimeRangeTypeList" : {
+      "get" : {
+        "tags" : [ "浏览历史管理" ],
+        "summary" : "获取浏览历史时间类型列表",
+        "operationId" : "listTimeRangeTypeList",
+        "responses" : {
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResultListTimeRangeTypeDTO"
                 }
               }
             }
@@ -5412,7 +5471,7 @@
         "description" : "登录请求"
       },
       "CollectionPageReq" : {
-        "required" : [ "contentType", "userId" ],
+        "required" : [ "contentType" ],
         "type" : "object",
         "properties" : {
           "pageNum" : {
@@ -5430,11 +5489,6 @@
           "name" : {
             "type" : "string",
             "description" : "名称（收藏夹名称）"
-          },
-          "userId" : {
-            "type" : "integer",
-            "description" : "用户ID",
-            "format" : "int64"
           },
           "contentType" : {
             "type" : "string",
@@ -6082,6 +6136,11 @@
             "description" : "内容类型（image:图片, note:笔记）",
             "example" : "image"
           },
+          "timeRangeType" : {
+            "type" : "string",
+            "description" : "时间范围类型（all:全部, today:今天...）",
+            "example" : "all"
+          },
           "startTime" : {
             "type" : "string",
             "description" : "开始时间（最后浏览时间范围-起）",
@@ -6249,12 +6308,6 @@
             "description" : "内容ID",
             "format" : "int64",
             "example" : 1
-          },
-          "userId" : {
-            "type" : "integer",
-            "description" : "用户ID（可为空，表示匿名浏览）",
-            "format" : "int64",
-            "example" : 1
           }
         },
         "description" : "记录浏览请求"
@@ -6348,6 +6401,56 @@
           }
         },
         "description" : "统一响应结果"
+      },
+      "ResultListTimeRangeTypeDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "响应码",
+            "format" : "int32",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "响应消息",
+            "example" : "操作成功"
+          },
+          "traceId" : {
+            "type" : "string",
+            "description" : "traceId"
+          },
+          "data" : {
+            "type" : "array",
+            "description" : "响应数据",
+            "items" : {
+              "$ref" : "#/components/schemas/TimeRangeTypeDTO"
+            }
+          },
+          "timestamp" : {
+            "type" : "integer",
+            "description" : "响应时间戳",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          }
+        },
+        "description" : "统一响应结果"
+      },
+      "TimeRangeTypeDTO" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "description" : "时间范围类型编码"
+          },
+          "desc" : {
+            "type" : "string",
+            "description" : "时间范围类型描述"
+          }
+        },
+        "description" : "响应数据"
       },
       "ClearReq" : {
         "type" : "object",

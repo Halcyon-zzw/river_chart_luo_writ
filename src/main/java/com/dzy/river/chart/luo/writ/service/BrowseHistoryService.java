@@ -2,8 +2,11 @@ package com.dzy.river.chart.luo.writ.service;
 
 import com.dzy.river.chart.luo.writ.common.PageResult;
 import com.dzy.river.chart.luo.writ.domain.dto.BrowseHistoryDTO;
+import com.dzy.river.chart.luo.writ.domain.dto.TimeRangeTypeDTO;
 import com.dzy.river.chart.luo.writ.domain.req.BrowseHistoryPageReq;
 import com.dzy.river.chart.luo.writ.domain.req.ClearReq;
+
+import java.util.List;
 
 /**
  * <p>
@@ -60,9 +63,10 @@ public interface BrowseHistoryService {
     /**
      * 清空指定用户的所有浏览历史
      *
-     * @param userId 用户ID
-     * @param contentType 内容类型（可选，为空则清空所有类型）
+     * @param clearReq clearReq
      * @return 清空的记录数
      */
     Integer clearByUserId(ClearReq clearReq);
+
+    List<TimeRangeTypeDTO> listTimeRangeTypeList();
 }

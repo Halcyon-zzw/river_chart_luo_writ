@@ -28,6 +28,12 @@ public class BrowseHistoryPageReq extends PageReq {
     @Schema(description = "内容类型（image:图片, note:笔记）", example = "image")
     private String contentType;
 
+    /**
+     * @see com.dzy.river.chart.luo.writ.domain.enums.TimeRangeTypeEnum
+     */
+    @Schema(description = "时间范围类型（all:全部, today:今天...）", example = "all")
+    private String timeRangeType;
+
     @Schema(description = "开始时间（最后浏览时间范围-起）", example = "2025-01-01T00:00:00")
     private LocalDateTime startTime;
 

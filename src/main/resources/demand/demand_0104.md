@@ -100,6 +100,11 @@ IPage<BrowseHistoryDTO> resultPage = browseHistoryMapper.selectPageWithContentTi
    - 收藏功能应该只能查看自己的收藏，对吗？是的；
    - 不存在"查看他人收藏"的需求，对吗？是的；
 
+-----------分界线，上述需求已经处理，请忽略------------------
+1、新增时间类型列表接口，返回时间类型列表；TimeRangeTypeEnum中的所有值；
+
+2、查询浏览历史接口，新增时间范围参数，返回指定时间范围内的浏览记录；
+
 
 # 说明
 1. 已完成的需求追加到demand_tree_completed.md中，不需要修改本文件.
