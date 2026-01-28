@@ -65,6 +65,9 @@ public class OpenApiConfig {
                                 .url("https://www.apache.org/licenses/LICENSE-2.0.html")));
     }
 
+    @Autowired(required = false)
+    private RestTemplate restTemplate;
+
     /**
      * 应用启动后自动生成OpenAPI JSON文件
      */
@@ -77,7 +80,7 @@ public class OpenApiConfig {
             }
 
             // 等待应用完全启动
-            Thread.sleep(3000);
+            Thread.sleep(5000);
 
             try {
                 log.info("=".repeat(80));
@@ -95,9 +98,9 @@ public class OpenApiConfig {
 
                 log.info("开始生成OpenAPI JSON文件...");
 
-                // 使用RestTemplate获取JSON内容
-                RestTemplate restTemplate = new RestTemplate();
-                String jsonContent = restTemplate.getForObject(apiUrl, String.class);
+                // 使用注入的RestTemplate或创建新实例
+                RestTemplate template = restTemplate != null ? restTemplate : new RestTemplate();
+                String jsonContent = template.getForObject(apiUrl, String.class);
 
                 if (jsonContent == null || jsonContent.isEmpty()) {
                     log.error("获取到的API文档内容为空");

@@ -36,8 +36,11 @@ springdoc:
     path: /swagger-ui.html           # Swagger UI访问路径（默认值）
     tags-sorter: alpha               # 标签排序：alpha-字母排序，默认按Controller定义顺序
     operations-sorter: alpha         # 接口排序：alpha-字母排序，method-按HTTP方法排序
+    lazy-load: true                  # 延迟加载，减少启动时间
   show-actuator: false               # 不显示Actuator端点
   default-flat-param-object: true    # 扁平化参数对象
+  cache:
+    disabled: false                  # 启用缓存，提高性能
 
 # OpenAPI JSON文件生成配置
 openapi:

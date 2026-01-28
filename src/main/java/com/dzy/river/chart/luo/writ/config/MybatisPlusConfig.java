@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Configuration;
  * @date 2025/10/27 17:10
  */
 @Configuration
-@MapperScan("com.dzy.river.chart.luo.writ.mapper")
 public class MybatisPlusConfig {
 
     /**

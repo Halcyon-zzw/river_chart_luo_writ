@@ -1,0 +1,33 @@
+# Debug 模式专用配置
+# 使用方式：在 IntelliJ IDEA 的 Run Configuration 中设置 Active profiles: debug
+
+# 禁用 OpenAPI 自动生成（加快启动）
+openapi:
+  json:
+    auto-generate: false
+
+# SpringDoc 优化
+springdoc:
+  api-docs:
+    enabled: false  # debug时可以暂时禁用API文档生成
+  swagger-ui:
+    enabled: false  # debug时可以暂时禁用Swagger UI
+
+# 数据库连接池优化
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 5   # 减少连接池大小
+      minimum-idle: 2
+      connection-timeout: 5000
+      initialization-fail-timeout: -1  # 禁用启动时的连接验证
+
+# 日志级别优化（减少日志输出）
+logging:
+  level:
+    root: WARN
+    com.dzy.river.chart.luo.writ: INFO  # 只保留业务日志
+    org.springframework: WARN
+    org.apache: WARN
+    com.baomidou: WARN
+    com.zaxxer.hikari: ERROR
